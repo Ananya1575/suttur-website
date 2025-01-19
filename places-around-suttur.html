@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Around Suttur</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+            color: #2c3e50;
+        }
+
+
+        :root {
+            --primary-color: rgba(244, 116, 52, 0.9);
+            --secondary-color: #f6a049;
+            --accent-color: #ffcc55;
+            --background-color: #ffffff;
+            --text-dark: #2d3436;
+            --text-light: #ffffff;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+/* Base navbar styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.0);
+    backdrop-filter: blur(10px);
+    color: var(--text-dark);
+    padding-top: 40px;
+    z-index: 1000;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    /* Remove the initial transform to show navbar by default */
+    transform: translateX(0);
+}
+
+/* Modified to hide navbar when closed */
+.navbar.closed {
+    transform: translateX(-100%);
+}
+
+/* Rest of the navbar styles remain the same */
+.logo {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo img {
+    width: 70px;
+    height: 70px;
+    border-radius: 40%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+/* Navigation list styles */
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.navbar ul li {
+    position: relative;
+    text-align: center;
+    height: 40px;
+}
+
+/* Navigation item styles remain the same */
+.navbar ul li a {
+    display: block;
+    width: 75px;
+    height: 3px;
+    border-radius: 30%;
+    background-color: var(--text-dark);
+    margin: 0 auto;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: right;
+}
+
+.navbar ul li a::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 120%;
+    top: -10px;
+    color: var(--text-dark);
+    font-size: 16px;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    transform: translateX(20px);
+}
+
+.navbar ul li:hover a {
+    width: 50px;
+    transform: translateX(-50px);
+    background-color: var(--primary-color);
+}
+
+.navbar ul li:hover a::before {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Hamburger menu styles remain the same */
+.navbar-toggle {
+    display: block;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: none;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.navbar-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.navbar-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-dark);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Hamburger animation when active */
+.navbar-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.navbar-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+        .main-content {
+            margin-left: 40px;
+            padding: 40px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content.expanded {
+            margin-left: 0;
+        }
+
+        .page-title {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2c3e50;
+        }
+
+        .places-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .place-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .place-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .place-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .distance-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(230, 74, 25, 0.9);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .place-preview {
+            padding: 25px;
+        }
+
+        .place-name {
+            font-size: 1.8em;
+            color: #E64A19;
+            margin-bottom: 15px;
+        }
+
+        .place-brief {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .see-more-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background: #E64A19;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-family: inherit;
+        }
+
+        .see-more-btn:hover {
+            background: #F4511E;
+        }
+
+        .place-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            padding: 0 25px;
+        }
+
+        .place-details.expanded {
+            max-height: 1000px;
+            padding-bottom: 25px;
+        }
+
+        .detail-item {
+            margin: 15px 0;
+        }
+
+        .detail-item p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .special-features {
+            background: rgba(230, 74, 25, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .special-features h4 {
+            color: #E64A19;
+            margin-bottom: 10px;
+        }
+
+        .special-features ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .special-features li {
+            margin-bottom: 8px;
+            color: #666;
+        }
+
+        .map-link {
+            display: inline-block;
+            padding: 10px 25px;
+            background: #E64A19;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 15px;
+            transition: background 0.3s ease;
+        }
+
+        .map-link:hover {
+            background: #F4511E;
+        }
+
+    
+
+        @media (max-width: 768px) {
+            .navbar {
+                width: 100%;
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .place-image {
+                height: 300px;
+            }
+
+            .places-grid {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+   
+
+    <header>
+        <button class="navbar-toggle active" onclick="toggleNav()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="navbar">
+          <div class="logo">
+            <img src="images/logo.jpg" alt="Suttur Logo">
+          </div>
+          <ul>
+            <li><a href="index.html" class="nav-item" data-text="Home"></a></li>
+            <li><a href="game.html" class="nav-item" data-text="Game"></a></li>
+            <li><a href="reach.html" class="nav-item" data-text="How to Reach"></a></li>
+            <li><a href="culinary.html" class="nav-item" data-text="Culinary Journey"></a></li>
+            <li><a href="events.html" class="nav-item" data-text="Events"></a></li>
+            <li><a href="stay.html" class="nav-item" data-text="Staying in Comfort"></a></li>
+            <li><a href="explore.html" class="nav-item" data-text="Exploring Nearby"></a></li>
+            <li><a href="education.html" class="nav-item" data-text="Education"></a></li>
+            <li><a href="difference.html" class="nav-item" data-text="Making a Difference"></a></li>
+            <li><a href="whysuttur.html" class="nav-item" data-text="Why Suttur"></a></li>
+            <li><a href="contacts.html" class="nav-item" data-text="Contact"></a></li>
+          </ul>
+        </nav>
+      </header>
+
+    <div class="main-content">
+        <h1 class="page-title">Explore Around Suttur</h1>
+        <div class="places-grid">
+            <!-- Place Card 1 -->
+            <div class="place-card" style="animation-delay: 0.1s">
+                <img src="images/Mysuru-Palace.jpg" alt="Mysore Palace" class="place-image">
+                <div class="distance-badge">25 km</div>
+                <div class="place-preview">
+                    <h2 class="place-name">Mysore Palace</h2>
+                    <p class="place-brief">The magnificent Mysore Palace, also known as Amba Vilas Palace, is one of
+                        India's most famous tourist attractions. This architectural marvel combines Indo-Saracenic,
+                        Dravidian, and British styles.</p>
+                    <button class="see-more-btn">See More</button>
+                </div>
+                <div class="place-details">
+                    <div class="special-features">
+                        <h4>What's Special</h4>
+                        <ul>
+                            <li>• Light and Sound show</li>
+                            <li>• Royal artifacts collection</li>
+                            <li>• Grand architecture</li>
+                        </ul>
+                    </div>
+                    <a href="https://maps.google.com/?q=Mysore+Palace" target="_blank" class="map-link">Get
+                        Directions</a>
+                </div>
+            </div>
+
+            <!-- Place Card 2 -->
+            <div class="place-card" style="animation-delay: 0.2s">
+                <img src="images/najangud temple.jpg" alt="Nanjangud Temple" class="place-image">
+                <div class="distance-badge">8 km</div>
+                <div class="place-preview">
+                    <h2 class="place-name">Nanjangud Temple</h2>
+                    <p class="place-brief">Known as 'Dakshina Kashi', this ancient temple dedicated to Lord Shiva is
+                        renowned for its magnificent architecture and spiritual significance. The temple complex is a
+                        masterpiece of Dravidian architecture.</p>
+                    <button class="see-more-btn">See More</button>
+                </div>
+                <div class="place-details">
+                    <div class="special-features">
+                        <h4>What's Special</h4>
+                        <ul>
+                            <li>• Ancient sculptures</li>
+                            <li>• Traditional rituals</li>
+                            <li>• Sacred water tank</li>
+                        </ul>
+                    </div>
+                    <a href="https://maps.google.com/?q=Nanjangud+Temple" target="_blank" class="map-link">Get
+                        Directions</a>
+                </div>
+            </div>
+
+            <!-- Place Card 3 -->
+            <div class="place-card" style="animation-delay: 0.3s">
+                <img src="images/chamundi hills.jpg" alt="Chamundi Hills" class="place-image">
+                <div class="distance-badge">30 km</div>
+                <div class="place-preview">
+                    <h2 class="place-name">Chamundi Hills</h2>
+                    <p class="place-brief">A sacred hill hosting the famous Chamundeshwari Temple, offering panoramic
+                        views of Mysore city. The hill features a historic stone stairway of 1000 steps and several
+                        significant monuments.</p>
+                    <button class="see-more-btn">See More</button>
+                </div>
+                <div class="place-details">
+                    <div class="special-features">
+                        <h4>What's Special</h4>
+                        <ul>
+                            <li>• Panoramic city views</li>
+                            <li>• Ancient temple architecture</li>
+                            <li>• Nandi statue</li>
+                        </ul>
+                    </div>
+                    <a href="https://maps.google.com/?q=Chamundi+Hills" target="_blank" class="map-link">Get
+                        Directions</a>
+                </div>
+            </div>
+
+            <!-- Place Card 4 -->
+            <div class="place-card">
+                <img src="images/br hills.jpg" alt="BR Hills" class="place-image">
+                <div class="distance-badge">45 km</div>
+                <div class="place-preview">
+                    <h2 class="place-name">BR Hills Wildlife Sanctuary</h2>
+                    <p class="place-brief">Biligiriranga Hills offers a unique blend of wildlife and spirituality. This
+                        bio-diverse sanctuary is home to various species of flora and fauna, alongside the ancient
+                        Biligiriranga Temple.</p>
+                    <button class="see-more-btn">See More</button>
+                </div>
+                <div class="place-details">
+                    <div class="special-features">
+                        <h4>What's Special</h4>
+                        <ul>
+                            <li>• Wildlife safaris</li>
+                            <li>• Nature trails</li>
+                            <li>• Ancient temple</li>
+                        </ul>
+                    </div>
+                    <a href="https://maps.google.com/?q=BR+Hills+Wildlife+Sanctuary" target="_blank"
+                        class="map-link">Get Directions</a>
+                </div>
+            </div>
+
+            <!-- Place Card 5 -->
+            <div class="place-card">
+                <img src="images/bylakuppe.jpg" alt="Bylakuppe" class="place-image">
+                <div class="distance-badge">60 km</div>
+                <div class="place-preview">
+                    <h2 class="place-name">Bylakuppe Monastery</h2>
+                    <p class="place-brief">The second largest Tibetan settlement outside Tibet, featuring magnificent
+                        monasteries, colorful prayer flags, and authentic Tibetan culture. The Golden Temple is a
+                        must-visit attraction.</p>
+                    <button class="see-more-btn">See More</button>
+                </div>
+                <div class="place-details">
+                    <div class="special-features">
+                        <h4>What's Special</h4>
+                        <ul>
+                            <li>• Golden Temple</li>
+                            <li>• Tibetan culture</li>
+                            <li>• Authentic cuisine</li>
+                        </ul>
+                    </div>
+                    <a href="https://maps.google.com/?q=Bylakuppe+Monastery" target="_blank" class="map-link">Get
+                        Directions</a>
+                </div>
+            </div>
+
+            <!-- Place Card 6 -->
+            <div class="place-card">
+                <img src="images/coorg.jpg" alt="Coorg" class="place-image">
+                <div class="distance-badge">90 km</div>
+                <div class="place-preview">
+                    <h2 class="place-name">Coorg (Kodagu)</h2>
+                    <p class="place-brief">Known as the 'Scotland of India', Coorg offers misty hills, coffee
+                        plantations, and waterfalls. This hill station is perfect for nature lovers and adventure
+                        enthusiasts.</p>
+                    <button class="see-more-btn">See More</button>
+                </div>
+                <div class="place-details">
+                    <div class="special-features">
+                        <h4>What's Special</h4>
+                        <ul>
+                            <li>• Coffee plantations</li>
+                            <li>• Abbey Falls</li>
+                            <li>• Raja's Seat</li>
+                        </ul>
+                    </div>
+                    <a href="https://maps.google.com/?q=Coorg" target="_blank" class="map-link">Get Directions</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleNav() {
+            const navbar = document.querySelector('.navbar');
+            const mainContent = document.querySelector('.main-content');
+            const toggle = document.querySelector('.navbar-toggle');
+
+            navbar.classList.toggle('closed');
+            mainContent.classList.toggle('expanded');
+            toggle.classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const seeMoreButtons = document.querySelectorAll('.see-more-btn');
+
+            seeMoreButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const card = this.closest('.place-card');
+                    const details = card.querySelector('.place-details');
+                    const isExpanded = details.classList.contains('expanded');
+
+                    details.classList.toggle('expanded');
+                    this.textContent = isExpanded ? 'See More' : 'See Less';
+                });
+            });
+        });
+
+
+
+ // Handle navigation items animation
+ const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Scroll behavior
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            const hero = document.querySelector('.hero');
+            const navbarToggle = document.querySelector('.navbar-toggle');
+
+            if (window.pageYOffset > hero.offsetHeight) {
+                navbar.classList.add('closed');
+                navbarToggle.classList.remove('active');
+            }
+        });
+
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile navbar after clicking a link
+                    if (window.innerWidth <= 768) {
+                        toggleNav();
+                    }
+                }
+            });
+        });
+
+        // Add contact cards animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    // Remove observer after animation
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                document.querySelector('.navbar').classList.remove('closed');
+                document.querySelector('.navbar-toggle').classList.remove('active');
+            }
+        });
+
+        // Add loading animation
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.opacity = '1';
+        });
+ 
+    </script>
+</body>
+
+</html>

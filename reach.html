@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journey Guide to Suttur</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+            color: #2c3e50;
+        }
+
+
+        :root {
+            --primary-color: rgba(244, 116, 52, 0.9);
+            --secondary-color: #f6a049;
+            --accent-color: #ffcc55;
+            --background-color: #ffffff;
+            --text-dark: #2d3436;
+            --text-light: #ffffff;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+/* Base navbar styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.0);
+    backdrop-filter: blur(10px);
+    color: var(--text-dark);
+    padding-top: 40px;
+    z-index: 1000;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    /* Remove the initial transform to show navbar by default */
+    transform: translateX(0);
+}
+
+/* Modified to hide navbar when closed */
+.navbar.closed {
+    transform: translateX(-100%);
+}
+
+/* Rest of the navbar styles remain the same */
+.logo {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo img {
+    width: 70px;
+    height: 70px;
+    border-radius: 40%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+/* Navigation list styles */
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.navbar ul li {
+    position: relative;
+    text-align: center;
+    height: 40px;
+}
+
+/* Navigation item styles remain the same */
+.navbar ul li a {
+    display: block;
+    width: 75px;
+    height: 3px;
+    border-radius: 30%;
+    background-color: var(--text-dark);
+    margin: 0 auto;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: right;
+}
+
+.navbar ul li a::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 120%;
+    top: -10px;
+    color: var(--text-dark);
+    font-size: 16px;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    transform: translateX(20px);
+}
+
+.navbar ul li:hover a {
+    width: 50px;
+    transform: translateX(-50px);
+    background-color: var(--primary-color);
+}
+
+.navbar ul li:hover a::before {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Hamburger menu styles remain the same */
+.navbar-toggle {
+    display: block;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: none;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.navbar-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.navbar-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-dark);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Hamburger animation when active */
+.navbar-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.navbar-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://source.unsplash.com/1600x900/?india,travel');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .journey-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+            display: flex;
+            align-items: stretch;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-icon {
+            width: 80px;
+            height: 80px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin-right: 2rem;
+            flex-shrink: 0;
+        }
+
+        .timeline-icon i {
+            font-size: 2rem;
+            color: var(--primary-color)
+        }
+
+        .timeline-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            transform: rotate(45deg);
+        }
+
+        .route-map {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .waypoints {
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 1rem 0;
+        }
+
+        .waypoints::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary-color);
+            z-index: 1;
+        }
+
+        .waypoint {
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 0.5rem;
+        }
+
+        .waypoint-dot {
+            width: 15px;
+            height: 15px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            margin-bottom: 0.5rem;
+        }
+
+        .waypoint-name {
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .travel-details {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .detail-box {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            flex: 1;
+        }
+
+        .detail-box h4 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        a{
+            color: #f6a049;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .timeline-icon:hover {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .bus-schedule {
+            margin-top: 1rem;
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .bus-schedule h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .bus-schedule ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .bus-schedule li {
+            margin-bottom: 0.5rem;
+        }
+
+        .taxi-info {
+            margin-top: 1rem;
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .taxi-info h4 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Journey Guide to Suttur</h1>
+        </div>
+    </div>
+    <header>
+        <button class="navbar-toggle active" onclick="toggleNav()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="navbar">
+          <div class="logo">
+            <img src="images/logo.jpg" alt="Suttur Logo">
+          </div>
+          <ul>
+            <li><a href="index.html" class="nav-item" data-text="Home"></a></li>
+            <li><a href="game.html" class="nav-item" data-text="Game"></a></li>
+            <li><a href="culinary.html" class="nav-item" data-text="Culinary Journey"></a></li>
+            <li><a href="events.html" class="nav-item" data-text="Events"></a></li>
+            <li><a href="stay.html" class="nav-item" data-text="Staying in Comfort"></a></li>
+            <li><a href="explore.html" class="nav-item" data-text="Exploring Nearby"></a></li>
+            <li><a href="education.html" class="nav-item" data-text="Education"></a></li>
+            <li><a href="difference.html" class="nav-item" data-text="Making a Difference"></a></li>
+            <li><a href="whysuttur.html" class="nav-item" data-text="Why Suttur"></a></li>
+            <li><a href="contacts.html" class="nav-item" data-text="Contact"></a></li>
+          </ul>
+        </nav>
+      </header>
+
+    <div class="container">
+        <div class="journey-timeline">
+            <div class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-car"></i>
+                </div>
+                <div class="timeline-content">
+                    <h2>By Car</h2>
+                    <div class="route-map">
+                        <div class="waypoints">
+                            <div class="waypoint">
+                                <div class="waypoint-dot"></div>
+                                <div class="waypoint-name">Bangalore</div>
+                            </div>
+                            <div class="waypoint">
+                                <div class="waypoint-dot"></div>
+                                <div class="waypoint-name">Bidadi</div>
+                            </div>
+                            <div class="waypoint">
+                                <div class="waypoint-dot"></div>
+                                <div class="waypoint-name">Ramanagara</div>
+                            </div>
+                            <div class="waypoint">
+                                <div class="waypoint-dot"></div>
+                                <div class="waypoint-name">Channaptana</div>
+                            </div>
+                            <div class="waypoint">
+                                <div class="waypoint-dot"></div>
+                                <div class="waypoint-name">Maddur</div>
+                            </div>
+                            <div class="waypoint">
+                                <div class="waypoint-dot"></div>
+                                <div class="waypoint-name">Mandya</div>
+                            </div>
+                            <div class="waypoint">
+                                <div class="waypoint-dot"></div>
+                                <div class="waypoint-name">Mysore</div>
+                            </div>
+                            <div class="waypoint">
+                                <div class="waypoint-dot"></div>
+                                <div class="waypoint-name">Suttur</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="travel-details">
+                        <div class="detail-box">
+                            <h4>Route</h4>
+                            <p>NH275 </p>
+                        </div>
+                        <div class="detail-box">
+                            <h4>Distance</h4>
+                            <p>169 km</p>
+                        </div>
+                        <div class="detail-box">
+                            <h4>Duration</h4>
+                            <p>2-3 hours</p>
+                        </div>
+                    </div>
+                    <div class="taxi-info">
+                        <h4>Taxi from Mysore to Suttur</h4>
+                        <p>Available at Mysore Bus Stand or Railway Station.</p>
+                    </div>
+                    <div class="taxi-info">
+                        <h4>Taxi Companies</h4>
+                        <ul>
+                            <li>Ola</li>
+                            <li>Uber</li>
+                            <li>Meru Cabs</li>
+                        </ul>
+                    </div>
+                    <div class="taxi-info">
+                        <h4>Map Link</h4>
+                        <a href="https://www.google.com/maps/dir/Bangalore/Suttur" target="_blank">View Route on Google
+                            Maps</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-bus"></i>
+                </div>
+                <div class="timeline-content">
+                    <h2>By Bus</h2>
+                    <p>Travel from Bangalore to Mysore by Bus, then take a taxi to Suttur.</p>
+                    <div class="travel-details">
+                        <div class="detail-box">
+                            <h4>Service</h4>
+                            <p>KSRTC Regular Service</p>
+                        </div>
+                        <div class="detail-box">
+                            <h4>Distance</h4>
+                            <p>169 Km </p>
+                        </div>
+                        <div class="detail-box">
+                            <h4>Duration</h4>
+                            <p>3-4 hours</p>
+                        </div>
+                    </div>
+                    <!-- <div class="bus-schedule">
+                        <h4>Bus Timings (Bangalore to Mysore)</h4>
+                        <p>Travel from Bangalore to Mysore by Bus, then take a taxi to Suttur.</p>
+                        <ul>
+                            <li>06:00 AM - Volvo AC</li>
+                            <li>08:00 AM - Regular</li>
+                            <li>11:00 AM - Sleeper</li>
+                            <li>02:00 PM - Deluxe</li>
+                        </ul>
+                    </div> -->
+                    <div class="bus-schedule">
+                        <h4>Ticket Booking</h4>
+                        <p><a href="https://www.ksrtc.in" target="_blank">KSRTC Official Website</a></p>
+                    </div>
+                    <div class="taxi-info">
+                        <h4>Taxi Availability</h4>
+                        <p>Taxi is available at Mysore Bus Stand to Suttur.</p>
+                    </div>
+                    <div class="taxi-info">
+                        <h4>Map Link</h4>
+                        <a href="https://www.google.com/maps/dir/Bangalore/Suttur" target="_blank">View Route on Google
+                            Maps</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Train Section -->
+            <div class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-train"></i>
+                </div>
+                <div class="timeline-content">
+                    <h2>By Train</h2>
+                    <p>Travel from Bangalore to Mysore by train, then take a taxi to Suttur.</p>
+                    <div class="travel-details">
+                        <div class="detail-box">
+                            <h4>Nearest Station</h4>
+                            <p>Mysore Railway Station</p>
+                            <p>Nanjangud Railway Station</p>
+                        </div>
+                        <div class="detail-box">
+                            <h4>Duration</h4>
+                            <p>2.5-3 hours (Bangalore to Mysore)</p>
+                        </div>
+                    </div>
+                    <div class="taxi-info">
+                        <h4>Taxi from Railway Station</h4>
+                        <p>Available at Mysore Railway Station.</p>
+                    </div>
+                    <div class="taxi-info">
+                        <h4>Train Booking</h4>
+                        <p><a href="https://www.irctc.co.in" target="_blank">IRCTC Train Booking</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Air Travel Section -->
+            <div class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-plane"></i>
+                </div>
+                <div class="timeline-content">
+                    <h2>By Air</h2>
+                    <p>Fly to Mysore or Bangalore airport. Then take a taxi or bus to Suttur.</p>
+                    <div class="travel-details">
+                        <div class="detail-box">
+                            <h4>Nearest Airport</h4>
+                            <p>Mysore Airport</p>
+                        </div>
+                        <div class="detail-box">
+                            <h4>Duration</h4>
+                            <p>1.5 hours flight time (from Bangalore)</p>
+                        </div>
+                    </div>
+                    <div class="taxi-info">
+                        <h4>Taxi from Airport</h4>
+                        <p>Available at Mysore Airport.</p>
+                    </div>
+                    <div class="taxi-info">
+                        <h4>Flight Booking</h4>
+                        <p> <a href="https://www.makemytrip.com/flights/" target="_blank">Book Flights with
+                                MakeMyTrip</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            window.addEventListener('scroll', () => {
+                timelineItems.forEach(item => {
+                    if (item.getBoundingClientRect().top < window.innerHeight) {
+                        item.classList.add('visible');
+                    }
+                });
+            });
+        });
+
+
+        function toggleNav() {
+    const navbar = document.querySelector('.navbar');
+    const toggle = document.querySelector('.navbar-toggle');
+    
+    navbar.classList.toggle('closed');
+    toggle.classList.toggle('active');
+}
+
+
+ // Handle navigation items animation
+ const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Scroll behavior
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            const hero = document.querySelector('.hero');
+            const navbarToggle = document.querySelector('.navbar-toggle');
+
+            if (window.pageYOffset > hero.offsetHeight) {
+                navbar.classList.add('closed');
+                navbarToggle.classList.remove('active');
+            }
+        });
+
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile navbar after clicking a link
+                    if (window.innerWidth <= 768) {
+                        toggleNav();
+                    }
+                }
+            });
+        });
+
+        // Add contact cards animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    // Remove observer after animation
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                document.querySelector('.navbar').classList.remove('closed');
+                document.querySelector('.navbar-toggle').classList.remove('active');
+            }
+        });
+
+        // Add loading animation
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.opacity = '1';
+        });
+ 
+
+    </script>
+</body>
+
+</html>

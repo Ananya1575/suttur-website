@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staying in Comforts</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: white;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        :root {
+            --primary-color: rgba(244, 116, 52, 0.9);
+            --secondary-color: #f6a049;
+            --accent-color: #ffcc55;
+            --background-color: #ffffff;
+            --text-dark: #2d3436;
+            --text-light: #ffffff;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+/* Base navbar styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.0);
+    backdrop-filter: blur(10px);
+    color: var(--text-dark);
+    padding-top: 40px;
+    z-index: 1000;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    /* Remove the initial transform to show navbar by default */
+    transform: translateX(0);
+}
+
+/* Modified to hide navbar when closed */
+.navbar.closed {
+    transform: translateX(-100%);
+}
+
+/* Rest of the navbar styles remain the same */
+.logo {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo img {
+    width: 70px;
+    height: 70px;
+    border-radius: 40%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+/* Navigation list styles */
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.navbar ul li {
+    position: relative;
+    text-align: center;
+    height: 40px;
+}
+
+/* Navigation item styles remain the same */
+.navbar ul li a {
+    display: block;
+    width: 75px;
+    height: 3px;
+    border-radius: 30%;
+    background-color: var(--text-dark);
+    margin: 0 auto;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: right;
+}
+
+.navbar ul li a::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 120%;
+    top: -10px;
+    color: var(--text-dark);
+    font-size: 16px;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    transform: translateX(20px);
+}
+
+.navbar ul li:hover a {
+    width: 50px;
+    transform: translateX(-50px);
+    background-color: var(--primary-color);
+}
+
+.navbar ul li:hover a::before {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Hamburger menu styles remain the same */
+.navbar-toggle {
+    display: block;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: none;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.navbar-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.navbar-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-dark);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Hamburger animation when active */
+.navbar-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.navbar-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-image: url("images/hotel.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hotel-section {
+            margin: 40px 0;
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .hotel-section::before {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 100%;
+            background-color: var(--secondary-color);
+            margin-right: 20px;
+            border-radius: 3px;
+        }
+
+        .hotel-content {
+            flex: 1;
+        }
+
+        .hotel-name {
+            font-family: 'DM Serif Display', serif;
+            font-size: 2.5rem;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            font-weight: normal;
+            border-left: 5px solid var(--secondary-color);
+            padding: 1rem;;
+        }
+
+        .gallery {
+            position: relative;
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            color: #444;
+            margin: 20px 0;
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .more-info {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .more-info.show {
+            max-height: 500px;
+        }
+
+        .details {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .details p {
+            margin: 10px 0;
+            color: #444;
+        }
+
+        .details a {
+            color: #4285f4;
+            text-decoration: none;
+        }
+
+        .details a:hover {
+            text-decoration: underline;
+        }
+
+        .stars {
+            color: #ffd700;
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .header-text {
+                font-size: 3em;
+            }
+
+            .hotel-section {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .hotel-section::before {
+                width: 100%;
+                height: 6px;
+                margin-bottom: 20px;
+            }
+
+            .gallery {
+                height: 300px;
+            }
+
+            .hotel-name {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-text {
+                font-size: 2em;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .gallery {
+                height: 250px;
+            }
+
+            .hotel-name {
+                font-size: 1.8rem;
+            }
+
+            .description {
+                font-size: 1rem;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Apply animations to elements */
+        .hero-content h1 {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hotel-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .hotel-section.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery {
+            animation: slideInRight 1s ease-out;
+        }
+
+        .btn {
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <button class="navbar-toggle active" onclick="toggleNav()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="navbar">
+          <div class="logo">
+            <img src="images/logo.jpg" alt="Suttur Logo">
+          </div>
+          <ul>
+            <li><a href="index.html" class="nav-item" data-text="Home"></a></li>
+            <li><a href="game.html" class="nav-item" data-text="Game"></a></li>
+            <li><a href="reach.html" class="nav-item" data-text="How to Reach"></a></li>
+            <li><a href="culinary.html" class="nav-item" data-text="Culinary Journey"></a></li>
+            <li><a href="events.html" class="nav-item" data-text="Events"></a></li>
+            <li><a href="explore.html" class="nav-item" data-text="Exploring Nearby"></a></li>
+            <li><a href="education.html" class="nav-item" data-text="Education"></a></li>
+            <li><a href="difference.html" class="nav-item" data-text="Making a Difference"></a></li>
+            <li><a href="whysuttur.html" class="nav-item" data-text="Why Suttur"></a></li>
+            <li><a href="contacts.html" class="nav-item" data-text="Contact"></a></li>
+          </ul>
+        </nav>
+      </header>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Staying in Comforts</h1>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <!-- Hotel 1 -->
+        <div class="hotel-section">
+            <div class="hotel-content">
+                <h2 class="hotel-name">Sutturu Jss Guest House</h2>
+                <div class="gallery">
+                    <img src="images/hotel1.png" alt="Sutturu Jss Guest House">
+                </div>
+                <div class="description">
+                    <p>At Suttur JSS Guest house, guest are provided with a secure and welcoming environment featuring modern amenities and personalized services. offering flexible living arrangements, Suttur Jss guest house ensures that every guest finds the perfect fit for their needs.</p>
+                </div>
+                <button class="btn" onclick="toggleInfo(1)">See More</button>
+                <div class="more-info" id="moreInfo-1">
+                    <div class="details">
+                        <h3>Location & Details</h3>
+                        <p>Distance from suttur:1.2km (3 mins by car)</p>
+                        <p>Restaurant pricing: contact owner</p>
+                        <p>Location: <a href="https://www.google.com/maps/place/Sutturu+JSS+Guest+House/@12.1638319,76.7896823,17z/data=!3m1!4b1!4m9!3m8!1s0x3baf6b1d582c8f87:0x94856bc35a4b129c!5m2!4m1!1i2!8m2!3d12.1638319!4d76.7922572!16s%2Fg%2F113fnxrgb?entry=ttu&g_ep=EgoyMDI1MDEwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank">View on Google Maps</a></p>
+                        <div class="stars">★★★★</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hotel-section">
+            <div class="hotel-content">
+                <h2 class="hotel-name">Tropical Villages</h2>
+                <div class="gallery">
+                    <img src="images/hotel2.png" alt="Tropical Villages">
+                </div>
+                <div class="description">
+                    <p>Ideal for fun and relaxation, SLV Royal Inn is located in the Gurur area of Mysore. From here,guests can make the most of all that the lively city has to offer. With its convenient location, the property offers easy access to the city's must-see destinations</p>
+                </div>
+                <button class="btn" onclick="toggleInfo(2)">See More</button>
+                <div class="more-info" id="moreInfo-2">
+                    <div class="details">
+                        <h3>Location & Details</h3>
+                        <p>Distance from suttur: 10.2 km (16 minutes by car)</p>
+                        <p>Restaurant pricing: starts from 7448 </p>
+                        <p>Location: <a href="https://www.google.com/maps/place/Tropical+villages/@12.2280966,76.7592013,17z/data=!3m1!4b1!4m9!3m8!1s0x3baf6d35983ea6b5:0x3d927feafe020c5a!5m2!4m1!1i2!8m2!3d12.2280966!4d76.7617762!16s%2Fg%2F11txlccks5?entry=ttu&g_ep=EgoyMDI1MDEwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank">View on Google Maps</a></p>
+                        <div class="stars">★★★★</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hotel-section">
+            <div class="hotel-content">
+                <h2 class="hotel-name">SLV Royal Inn</h2>
+                <div class="gallery">
+                    <img src="images/hotel3.png" alt="SLV Royal Innl">
+                </div>
+                <div class="description">
+                    <p>Ideal for fun and relaxation, SLV Royal Inn is located in the Gurur area of Mysore. From here, 			guests 	can make the most of all that the lively city has to offer. With its convenient location, the property offers easy access to the city's must-see destinations.</p>
+                </div>
+                <button class="btn" onclick="toggleInfo(3)">See More</button>
+                <div class="more-info" id="moreInfo-3">
+                    <div class="details">
+                        <h3>Location & Details</h3>
+                        <p>Distance from suttur: 20.4 km (32 mins by car)</p>
+                        <p>Restaurant pricing: starts from INR 1,700/-</p>
+                        <p>Location: <a href="https://www.google.com/maps/place/SLV+Royal+Inn/@12.1047802,76.6690879,17z/data=!3m1!4b1!4m9!3m8!1s0x3baf429bb0f882bf:0xeeeb5fae452c8cd8!5m2!4m1!1i2!8m2!3d12.1047802!4d76.6716628!16s%2Fg%2F11f3_vdjx9?entry=ttu&g_ep=EgoyMDI1MDEwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank">View on Google Maps</a></p>
+                        <div class="stars">★★★</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hotel-section">
+            <div class="hotel-content">
+                <h2 class="hotel-name">Radisson Blu Plaz</h2>
+                <div class="gallery">
+                    <img src="images/hotel4.png" alt="Radisson Blu Plaz">
+                </div>
+                <div class="description">
+                    <p>The Radisson Blu Plaza Hotel Mysore is a 5-star deluxe hotel that offers luxurious 				accommodations and amenities. It serves a variety of cuisines, including Continental, North 			Indian, South Indian, Beverages, and Desserts. The hotel features an outdoor swimming pool, a 			24-hour front desk, and a garden, as well as a tour desk and luggage storage.</p>
+                </div>
+                <button class="btn" onclick="toggleInfo(4)">See More</button>
+                <div class="more-info" id="moreInfo-4">
+                    <div class="details">
+                        <h3>Location & Details</h3>
+                        <p>Distance from suttur:  25 km (35 mins by car)</p>
+                        <p>Restaurant pricing: starts from INR 11,000/-</p>
+                        <p>Location: <a href="https://www.google.com/maps/place/Radisson+Blu+Plaza+Hotel+Mysore/@12.2980275,75.4458833,9z/data=!4m17!1m5!2m4!1sradison+blu+my!5m2!5m1!1s2025-01-14!3m10!1s0x3baf70221adef799:0xc44e7d4b78353aa9!5m3!1s2025-01-14!4m1!1i2!8m2!3d12.2980275!4d76.6653657!15sCg9yYWRpc3NvbiBibHUgbXkiA4gBAVoRIg9yYWRpc3NvbiBibHUgbXmSAQVob3RlbOABAA!16s%2Fg%2F1hc28_d_z?entry=ttu&g_ep=EgoyMDI1MDEwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank">View on Google Maps</a></p>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hotel-section">
+            <div class="hotel-content">
+                <h2 class="hotel-name">Livaana</h2>
+                <div class="gallery">
+                    <img src="images/hotel5.png" alt="Livaana">
+                </div>
+                <div class="description">
+                    <p>Set in Mysore, 1.9 km from Mysore Palace, Livaana offers accommodation with an outdoor 			swimming pool, free private parking and a restaurant.The private bathroom is equipped with a 			shower and a hairdryer. Guest rooms feature a wardrobe</p>
+                </div>
+                <button class="btn" onclick="toggleInfo(5)">See More</button>
+                <div class="more-info" id="moreInfo-5">
+                    <div class="details">
+                        <h3>Location & Details</h3>
+                        <p>Distance from suttur: 27 km (30 mins by car)</p>
+                        <p>Restaurant pricing: starts from INR 2,500/-</p>
+                        <p>Location: <a href="https://www.google.com/maps/place/Livaana+(Formerly+known+as+Vivaana)/@12.3157868,76.6555433,17z/data=!4m10!3m9!1s0x3baf706b65527e3f:0x87c7b6380e92c3ce!5m3!1s2025-01-14!4m1!1i2!8m2!3d12.3157868!4d76.6581182!16s%2Fg%2F11n_y9lf1v?entry=ttu&g_ep=EgoyMDI1MDEwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank">View on Google Maps</a></p>
+                        <div class="stars">★★★</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hotel-section">
+            <div class="hotel-content">
+                <h2 class="hotel-name">Lalith Mahal Palace Hote</h2>
+                <div class="gallery">
+                    <img src="images/hotel6.png"Lalith Mahal Palace Hote">
+                </div>
+                <div class="description">
+                    <p>Stay like royalty at Lalitha Mahal Palace Hotel in Mysore. Solo travelers enjoy stunning views of 			Chamundi Hill and the city, along with unique facilities like the Blowing Alley. Immerse yourself in 			the rich heritage of this magnificent palace while savoring delicious meals at the on-site restaurants.</p>
+                </div>
+                <button class="btn" onclick="toggleInfo(6)">See More</button>
+                <div class="more-info" id="moreInfo-6">
+                    <div class="details">
+                        <h3>Location & Details</h3>
+                        <p>Distance from city center:22.9 km (30 mins by car)</p>
+                        <p>Restaurant pricing:starts from INR 5,000/-</p>
+                        <p>Location: <a href="https://www.google.com/maps/place/Lalitha+Mahal+Palace+Hotel/@12.2982956,76.6900356,17z/data=!4m10!3m9!1s0x3baf7005079c2ff5:0xc796fc64f4676317!5m3!1s2025-01-14!4m1!1i2!8m2!3d12.2982956!4d76.6926105!16zL20vMDgyeWZt?entry=ttu&g_ep=EgoyMDI1MDEwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank">View on Google Maps</a></p>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional hotels follow the same pattern... -->
+        <!-- Hotel sections 2-5 would be identical in structure, just with different content -->
+
+    </div>
+
+    <script>
+        function toggleInfo(hotelId) {
+            const moreInfo = document.getElementById(`moreInfo-${hotelId}`);
+            const btn = moreInfo.previousElementSibling;
+            moreInfo.classList.toggle('show');
+            btn.textContent = moreInfo.classList.contains('show') ? 'See Less' : 'See More';
+        }
+
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.hotel-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // Call the function when the page loads
+        window.addEventListener('load', animateOnScroll);
+
+
+
+        function toggleNav() {
+    const navbar = document.querySelector('.navbar');
+    const toggle = document.querySelector('.navbar-toggle');
+    
+    navbar.classList.toggle('closed');
+    toggle.classList.toggle('active');
+}
+ // Handle navigation items animation
+ const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Scroll behavior
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            const hero = document.querySelector('.hero');
+            const navbarToggle = document.querySelector('.navbar-toggle');
+
+            if (window.pageYOffset > hero.offsetHeight) {
+                navbar.classList.add('closed');
+                navbarToggle.classList.remove('active');
+            }
+        });
+
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile navbar after clicking a link
+                    if (window.innerWidth <= 768) {
+                        toggleNav();
+                    }
+                }
+            });
+        });
+
+        // Add contact cards animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    // Remove observer after animation
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                document.querySelector('.navbar').classList.remove('closed');
+                document.querySelector('.navbar-toggle').classList.remove('active');
+            }
+        });
+
+        // Add loading animation
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.opacity = '1';
+        });
+ 
+
+    </script>
+</body>
+</html>

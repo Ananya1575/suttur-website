@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suttur - Culinary Heritage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #E64A19;
+            --secondary-color: #FFA000;
+            --text-color: #333;
+            --background-color: #fff8f6;
+            --card-background: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Merienda', cursive;
+            background: linear-gradient(45deg, var(--background-color), #fff);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        :root {
+            --primary-color: rgba(244, 116, 52, 0.9);
+            --secondary-color: #f6a049;
+            --accent-color: #ffcc55;
+            --background-color: #ffffff;
+            --text-dark: #2d3436;
+            --text-light: #ffffff;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+/* Base navbar styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.0);
+    backdrop-filter: blur(10px);
+    color: var(--text-dark);
+    padding-top: 40px;
+    z-index: 1000;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    /* Remove the initial transform to show navbar by default */
+    transform: translateX(0);
+}
+
+/* Modified to hide navbar when closed */
+.navbar.closed {
+    transform: translateX(-100%);
+}
+
+/* Rest of the navbar styles remain the same */
+.logo {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo img {
+    width: 70px;
+    height: 70px;
+    border-radius: 40%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+/* Navigation list styles */
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.navbar ul li {
+    position: relative;
+    text-align: center;
+    height: 40px;
+}
+
+/* Navigation item styles remain the same */
+.navbar ul li a {
+    display: block;
+    width: 75px;
+    height: 3px;
+    border-radius: 30%;
+    background-color: var(--text-dark);
+    margin: 0 auto;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: right;
+}
+
+.navbar ul li a::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 120%;
+    top: -10px;
+    color: var(--text-dark);
+    font-size: 16px;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    transform: translateX(20px);
+}
+
+.navbar ul li:hover a {
+    width: 50px;
+    transform: translateX(-50px);
+    background-color: var(--primary-color);
+}
+
+.navbar ul li:hover a::before {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Hamburger menu styles remain the same */
+.navbar-toggle {
+    display: block;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: none;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.navbar-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.navbar-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-dark);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Hamburger animation when active */
+.navbar-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.navbar-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #808080;
+            color: var(--background-color);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            text-align: center;
+        }
+
+        .floating-icons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            overflow: hidden;
+            z-index: 99;
+            background: linear-gradient(to bottom, rgba(230, 74, 25, 0.1), transparent);
+            pointer-events: none;
+        }
+
+        .food-icon {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(230, 74, 25, 0.3);
+            animation: float 15s infinite linear;
+            font-size: 32px;
+            cursor: pointer;
+            pointer-events: auto;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 1001;
+            user-select: none;
+        }
+
+        .food-icon:hover {
+            transform: scale(1.1) !important;
+            box-shadow: 0 0 20px rgba(230, 74, 25, 0.5);
+        }
+
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1002;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-overlay.active .popup-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .popup-text {
+            font-size: 1.2em;
+            color: var(--text-color);
+            text-align: center;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .popup-icon {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            25% { transform: translate(20%, 20px) rotate(90deg) scale(1.1); }
+            50% { transform: translate(40%, 0) rotate(180deg) scale(1); }
+            75% { transform: translate(20%, -20px) rotate(270deg) scale(1.1); }
+            100% { transform: translate(0, 0) rotate(360deg) scale(1); }
+        }
+
+        .stars-container {
+            position: relative;
+            height: 60px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 30px;
+            padding: 5px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2),
+                        0 0 20px rgba(123, 31, 162, 0.1);
+            overflow: hidden;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .background-stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(123, 31, 162, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(66, 165, 245, 0.05) 0%, transparent 50%),
+                radial-gradient(white 1px, transparent 1px),
+                radial-gradient(white 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 50px 50px, 100px 100px;
+            background-position: 0 0, 0 0, 25px 25px, 50px 50px;
+            animation: space-twinkle 10s linear infinite;
+            opacity: 0.15;
+        }
+
+        @keyframes space-twinkle {
+            0% { background-position: 0 0, 0 0, 25px 25px, 50px 50px; }
+            100% { background-position: 0 0, 0 0, -25px -25px, -50px -50px; }
+        }
+
+        .cards-container {
+            width: 100%;
+            padding: 140px 40px 40px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background: var(--card-background);
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+
+        .card:hover .card-image {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .card:first-child .card-image {
+            height: 400px;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .card-content {
+            padding: 25px;
+            background: linear-gradient(to bottom, #fff, var(--background-color));
+        }
+
+        .card-content h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.4em;
+            color: var(--primary-color);
+        }
+
+        .see-more-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Merienda', cursive;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .see-more-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--secondary-color);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .see-more-btn:hover::before {
+            left: 0;
+        }
+
+        .feedback-section {
+            height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: linear-gradient(to bottom, #1a1a2e, #16213e);
+            color: white;
+            padding: 0 20px;
+            border-radius: 15px;
+            margin-top: 15px;
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        .feedback-section.active {
+            height: 200px;
+            padding: 20px;
+            opacity: 1;
+            transform: translateY(0);
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .star {
+            position: absolute;
+            color: gold;
+            font-size: 20px;
+            transform-origin: center;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .rating {
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            color: gold;
+            text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-style: italic;
+            margin-top: 10px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feedback-text {
+            text-align: center;
+            line-height: 1.6;
+            margin-top: 20px;
+            font-style: italic;
+            color: #e0e0e0;
+        }
+
+        @media (min-width: 769px) {
+            .cards-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .card:first-child {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cards-container {
+                padding: 20px;
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+        }
+
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="navbar-toggle active" onclick="toggleNav()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="navbar">
+          <div class="logo">
+            <img src="images/logo.jpg" alt="Suttur Logo">
+          </div>
+          <ul>
+            <li><a href="index.html" class="nav-item" data-text="Home"></a></li>
+            <li><a href="game.html" class="nav-item" data-text="Game"></a></li>
+            <li><a href="reach.html" class="nav-item" data-text="How to Reach"></a></li>
+            <li><a href="events.html" class="nav-item" data-text="Events"></a></li>
+            <li><a href="stay.html" class="nav-item" data-text="Staying in Comfort"></a></li>
+            <li><a href="explore.html" class="nav-item" data-text="Exploring Nearby"></a></li>
+            <li><a href="education.html" class="nav-item" data-text="Education"></a></li>
+            <li><a href="difference.html" class="nav-item" data-text="Making a Difference"></a></li>
+            <li><a href="whysuttur.html" class="nav-item" data-text="Why Suttur"></a></li>
+            <li><a href="contacts.html" class="nav-item" data-text="Contact"></a></li>
+          </ul>
+        </nav>
+      </header>
+
+    <section class="hero">
+        <h1>Suttur Culinary Heritage</h1>
+    </section>
+
+    <div class="floating-icons" id="floatingIcons"></div>
+
+    <main class="cards-container" id="cardsContainer"></main>
+
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">↑</button>
+
+    <footer class="footer">
+        <p>&copy; 2023 Suttur Culinary Heritage. All rights reserved.</p>
+    </footer>
+
+    <div class="popup-overlay">
+        <div class="popup-content">
+            <span class="popup-icon"></span>
+            <p class="popup-text"></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Suttur facts array
+            const sutturFacts = [
+                "Suttur Mutt, established in 1100s, is one of Karnataka's most significant spiritual centers.",
+                "The annual Suttur Jatra Mahotsava attracts over 10 lakh devotees from across India.",
+                "Suttur Mutt runs over 300 educational institutions across Karnataka.",
+                "The Suttur Mutt library houses rare manuscripts dating back to the 12th century.",
+                "The sacred Kapila River flows through Suttur, believed to have healing properties.",
+                "Suttur's Sri Shivarathreeshwara Temple is over 1000 years old.",
+                "The Mutt provides free meals to thousands of students daily.",
+                "Suttur hosts one of South India's largest agricultural fairs during Jatra.",
+                "The current Suttur Swamiji is the 24th in the lineage of spiritual heads.",
+                "The Mutt's medical institutions serve over 3000 patients daily.",
+                "Suttur's ancient stone inscriptions date back to the Hoysala period.",
+                "The Mutt actively promotes traditional arts and music through its cultural wing."
+            ];
+
+            // Create floating food icons with popups
+            const foodIcons = ['🍚', '☕', '🫓', '🥘', '🍲', '🥪', '🍛', '🍵', '🥣', '🍜', '🍱', '🍤'];
+            const iconContainer = document.getElementById('floatingIcons');
+            const popupOverlay = document.querySelector('.popup-overlay');
+            const popupContent = document.querySelector('.popup-content');
+            const popupIcon = document.querySelector('.popup-icon');
+            const popupText = document.querySelector('.popup-text');
+            
+            foodIcons.forEach((icon, index) => {
+                const div = document.createElement('div');
+                div.className = 'food-icon';
+                div.innerHTML = icon;
+                const leftPosition = (index / (foodIcons.length - 1)) * 100;
+                div.style.left = `${leftPosition}%`;
+                div.style.animationDelay = `${index * 1.5}s`;
+                
+                div.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    popupIcon.textContent = icon;
+                    popupText.textContent = sutturFacts[index];
+                    popupOverlay.classList.add('active');
+                });
+
+                iconContainer.appendChild(div);
+            });
+
+            document.addEventListener('click', (e) => {
+                if (popupOverlay.classList.contains('active') && !popupContent.contains(e.target)) {
+                    popupOverlay.classList.remove('active');
+                }
+            });
+
+            popupContent.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+
+            // Dishes array with reviews
+            const dishes = [
+                {
+                    name: "JSS Suttur Canteen",
+                    description: "Experience the divine flavors of traditional South Indian cuisine at our iconic canteen. Serving authentic dishes prepared with locally sourced ingredients, the JSS Suttur Canteen offers a true taste of Karnataka's culinary heritage.",
+                    rating: 4.8,
+                    review: "The JSS Suttur Canteen is a gem! Their masala dosa is perfectly crispy, and the sambar has the perfect balance of spices. The cleanliness and quick service make it a student favorite. Don't miss their special puliyogare on Wednesdays!"
+                },
+                {
+                    name: "Puni Omkar Hotel",
+                    description: "A local favorite known for its delicious North Karnataka style meals and snacks.",
+                    rating: 4.2,
+                    review: "Puni Omkar's jolada rotti and yennegai are simply outstanding! The authentic North Karnataka flavors transport you to a traditional household. Their spicy chutney powder is a must-try. Great value for money!"
+                },
+                {
+                    name: "Sri Veerashaiva Basaveshwara Hotel",
+                    description: "Specializing in vegetarian delicacies, this hotel offers a range of traditional Lingayat cuisine.",
+                    rating: 4.3,
+                    review: "The best place for traditional Lingayat cuisine! Their ragi mudde and soppu saaru are exceptional. The staff is courteous, and the ambiance reflects true Karnataka culture. Their special festival thalis are not to be missed!"
+                },
+                {
+                    name: "Nanda Tea Stall",
+                    description: "Famous for its perfect tea along with their hot bajji and bonda.",
+                    rating: 4.1,
+                    review: "Nanda Tea Stall's evening snacks are legendary! The masala tea is perfectly brewed, and their onion bajjis are crispy and flavorful. It's the perfect spot for an evening chat with friends. The mint chutney deserves special mention!"
+                },
+                {
+                    name: "S.G.M Hotel",
+                    description: "A family-friendly restaurant serving South Indian cuisines with a local twist.",
+                    rating: 4.4,
+                    review: "S.G.M's South Indian dishes are unique! Their thali meals are generous and varied. Great ambiance for family dining!"
+                }
+            ];
+
+            const cardsContainer = document.getElementById('cardsContainer');
+
+            dishes.forEach((dish, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <img src="./images/suttur${index + 1}.jpg" alt="${dish.name}" class="card-image">
+                    <div class="card-content">
+                        <h3>${dish.name}</h3>
+                        <p>${dish.description}</p>
+                        <button class="see-more-btn">See More</button>
+                        <div class="feedback-section">
+                            <div class="stars-container">
+                                <div class="background-stars"></div>
+                            </div>
+                            <p class="feedback-text">${dish.review}</p>
+                        </div>
+                    </div>
+                `;
+                cardsContainer.appendChild(card);
+
+                const starsContainer = card.querySelector('.stars-container');
+                for (let j = 0; j < 5; j++) {
+                    const star = document.createElement('span');
+                    star.className = 'star';
+                    star.innerHTML = '⭐';
+                    star.style.top = `${Math.sin(j * 0.7) * 15 + 20}px`;
+                    star.style.left = `calc(50% + ${(j - 2) * 25}px)`;
+                    starsContainer.appendChild(star);
+                }
+                const rating = document.createElement('span');
+                rating.className = 'rating';
+                rating.textContent = `${dish.rating} stars`;
+                card.querySelector('.feedback-section').insertBefore(rating, card.querySelector('.feedback-text'));
+            });
+
+            document.querySelectorAll('.see-more-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const feedbackSection = button.nextElementSibling;
+                    feedbackSection.classList.toggle('active');
+                    button.textContent = feedbackSection.classList.contains('active') ? 'See Less' : 'See More';
+                    
+                    if (feedbackSection.classList.contains('active')) {
+                        const stars = feedbackSection.querySelectorAll('.star');
+                        const rating = parseFloat(feedbackSection.querySelector('.rating').textContent);
+                        stars.forEach((star, index) => {
+                            setTimeout(() => {
+                                if (index < Math.floor(rating)) {
+                                    star.style.opacity = '1';
+                                    star.style.transform = 'translateX(-50%) scale(1)';
+                                } else if (index === Math.floor(rating) && rating % 1 !== 0) {
+                                    star.style.opacity = (rating % 1).toString();
+                                    star.style.transform = `translateX(-50%) scale(${rating % 1})`;
+                                } else {
+                                    star.style.opacity = '0';
+                                    star.style.transform = 'translateX(-50%) scale(0)';
+                                }
+                            }, index * 200);
+                        });
+                    } else {
+                        const stars = feedbackSection.querySelectorAll('.star');
+                        stars.forEach(star => {
+                            star.style.opacity = '0';
+                            star.style.transform = 'translateX(-50%) scale(0)';
+                        });
+                    }
+                });
+            });
+
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('visible');
+                } else {
+                    scrollToTopBtn.classList.remove('visible');
+                }
+
+                // Auto-close navbar when scrolling past hero section
+                const navbar = document.querySelector('.navbar');
+                const hero = document.querySelector('.hero');
+                const navbarToggle = document.querySelector('.navbar-toggle');
+
+                if (window.pageYOffset > hero.offsetHeight) {
+                    navbar.classList.add('closed');
+                    navbarToggle.classList.remove('active');
+                }
+            });
+
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        function toggleNav() {
+    const navbar = document.querySelector('.navbar');
+    const toggle = document.querySelector('.navbar-toggle');
+    
+    navbar.classList.toggle('closed');
+    toggle.classList.toggle('active');
+}
+ 
+    </script>
+</body>
+</html>
