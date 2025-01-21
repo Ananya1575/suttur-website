@@ -199,6 +199,35 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
+        .footer-content {
+        text-align: center;
+        padding: 3rem ;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        color: var(--white);
+        font-size: 1.1rem;
+        position: relative;
+        
+        }
+
+        .footer-content {
+            max-width: 100vw;
+            margin: 0 auto;
+        }
+
+        .footer-content a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+        }
+
+        .footer-content a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -447,6 +476,8 @@
             animation: fadeInUp 0.5s ease-out;
         }
 
+        
+
         /* Smooth scroll behavior */
         html {
             scroll-behavior: smooth;
@@ -462,7 +493,7 @@
         </button>
         <nav class="navbar">
           <div class="logo">
-            <img src="images/logo.jpg" alt="Suttur Logo">
+            <img src="images/logo.png" alt="Suttur Logo">
           </div>
           <ul>
             <li><a href="index.html" class="nav-item" data-text="Home"></a></li>
@@ -743,5 +774,12 @@
  
  
     </script>
+
+<footer>
+    <div class="footer-content">
+        <p>&copy; 2025 TechNova. All rights reserved.</p>
+        <p>Follow us: <a href="#">Instagram</a> | <a href="#">Twitter</a> | <a href="#">LinkedIn</a></p>
+    </div>
+</footer>
 </body>
 </html>

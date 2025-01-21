@@ -175,18 +175,40 @@
 }
 
 
-        .hero {
+.hero {
+            position: relative;
+            width: 100%;
             height: 100vh;
+            background-image: url("images/hotel.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
             display: flex;
-            justify-content: center;
             align-items: center;
-            background-color: #808080;
-            color: var(--background-color);
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
         }
 
         .hero h1 {
-            font-size: 4rem;
-            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .floating-icons {
@@ -506,12 +528,27 @@
             opacity: 1;
         }
 
-        .footer {
-            background-color: var(--primary-color);
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
+        .footer-content {
+        text-align: center;
+        padding: 3rem ;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        color: var(--white);
+        font-size: 1.1rem;
+        position: relative;
+        }
+
+        .footer-content a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+        }
+
+        .footer-content a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
         }
     </style>
 </head>
@@ -524,7 +561,7 @@
         </button>
         <nav class="navbar">
           <div class="logo">
-            <img src="images/logo.jpg" alt="Suttur Logo">
+            <img src="images/logo.png" alt="Suttur Logo">
           </div>
           <ul>
             <li><a href="index.html" class="nav-item" data-text="Home"></a></li>
@@ -551,8 +588,11 @@
 
     <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">↑</button>
 
-    <footer class="footer">
-        <p>&copy; 2023 Suttur Culinary Heritage. All rights reserved.</p>
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 TechNova. All rights reserved.</p>
+            <p>Follow us: <a href="#">Instagram</a> | <a href="#">Twitter</a> | <a href="#">LinkedIn</a></p>
+        </div>
     </footer>
 
     <div class="popup-overlay">

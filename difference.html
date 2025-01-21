@@ -402,6 +402,29 @@
             text-decoration: underline;
         }
 
+        .footer-content {
+        text-align: center;
+        padding: 3rem ;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        color: var(--white);
+        font-size: 1.1rem;
+        position: relative;
+        }
+
+        .footer-content a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+        }
+
+        .footer-content a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -458,7 +481,7 @@
         </button>
         <nav class="navbar">
           <div class="logo">
-            <img src="images/logo.jpg" alt="Suttur Logo">
+            <img src="images/logo.png" alt="Suttur Logo">
           </div>
           <ul>
             <li><a href="index.html" class="nav-item" data-text="Home"></a></li>
@@ -570,23 +593,10 @@
             </div>
         </section>
 
-        <footer class="footer">
+        <footer>
             <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Contact Us</h3>
-                    <p>Phone: +91 1234567890</p>
-                    <p>Email: info@suttur.org</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <p><a href="#faq">FAQ</a></p>
-                    <p><a href="#social">Social Media</a></p>
-                </div>
-                <div class="footer-section">
-                    <h3>Location</h3>
-                    <p>Suttur Mutt, Mysuru</p>
-                    <p>Karnataka, India</p>
-                </div>
+                <p>&copy; 2025 TechNova. All rights reserved.</p>
+                <p>Follow us: <a href="#">Instagram</a> | <a href="#">Twitter</a> | <a href="#">LinkedIn</a></p>
             </div>
         </footer>
     </div>

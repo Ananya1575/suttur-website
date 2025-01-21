@@ -323,6 +323,29 @@ body {
     cursor: pointer;
 }
 
+.footer-content {
+        text-align: center;
+        padding: 3rem ;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        color: var(--white);
+        font-size: 1.1rem;
+        position: relative;
+        }
+
+        .footer-content a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+        }
+
+        .footer-content a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+
 
 @media (max-width: 768px) {
     .main-title {
@@ -376,7 +399,7 @@ body {
         </button>
         <nav class="navbar">
           <div class="logo">
-            <img src="images/logo.jpg" alt="Suttur Logo">
+            <img src="images/logo.png" alt="Suttur Logo">
           </div>
           <ul>
             <li><a href="index.html" class="nav-item" data-text="Home"></a></li>
@@ -469,6 +492,15 @@ body {
             </div>
         </div>
     </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 TechNova. All rights reserved.</p>
+            <p>Follow us: <a href="#">Instagram</a> | <a href="#">Twitter</a> | <a href="#">LinkedIn</a></p>
+        </div>
+    </footer>
+
+
     <script>
         function animateOnScroll() {
             const elements = document.querySelectorAll('.hotel-section');
