@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Institutes</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: white;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        :root {
+            --primary-color: rgba(244, 116, 52, 0.9);
+            --secondary-color: #f6a049;
+            --accent-color: #ffcc55;
+            --background-color: #ffffff;
+            --text-dark: #2d3436;
+            --text-light: #ffffff;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+
+
+        .navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(240, 102, 11, 0.897);
+  color: var(--white);
+  padding: 1rem 2rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: fixed;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid var(--glass-border);
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin-right: -20px;
+  margin-top: -3px;
+  margin-bottom: -5px;
+}
+   
+
+.nav-toggle {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.nav-toggle .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--background-color);
+}
+
+.navbar .nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .nav-links li {
+  position: relative;
+  margin-right: 2rem;
+}
+
+.navbar .nav-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+}
+
+.navbar .nav-links a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.navbar .nav-links li:hover > .dropdown-content {
+  display: block;
+}
+
+  
+  .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color:var(--secondary-color);
+      min-width: 260px;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .dropdown-content a {
+      color: var(--text-dark);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #333;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 3rem;
+  }
+
+
+    .navbar-container {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        padding: 2rem;
+    }
+
+    .logo {
+        position: absolute;
+        top: 1.5rem;
+        left: 2rem;
+        z-index: 1001;
+    }
+
+    .nav-toggle {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        z-index: 1002;
+    }
+
+    .navbar .nav-links {
+        display: none;
+        width: 100%;
+        margin-top: 4rem; /* Adjust to prevent overlap with logo */
+    }
+
+    .navbar .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar .nav-links li {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .nav-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .navbar .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 3rem;
+  }
+
+  .navbar .nav-links.active {
+    display: flex;
+  }
+
+  .navbar .nav-links li {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .dropdown-content {
+    position: static;
+    box-shadow: none;
+  }
+}
+
+
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            
+            background-image: url("images/orange.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color:black;
+        }
+
+        .more-info-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .other-institutions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            padding: 2rem;
+        }
+        .institution-card {
+            width: calc(33.333% - 1rem);
+            min-width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .institution-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .institution-details {
+            padding: 1rem;
+        }
+        .see-more, .see-less {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .see-more:hover, .see-less:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .hidden-info {
+            display: none;
+            padding: 1rem;
+            background-color: #f8f9fa;
+        }
+
+        footer {
+            width: 100%;
+            flex-shrink: 0; /* Prevents footer from shrinking */
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            margin-top: auto; /* Pushes footer to bottom */
+        }
+
+        .footer-content {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .footer-content a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+        }
+
+        .footer-content a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .institution-card {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="images/logonav.png" alt="">
+              </div>
+          <div class="nav-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">About</a>
+                <div class="dropdown-content">
+                  <a href="about1.html">About Suttur Mutt</a>
+                  <a href="about2.html">Suttur Mahavidhyapeeta</a>
+                </div>
+              </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Education</a>
+              <div class="dropdown-content">
+                <a href="educationsuttur.html">Suttur Education</a>
+                <a href="generaledu.html">General Education</a>
+                <a href="medicaledu.html">Medical Institutes</a>
+                <a href="technicaledu.html">Technical Institutes</a>
+                <a href="supportive.html">Supportive Institutes</a>
+              </div>
+            </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Services</a>
+              <div class="dropdown-content">
+                <a href="social.html">Social Services</a>
+                <a href="health.html">Healthcare</a>
+              </div>
+            </li>
+            <li><a href="events.html">Events</a></li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Visit Suttur</a>
+              <div class="dropdown-content">
+                <a href="reach.html">Reach</a>
+                <a href="stay.html">Stay</a>
+                <a href="culinary.html">Suttur Culinary Heritage</a>
+                <a href="places-in-suttur.html">Explore in Suttur</a>
+                <a href="places-around-suttur.html">Explore around Suttur</a>
+              </div>
+            </li>
+            <li><a href="contacts.html">Contact</a></li>
+            <li><a href="game.html">Game</a></li>
+          </ul>
+        </nav>
+      </header>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Medical Institutes</h1>
+        </div>
+    </div>
+    
+    <div class="other-institutions">
+        <!-- Institution Cards -->
+        <div class="institution-card">
+            <img src="images/medical1.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Ayurveda Medical College</h3>
+                <p>JSSMVP established an Ayurveda Medical College in Mysuru in 1996 to promote holistic healing, medical education, and research. Recognized by CCIM and RGUHS, it offers modern infrastructure for studying this ancient Indian system of medicine.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>An Ayurveda Medical College in Mysuru was established by JSSMVP in 1996, to deal with human ailments in terms of clinical care, medical education and research. Ayurveda is one of the world’s oldest holistic healing system with historical roots in India. Besides, this ancient diagnostic and treatment method is gaining popularity in recent times. The institution is well-equipped with best in class infrastructure. Both Central Council for Indian Medicine and Rajiv Gandhi University of Health Sciences recognizes the courses offered by the College.                    </p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/medical2.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Institute of Nature Cure and Yogic Sciences College</h3>
+                <p>JSSINYS, founded in 1997, is a leading institution for Naturopathy and Yogic Sciences. It offers a 5.5-year BNYS program, combining academic excellence with practical training.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>JSSINYS, established in 1997, is a premier institution dedicated to the scientific study and practice of Naturopathy and Yogic Sciences. Located on a scenic campus, it offers a 5.5-year BNYS program (4.5 years of academics + 1 year of internship) affiliated with Tamil Nadu Dr. MGR Medical University. JSSINYS focuses on providing students with a strong foundation in traditional healing methods while emphasizing research and clinical excellence.
+                        The institution boasts a well-equipped campus with modern facilities for learning and patient care. JSSINYS is recognized by leading bodies like CCRYN and NIN, ensuring quality education and training. The curriculum combines theoretical knowledge with hands-on experience through lectures, seminars, and workshops. With a focus on holistic healing, JSSINYS aims to produce skilled and compassionate graduates who can contribute significantly to the field of Naturopathy and Yoga.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/medical3.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS college of Physiotherapy</h3>
+                <p>JSS College of Physiotherapy, established in 1999, is a leading institution dedicated to training skilled physiotherapists. It offers undergraduate and postgraduate programs, preparing students for successful careers in the healthcare field.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>Recognized by Rajiv Gandhi University of Medical Sciences, Bengaluru, JSS College of Physiotherapy aims to provide students with a comprehensive understanding of human movement and its implications for health and well-being. The curriculum emphasizes both theoretical knowledge and practical skills through hands-on experience at JSS Hospital and collaborations with various healthcare organizations. The college boasts well-equipped laboratories, a comprehensive library, and a focus on student development through sports and recreational activities.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/medical4.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Institute of Speech and Hearing, Mysuru</h3>
+                <p>JSS Institute of Speech and Hearing, established in Mysuru in 2001-02, trains professionals in speech and hearing rehabilitation. Affiliated with the University of Mysore, it offers B.Sc., MASLP, MSc (Audiology), and MSc (Speech-Language Pathology) courses recognized by the Rehabilitation Council of India.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+               <p>JSS Institute of Speech and Hearing was established in Mysore in 2001-02 to meet the increasing need for qualified professionals in speech and hearing. It is affiliated to the University of Mysore and is recognized by the Rehabilitation Council of India, Govt. of India. The institute offers a four-year B.Sc. degree in Speech and Hearing Postgraduate courses in MASLP, MSc(Audiology) and MSc(Speech-Language Pathology). Mysuru University recognizes the Institute as a Research Centre. These courses are professional courses designed to produce speech and hearing specialists. They are broadly classified as Speech Pathologists and Audiologists. The Institute trains the speech and hearing professionals to cater to the health issues related to habilitation and rehabilitation of individuals of all age groups (from infants to the very old) with speech and hearing problems.
+
+                  The staff and students of the institute conduct and attend speech and hearing camps organised by Rotary and Lion clubs in various places. These camps help in bringing awareness among the rural population about speech and hearing problems and remedies available.   </p>                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/medical5.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Institute of Speech and Hearing, Dharwad</h3>
+                <p>JJSSMVP established the JSS Institute of Speech and Hearing in Dharwad in 2014, offering BASLP courses and quality clinical services for communication disorders. Affiliated with Karnataka University and recognized by RCI, it also serves as a rehabilitation center under Karnataka's Cochlear Implant Scheme.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>JSSMVP established its second Speech & Hearing institute in Dharwad in 2014.  JSS Institute of Speech and Hearing, Dharwad is located in a lush green campus measuring around 80 acres, near Kelageri- lake, Dharwad. It offers Bachelor of Audiology and Speech-Language Pathology (BASLP) course to provide an opportunity for aspiring students to pursue graduation in the field of speech and hearing. The institute has state-of-the-art facilities and conducts clinical activities in the assessment and treatment of various communication disorders. This institute is affiliated to Karnataka University, Dharwad. In addition to this, Rehabilitation Council of India, Govt. of India recognizes it. The institute is also recognised by the Suvarna Arogya Suraksha Trust (SAST) as a rehabilitation entre of the Govt. of Karnataka’s Cochlear Implant Scheme. The objective of the institute is to provide quality education and affordable clinical services to the public education. The institute also carries out need-based research programmmes.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/medical6.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS School of Nursing, Mysuru</h3>
+                <p>Established in 1988 within JSS Hospital, the JSS School of Nursing offers state-of-the-art training facilities. Recognized by the Karnataka and Indian Nursing Councils, it welcomes both Indian and international students.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>
+                        JSS School of Nursing was established in 1988, in the JSS Hospital premises. The school is recognized by the Karnataka State Nursing Council, Bengaluru and the Indian Nursing Council New Delhi. It is affiliated to Karnataka State Diploma in Nursing Examination Board, Bengaluru. It has state-of-the-art equipment to train students. Admission is open for both Indians and Foreigners.
+                    </p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/medical7.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS School of Nursing, MM Hills road, Kollegal</h3>
+                <p>Established in 2004, JSS School of Nursing, Kollegal, offers quality nursing education amidst a lush 3.96-acre campus. Recognized by INC, KNC, and the Karnataka Nursing Board, it focuses on affordable education and rural healthcare.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>JSS School of Nursing, Kollegal, Chamarajanagar, was established in the year 2004. Kollegal is a town located 60 km away from Mysuru. Kollegal is well-known for silk and a pilgrim centre in MM Hills. Nestled among the splendid greenery in the campus spread over 3.96 acres. The school is recognized by the Indian Nursing Council (INC), New Delhi, Karnataka Nursing Council (KNC), Bengaluru and Karnataka State Diploma Nursing Examination Board, Bengaluru and is approved by the Government of Karnataka. The school has been providing a perfect ambience for the pursuit of excellence in Nursing Education and to learn a full spectrum of Nursing. The topmost priority of the institute is to impart subsidized quality education and to provide assistance to rural and poor people to meet the essential health requirement. The school is also designed to meet the ever-growing need for qualified nurses in the country.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/medical8.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS School of Nursing, B.R. Hills Road, Chamarajanagar</h3>
+                <p>Established in 2004, JSS School of Nursing, Chamarajanagar, offers quality nursing education with access to 400+ hospital beds for clinical training. Recognized by INC, KSNC, and the Karnataka Nursing Board, it provides excellent facilities and experienced faculty for student success.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>JSS School of Nursing, B.R. Hills Road, Chamarajanagar was established in the year 2004 and is attached to the JSS Hospital, Chamarajanagar which has 100 beds and also to the District Hospital Chamarajanagar which has 300 beds with different departments and equipment. The School is recognized by Indian Nursing Council (INC), New Delhi, Karnataka State Nursing Council (KSNC), Bengaluru and Karnataka State Diploma Nursing Examination Board, Bengaluru and is approved by the Government of Karnataka. Our School is located at the heart of the city. It has an eco-friendly campus with well-furnished laboratories, spacious classrooms, computerized library as well as other necessary infrastructural facilities. Also, we have well-experienced, excellent, dedicated faculty who strive for student success and achievement.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/medical9.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>DJSS College of Nursing, Mysuru</h3>
+                <p>Established in 1997, JSS College of Nursing, Mysuru, is the city's first nursing college and the pioneer in offering postgraduate nursing education. With a mission to uphold quality standards, it is guided by experienced faculty dedicated to excellence in nursing education.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>The JSS College of Nursing was started in November 1997 by the foresight and vision of His Holiness Jagadguru Sri Shivarathreeshwara Deshikendra Mahaswamiji to prepare professional Nurses at the university level in order to improve standards of nursing service through quality nursing education.
+
+                        The idea was conceived in 1990 and nurtured for seven long years. This is the first college of nursing started in the city of Mysore as well as the first college of nursing in Mysore to start a post-graduation course in nursing. Its motto is to maintain the standards of nursing education and all efforts are made to deploy well qualified and experienced faculty to achieve the goal.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/medical10.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Medical College</h3>
+                <p>Established in 1984-85, JSS Medical College, Mysuru, offers premier education in medical sciences and is recognized by the Medical Council of India. Since 2008, it has been a constituent college of JSS Academy of Higher Education & Research (JSSAHER).</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>JSS Medical College, Mysuru, was started in the year 1984-85 for imparting education in medical sciences. The Medical Council of India recognizes the college. Earlier, in 1995-96, it was affiliated to the Rajiv Gandhi University of Health Sciences, Bengaluru, Karnataka. Since 28-05-2008, it became a constituent college of JSSAHER (Established under Section-3 of UGC Act).
+
+                    </p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/medical11.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Dental College</h3>
+                <p>JSS Halbhavi School of Art, established in 1935, is Karnataka's first school of arts and has produced numerous renowned artists. Merged with JSSMVP in 2008, it offers graduate-level education in fine arts, along with courses in computers, communication, and complementary fields like theatre, literature, and music.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>
+                        JSS Dental College & Hospital, Mysuru, established in 1986-87, is a premier institution dedicated to excellence in dental education and healthcare. Located in Mysuru, the college offers BDS, MDS in nine specialties, and Postgraduate Diploma courses in five areas, with recognition from the Dental Council of India and the Government of India. Since 2008-09, it has been affiliated with JSS Academy of Higher Education & Research (JSSAHER).
+                        
+                        Spread across 38 acres, the institution features state-of-the-art facilities, including dedicated spaces for dental education and separate hostels for boys and girls. It provides quality dental care to the needy and actively engages in rural outreach programs, offering education and treatment to underserved populations.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/medical12.png" alt="Institution 1" >
+            <div class="institution-details">
+                <h3>JSS College of Pharmacy, Mysore
+                </h3>
+                <p>Jagadguru Sri Dr Shivarathri Rajendra Mahaswamjigalavaru, the 23rd pontiff of Sri Suttur Veerasimhasana Math was the architect and founder president of JSS Mahavidyapeetha, which came into being in 1954. With the divine inspiration of Sri Swamiji, the JSS College of Pharmacy was started in the year 1973 in Mysuru.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>JSS College of Pharmacy is a constituent college of JSS University, Mysore. JSS University is recognized by Ministry of Human Resource Development, Government of India on 28th May 2008 and has declared Jagadguru Sri Shivarathreeshwara University (JSSU), Mysore, Karnataka, as deemed. The college offers a comprehensive package of pharmacy education and training opportunities beginning with the Diploma in Pharmacy (D.Pharm), B.Pharm (Practice), Bachelor of Pharmacy (B.Pharm), Doctor of Pharmacy (Pharm.D.), Master of Pharmacy (M.Pharm) and Doctoral (PhD) programs, Residency Programme in Oncology & Nephrology. Postgraduate diploma and certificate courses are also offered to the students as an add-on to the regular programs. The college houses some of the nation`s recognized researchers and educates some of the brightest students nationally and internationally. The college has a Drug Testing Laboratory which is approved by Govt. of Karnataka and is NABL accreditated. The institute is a renowned leader in pharmaceutical education, research and practice. This benchmarking has been recognized nationally in the form of accreditation by National Board of Accreditation (NBA), India. As a part of global recognition, the Pharm.D. Program has been certified by Accreditation Council for Pharmacy Education (ACPE), USA. It is presently ranked as top 10 pharmacy college in the country (by NIRF, MHRD, Govt. of India). The college has active Training and Placement Cell which conducts campus drive annually. A large pool of Pharmaceutical Companies, Research Organisations participate in this drive.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/medical13.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>College of Pharmacy, Ooty</h3>
+                <p>JSS College of Pharmacy, Ooty, established in 1980, is a premier institution offering D.Pharm., B.Pharm., M.Pharm. (10 specializations), Pharm.D., and PhD programs. Accredited by NAAC with an A+ grade, it is internationally recognized, including ACPE certification for its Pharm.D. program, the first in the Asia Pacific region.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>Established in 1980 with D.Pharm. program, JSS College of Pharmacy, Ooty is a constituent college of Jagadguru Sri Shivarathreeswara University (JSS University), Mysuru since 2008, and positioned today as one of the premier postgraduate and research institution imparting D.Pharm., B.Pharm., M.Pharm., (10 Specializations) Pharm.D., and PhD. Programs. The ‘Add-On’ PG Diploma and Certificate courses offered to the students and scholars are for value addition and nurturing their knowledge in inter-disciplinary subjects. The College and the JSS AHER are accredited by the National Assessment and Accreditation Council (NAAC) with `A+` Grade.  Our B.Pharm. Program is accredited by NBA, New Delhi and the Pharm.D. Program is awarded with international certification by ACPE, USA for the first time in the Asia Pacific Region. The Drug Testing Laboratory is accredited by NABL. Both the college and CADRAT are certified with ISO 9001:2015for the quality management systems. The college is ranked 8th in India by NIRF ranking 2019.
+
+                        As strong believers in ‘Team Play’, our focus is on collaboration instead of competition resulting in National and International MoUs to foster teaching-learning, research through faculty and student exchange, consultancy, training programs, etc., JSS College of Pharmacy, Ooty has an esteemed legacy in advancing pharmaceutical education, practice and research and shaping pharmacy professionals on par with international standards and requirements.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 SutturSamskruthi. All rights reserved.</p>
+            <p>Follow us: <a href="#">Instagram</a> | <a href="#">Twitter</a> | <a href="#">LinkedIn</a></p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDetails(button) {
+            const card = button.closest('.institution-card');
+            const hiddenInfo = card.querySelector('.hidden-info');
+            const seeMore = card.querySelector('.see-more');
+            
+            if (hiddenInfo.style.display === 'block') {
+                hiddenInfo.style.display = 'none';
+                seeMore.style.display = 'block';
+            } else {
+                hiddenInfo.style.display = 'block';
+                seeMore.style.display = 'none';
+            }
+        }
+
+        
+        const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+navToggle.addEventListener('click', () => {
+  navToggle.classList.toggle('active');
+  navLinks.classList.toggle('active');
+});
+ 
+    </script>
+</body>
+</html>

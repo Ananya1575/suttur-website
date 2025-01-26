@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Education</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: white;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        :root {
+            --primary-color: rgba(244, 116, 52, 0.9);
+            --secondary-color: #f6a049;
+            --accent-color: #ffcc55;
+            --background-color: #ffffff;
+            --text-dark: #2d3436;
+            --text-light: #ffffff;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+
+
+
+        .navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(240, 102, 11, 0.897);
+  color: var(--white);
+  padding: 1rem 2rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: fixed;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid var(--glass-border);
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin-right: -20px;
+  margin-top: -3px;
+  margin-bottom: -5px;
+}
+   
+
+.nav-toggle {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.nav-toggle .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--background-color);
+}
+
+.navbar .nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .nav-links li {
+  position: relative;
+  margin-right: 2rem;
+}
+
+.navbar .nav-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+}
+
+.navbar .nav-links a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.navbar .nav-links li:hover > .dropdown-content {
+  display: block;
+}
+
+  
+  .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color:var(--secondary-color);
+      min-width: 260px;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .dropdown-content a {
+      color: var(--text-dark);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #333;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 3rem;
+  }
+
+
+    .navbar-container {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        padding: 2rem;
+    }
+
+    .logo {
+        position: absolute;
+        top: 1.5rem;
+        left: 2rem;
+        z-index: 1001;
+    }
+
+    .nav-toggle {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        z-index: 1002;
+    }
+
+    .navbar .nav-links {
+        display: none;
+        width: 100%;
+        margin-top: 4rem; /* Adjust to prevent overlap with logo */
+    }
+
+    .navbar .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar .nav-links li {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .nav-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .navbar .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 3rem;
+  }
+
+  .navbar .nav-links.active {
+    display: flex;
+  }
+
+  .navbar .nav-links li {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .dropdown-content {
+    position: static;
+    box-shadow: none;
+  }
+}
+
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            background-image: url("images/orange.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color:black;
+        }
+
+        .more-info-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .other-institutions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            padding: 2rem;
+        }
+        .institution-card {
+            width: calc(33.333% - 1rem);
+            min-width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .institution-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .institution-details {
+            padding: 1rem;
+        }
+        .see-more, .see-less {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .see-more:hover, .see-less:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .hidden-info {
+            display: none;
+            padding: 1rem;
+            background-color: #f8f9fa;
+        }
+
+        footer {
+            width: 100%;
+            flex-shrink: 0; /* Prevents footer from shrinking */
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            margin-top: auto; /* Pushes footer to bottom */
+        }
+
+        .footer-content {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .footer-content a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+        }
+
+        .footer-content a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .institution-card {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="images/logonav.png" alt="">
+              </div>
+          <div class="nav-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">About</a>
+                <div class="dropdown-content">
+                  <a href="about1.html">About Suttur Mutt</a>
+                  <a href="about2.html">Suttur Mahavidhyapeeta</a>
+                </div>
+              </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Education</a>
+              <div class="dropdown-content">
+                <a href="educationsuttur.html">Suttur Education</a>
+                <a href="generaledu.html">General Education</a>
+                <a href="medicaledu.html">Medical Institutes</a>
+                <a href="technicaledu.html">Technical Institutes</a>
+                <a href="supportive.html">Supportive Institutes</a>
+              </div>
+            </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Services</a>
+              <div class="dropdown-content">
+                <a href="social.html">Social Services</a>
+                <a href="health.html">Healthcare</a>
+              </div>
+            </li>
+            <li><a href="events.html">Events</a></li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Visit Suttur</a>
+              <div class="dropdown-content">
+                <a href="reach.html">Reach</a>
+                <a href="stay.html">Stay</a>
+                <a href="culinary.html">Suttur Culinary Heritage</a>
+                <a href="places-in-suttur.html">Explore in Suttur</a>
+                <a href="places-around-suttur.html">Explore around Suttur</a>
+              </div>
+            </li>
+            <li><a href="contacts.html">Contact</a></li>
+            <li><a href="game.html">Game</a></li>
+          </ul>
+        </nav>
+      </header>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>General Education</h1>
+        </div>
+    </div>
+    
+    <div class="other-institutions">
+        <!-- Institution Cards -->
+        <div class="institution-card">
+            <img src="images/general1.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>Balajagat and Creches</h3>
+                <p>JSSMVP has transformed access to quality pre-primary education by establishing seven crèches and 19 nursery schools across Karnataka, serving both urban and rural communities. This initiative aims to bridge societal gaps and provide every child with a strong educational foundation, regardless of their background.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>Until a few decades ago, quality pre-primary education was a privilege limited to the children of the elite in society. However, JSSMVP has been committed to providing equal access to quality education for all by establishing seven crèches and 19 nursery schools across Karnataka’s urban and rural areas. Four of the seven crèches are aided institutions, while only one of the 19 nursery schools is aided. The remaining 15 schools are operated entirely by JSSMVP. This effort by JSSMVP is a significant step towards bridging the educational gap between different sections of society and ensuring that every child has the opportunity to receive a strong foundation in education, regardless of their social or economic background.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/gerneral2.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>Sanskrit Schools</h3>
+                <p>JSSMVP promotes ancient Indian wisdom through 11 Sanskrit schools and a college, offering courses in Veda, Agama, Astrology, and Sanskrit literature. With a 60-year legacy, these institutions empower 1,800 students, especially from rural areas, to preserve and advance this rich heritage.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>JSSMVP operates JSS Sanskrit Schools to promote the study of ancient Indian wisdom, including Veda, Agama, and Astrology, which require proficiency in Sanskrit. The organization emphasizes Sanskrit's extensive use in literature, sacred hymns, philosophy, mythology, science, mathematics, history, poetry, drama, music, Ayurveda, and yoga, highlighting its relevance as the "language of the environment." Additionally, JSSMVP believes that learning Sanskrit sharpens memory and enhances cognitive skills. Over the past 60 years, JSSMVP has established 11 Sanskrit schools, starting with the Kyatanahalli Sri Siddlingaiah Samskruta Patashala in Mysuru, including five in rural areas to provide access to Sanskrit education for rural students. Currently, around 1,800 students, including 1,000 boys and 800 girls, are enrolled in these schools, where subjects like Veda, Agama Shastra, and Astrology are also taught in Mysuru and Suttur.
+
+                        In 2013, His Holiness Jagadguru Sri Shivarathri Deshikendra Mahaswamy inaugurated a Sanskrit college in Suttur to further this mission. The college offers specialized courses in Alankara, Shakthivishishtadwaitha Vedantha, Jyothishya, and Sanskrit language to talented rural students, fostering the preservation and dissemination of ancient knowledge. These initiatives by JSSMVP play a pivotal role in empowering students and ensuring the continued relevance of Sanskrit in modern education.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/general3.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>Sahana Schools</h3>
+                <p>JSSMVP's Sahana Schools in Bengaluru and Mysuru provide quality education and support for children with disabilities, fostering their talents and boosting confidence. With specialized teachers and inclusive programs, the schools empower students to integrate into mainstream society and excel in academics, arts, and sports.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>Providing Quality Education and Support for Children with Disabilities
+
+                        Learning and performing specific activities can be challenging for children with disabilities. These children require specialized services to support them throughout their school years, including individual attention from instructors. At JSSMVP, we believe that with proper care, affection, guidance, and excellent education, these children can reach their full potential.
+                        
+                        To provide deserving children with quality education and support, Sahana Schools for Special Children were established in Bengaluru and Mysuru. Our schools offer education to children with special needs and raise awareness about their rights and responsibilities. We aim to uncover their latent talents and potential and help them integrate into mainstream society by boosting their confidence.
+                        
+                        Our specially trained and dedicated teachers have the necessary qualifications in special education. They embrace differences and strive to create an environment of humaneness. We categorize children based on their particular needs, abilities, and interests and provide specialized training in dance, drawing, sports, and music. We also encourage our students to participate in sports competitions and other activities, many of whom have won prizes.
+                        
+                        At Sahana Schools for Special Children, we are committed to providing an inclusive education that helps children with disabilities thrive.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/general4.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>Primary Schools</h3>
+                <p>JSSMVP operates 23 primary and 62 high schools across Karnataka and Tamil Nadu, providing quality education to nearly 20,000 students. These schools lay a strong foundation for academic and personal growth in both urban and rural areas.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>The foundation for a child’s future is laid in their primary education. JSSMVP has recognized this importance and established multiple primary schools in both urban and rural areas. With a total of 23 primary schools and 62 high schools, JSSMVP’s reach spans across Mysuru, Chamarajanagar, Bengaluru, Kolar, Hassan, Mandya, Shimoga, and Davangere in Karnataka, as well as Periyar District in Tamil Nadu. These schools have an enrollment of nearly 20,000 students, paving the way for their academic and personal growth.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/general5.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS High Schools</h3>
+                <p>JSSMVP has established 59 high schools in rural Karnataka, providing quality education to 12,798 students. These schools empower rural children with academic, vocational, and personal growth opportunities, fostering a brighter future</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>High schools play a crucial role in empowering rural children by bringing quality education closer to their communities, eliminating long-distance travel, and offering a broad curriculum that prepares them for higher education and career opportunities. JSSMVP's high schools emphasize practical skills through vocational courses, enhancing students' employability while fostering personal and social development through extracurricular activities, sports, and community engagement. These schools act as community hubs, encouraging rural children to dream bigger and strive for careers once thought unattainable.
+
+                        To address the educational challenges in rural areas, JSSMVP established 59 high schools, employing 556 teachers and 154 non-teaching staff to ensure high standards of education. With significant investments in infrastructure, resources, and extracurricular initiatives, the organization creates a conducive learning environment. JSSMVP’s mission of inclusivity breaks barriers, empowering students to realize their potential and contribute to a socially equal society.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/general6.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>Akshara Dasoha</h3>
+                <p>JSSMVP's Akshara Dasoha Yojane, in partnership with the Karnataka government, provides free mid-day meals to over 12,000 rural schoolchildren across 33 villages. This initiative enhances nutrition, attendance, and retention while promoting social equity.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>JSS Maha Vidya Peetha Akshara Dasoha Yojane, in collaboration with the Government of Karnataka, initiated the provision of free mid-day meals to primary and high school children from rural areas in 2003-04. Under this scheme, the institution effectively implements the distribution of meals in more than 33 villages in Karnataka. Currently, over 12,000 children benefit from the Akshara Dasoha scheme. The institution supplies the food from its central kitchen.
+
+                        To address the poor health and learning abilities resulting from inadequate nutrition among economically backward and underprivileged children, JSSMVP decided to provide free mid-day meals to children studying in rural schools. This initiative aims to improve attendance and retention rates among children enrolled in rural schools, supporting educational objectives and promoting social equity.
+                        
+                        JSSMVP ensures that their staffs maintain high hygiene levels. They clean the vegetables and food grains before cooking, utilizing pure water for the cooking process. The central kitchen is well-maintained, and the utensils are cleaned daily before cooking and after serving the food.
+                        
+                        Currently, the project actively extends its coverage to schools located in Yelandur, a disadvantaged taluk in the Chamarajanagara district, and schools in the Mysuru district. JSSMVP takes the responsibility of bearing the expenses that go beyond the grants provided by the government.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/general7.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Public Schools (CBSE)</h3>
+                <p>JSSMVP operates over 300 institutions, serving 100,000+ students from kindergarten to postdoctoral levels. Its 14 public schools and international institutions in Ooty and Dubai offer CBSE curricula, ensuring global educational standards.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>JSS Mahavidyapeetha has experienced remarkable growth in the field of education, with more than 300 institutions operating under its umbrella. These institutions encompass a wide range of educational levels, from kindergartens to postgraduate centres and even postdoctoral research programs. In total, JSSMVP serves the educational needs of over 100,000 students.
+
+                        In order to meet the demands of a robust educational system, JSSMVP established its first public school in 1991. Presently, there are fourteen JSS public schools located in Mysuru, Bengaluru, Malur, Bellary, Dharwad, Sakaleshpur, Chamarajanagar, Mandya, and Noida (Uttar Pradesh). Additionally, there is an international school in Ooty, Tamil Nadu. Moreover, JSSMVP operates two schools in Dubai, including an international school and a private school. All the public schools follow the NCERT syllabus and are affiliated with the Central Board of Secondary Education (CBSE).</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/general8.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>Pre-University Colleges (Junior Colleges)</h3>
+                <p>Including the upgraded high schools, JSSMVP has 17 junior colleges offering pre-university education predominantly in rural areas. Around 3,400 students are studying in these colleges.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p></p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/general9.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>Degree Colleges</h3>
+                <p>JSSMVP operates six degree colleges, including three for women, offering NAAC-accredited programs in Arts, Science, Commerce, Management, Humanities, and Law. With a focus on holistic education, these colleges equip students for professional and personal success.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>JSSMVP has established many Degree Colleges to cater to the needs of both rural and urban students. JSS Degree Colleges offer courses to aid in personal as well as professional development of the students by instilling a broad range of skills in them. Education beyond the Pre-University level is essential to broaden one’s knowledge and to have better career prospects in today’s competitive world. Also, earning a bachelor’s degree not only provides long term employability but also job security, higher pay and a better future.
+
+                        The College Development Division established by JSSMVP supervises Six-degree colleges in Arts, Science, Commerce and Management field. Also, the institution runs a Law college and a Sanskrit college. These Colleges strive to create a holistic learning environment for its students to make them learned professionals and responsible individuals. The programmes are devised based on the requisites and aspirations of the young generation. Out of these six colleges, three are colleges for women and are located in Mysuru, Chamarajanagar and Kollegal. All the degree colleges are accredited with NAAC. These Colleges offer a degree in Science, Arts, Commerce, Humanities and law. Among the degree colleges of JSS, JSS Law College, Mysore, JSS College for Women, Saraswathipuram, Mysore, JSS College of Arts, Commerce and Science, Ooty Road, Mysore are autonomous institutions.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/general10.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Teacher Training Institutes</h3>
+                <p>JSSMVP runs multiple teacher training institutes to improve teaching quality, including those for rural students and special education. These institutes focus on building competencies and providing essential training to enhance educators' skills and knowledge..</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>Among several initiatives taken by JSSMVP, JSS Teacher Training Institute is one of them. Students will understand the subject matter in a better way if we teach them in an efficient manner. Considering the change in educational policy and environment, JSSMVP realized the need for good teachers and decided to produce good teachers. As a result, teacher training institutes were established, and teaching education was made accessible even to the rural students as well.
+
+                        During 2003-04, BRDM Institution, Bengaluru, merged with JSS Mahavidyapeetha. One High School and one Institute of Education run by BRDM institution at Sakaleshpur, Hassan, came under the fold of JSSMVP. This institution had an intake of 100 students. During 2005-06, four new Institutes of Education were established, and at present, five Institutes are functioning.
+                        During the year 2010-11, the strength of JSS B.Ed and JSS D.Ed colleges was 401(158 boys and 243 girls). There were 29 teachers and 22 non-teaching staff in these colleges.
+                        
+                        In addition to this, JSSMVP has established a Nursery School Teachers’ Training Institute in Mysuru and a Teacher Training Institute in Bengaluru to train teachers to work with differently-abled children.
+                        
+                        JSS Teacher Training Institutes aim at building teacher competencies by providing them with the necessary training to upgrade their knowledge and develop the required proficiency.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/general11.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Halbhavi School of Art, Kelgeri, Dharwad</h3>
+                <p>JSS Halbhavi School of Art, established in 1935, is Karnataka's first school of arts and has produced numerous renowned artists. Merged with JSSMVP in 2008, it offers graduate-level education in fine arts, along with courses in computers, communication, and complementary fields like theatre, literature, and music.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>JSS Halbhavi School of Art, which has the distinction of being Karnataka’s first school of arts, was established in Dharwad by Shri D V Halbhavi in 1935. The school, which was founded under the aegis of Dharwad Fine Art Society, has provided art education to thousands of students during the last 76 years. The school was merged with JSSMVP in 2008. It is recognized by the Hampi University for providing graduate level education in fine arts. In addition, education in computers, communication and soft skills are given to meet the needs of the modern world. The school also introduces students to complimentary fields such as theatre, literature and music. Many renowned artists who have achieved fame at the national and international level have studied here.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/general12.png" alt="Institution 1" >
+            <div class="institution-details">
+                <h3>JSS Karnataka Open School – JSS KOS
+                </h3>
+                <p>JSS Karnataka Open School (JSS KOS), the brainchild of Karnataka Higher Secondary Education, plays a pivotal role in the promotion and development of an open and distance learning system in the State of Karnataka.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>  JSSKOS functioning under JSS Mahavidyapeetha, Mysore, was established in the year 1999-2000 to bring school dropouts and those who were deprived of formal education, to the mainstream of education.  With the guidance of the National Institute of Open Schooling, NOIDA, the school provides education for those who are unable to get a formal school education. Karnataka Secondary Education Examination Board (KSEEB) will be conducting examinations and issuing marks cards to the students. The Personal Contact Programme (PCPs) classes conducted by Karnataka Open School are equivalent to regular SSLC.
+                        
+                        It started with 8 centres and now it has more than 100 study centres all over Karnataka State and more than 3000 students are pursuing their studies in these centres every year. Each state in India has its own state open school which is being run by the respective governments but in Karnataka, the responsibility of running this school is entrusted to JSS Mahavidyapeetha, Mysuru. His Holiness Jagadguru Sri Shivarathri Deshikendra Mahaswamiji is the chairman of the Karnataka Open School.
+                        
+                        </p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/general9.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>Post-Graduate Institutes</h3>
+                <p>JSSMVP offers post-graduate courses in several colleges across Mysuru and Chamarajanagar, providing rural students with opportunities to enhance their skills and career prospects.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>To meet the demands of the competitive world and boost employment opportunities, JSSMVP introduced post-graduate courses in multiple colleges. JSS Arts, Commerce, and Science College in Mysuru offers programs like MSW, M.Sc. in Biotechnology, Computer Science, Chemistry, Physics, and M.Com., while JSS Women's College in Kollegal and Saraswathipuram provides PG courses in Commerce, Kannada, and Economics. These courses aim to equip students, especially from rural areas, with the skills necessary to excel professionally.
+
+                        The post-graduate institutions are supported by excellent infrastructure and follow a comprehensive curriculum. With a team of dedicated, qualified faculty, students are not only taught in classrooms but also receive practical exposure through seminars, guest lectures, and educational tours. These initiatives help broaden students' understanding and enhance their academic and professional growth.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/gerneral2.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>Hindi Vidyalayas</h3>
+                <p>JSSMVP runs Hindi Vidyalayas in Mysore and Bangalore to promote Hindi literacy and prepare students for exams conducted by the Dakshina Bharat Hindi Prachar Sabha. These recognized exams, founded by Mahatma Gandhi, support over 400,000 students annually, enhancing Hindi proficiency across Southern India.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>Hindi, the first language of India, is widely spoken throughout the country and the fourth most spoken language globally. JSSMVP operates multiple Hindi Vidyalayas in Mysore and Bangalore to encourage students to enhance their knowledge of Hindi. These institutions offer to coach students appearing for various examinations conducted by the South India Hindi Prachar Sabha in Chennai.
+
+                        Dakshina Bharat Hindi Prachar Sabha was founded by Mahatma Gandhi in 1918 to promote Hindi literacy among non-Hindi-speaking people in Southern India. The organization is headquartered in Chennai on Thanikachalam Road. The examinations conducted by the organization, including Parichaya, Prathamik, Madhyama, Rashtrabhasha, Praveshika, Rashtrabhasha Visharad, Rashtrabhasha Praveen, and Nishnath, are recognized by both Central and State Governments. Additionally, the organization also conducts exams in Hindi Typewriting (Lower, Higher & High Speed) and Shorthand in Hindi. These exams are held twice a year in February and August, with nearly 400,000 students appearing for them annually. JSS provides comprehensive coaching to students who appear for these exams in the Mysore and Bangalore regions.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+        <!-- More institution cards can be added similarly -->
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 SutturSamskruthi. All rights reserved.</p>
+            <p>Follow us: <a href="#">Instagram</a> | <a href="#">Twitter</a> | <a href="#">LinkedIn</a></p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDetails(button) {
+            const card = button.closest('.institution-card');
+            const hiddenInfo = card.querySelector('.hidden-info');
+            const seeMore = card.querySelector('.see-more');
+            
+            if (hiddenInfo.style.display === 'block') {
+                hiddenInfo.style.display = 'none';
+                seeMore.style.display = 'block';
+            } else {
+                hiddenInfo.style.display = 'block';
+                seeMore.style.display = 'none';
+            }
+        }
+
+        
+        const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+navToggle.addEventListener('click', () => {
+  navToggle.classList.toggle('active');
+  navLinks.classList.toggle('active');
+});
+ 
+    </script>
+</body>
+</html>

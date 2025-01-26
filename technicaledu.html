@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Institutes</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: white;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        :root {
+            --primary-color: rgba(244, 116, 52, 0.9);
+            --secondary-color: #f6a049;
+            --accent-color: #ffcc55;
+            --background-color: #ffffff;
+            --text-dark: #2d3436;
+            --text-light: #ffffff;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+
+
+
+        .navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(240, 102, 11, 0.897);
+  color: var(--white);
+  padding: 1rem 2rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: fixed;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid var(--glass-border);
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin-right: -20px;
+  margin-top: -3px;
+  margin-bottom: -5px;
+}
+   
+
+.nav-toggle {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.nav-toggle .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--background-color);
+}
+
+.navbar .nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .nav-links li {
+  position: relative;
+  margin-right: 2rem;
+}
+
+.navbar .nav-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+}
+
+.navbar .nav-links a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.navbar .nav-links li:hover > .dropdown-content {
+  display: block;
+}
+
+  
+  .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color:var(--secondary-color);
+      min-width: 260px;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .dropdown-content a {
+      color: var(--text-dark);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #333;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 3rem;
+  }
+
+
+    .navbar-container {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        padding: 2rem;
+    }
+
+    .logo {
+        position: absolute;
+        top: 1.5rem;
+        left: 2rem;
+        z-index: 1001;
+    }
+
+    .nav-toggle {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        z-index: 1002;
+    }
+
+    .navbar .nav-links {
+        display: none;
+        width: 100%;
+        margin-top: 4rem; /* Adjust to prevent overlap with logo */
+    }
+
+    .navbar .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar .nav-links li {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .nav-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .navbar .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 3rem;
+  }
+
+  .navbar .nav-links.active {
+    display: flex;
+  }
+
+  .navbar .nav-links li {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .dropdown-content {
+    position: static;
+    box-shadow: none;
+  }
+}
+
+
+
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            background-image: url("images/orange.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color:black;
+        }
+
+        .more-info-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .other-institutions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            padding: 2rem;
+        }
+        .institution-card {
+            width: calc(33.333% - 1rem);
+            min-width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .institution-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .institution-details {
+            padding: 1rem;
+        }
+        .see-more, .see-less {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .see-more:hover, .see-less:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .hidden-info {
+            display: none;
+            padding: 1rem;
+            background-color: #f8f9fa;
+        }
+
+        footer {
+            width: 100%;
+            flex-shrink: 0; /* Prevents footer from shrinking */
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            margin-top: auto; /* Pushes footer to bottom */
+        }
+
+        .footer-content {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .footer-content a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+        }
+
+        .footer-content a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .subhead{
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 2rem;
+            padding-left: 1rem;
+            border-left: 10px solid var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .institution-card {
+                width: 100%;
+            }
+
+            .subhead{
+                font-size: 2rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="images/logonav.png" alt="">
+              </div>
+          <div class="nav-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">About</a>
+                <div class="dropdown-content">
+                  <a href="about1.html">About Suttur Mutt</a>
+                  <a href="about2.html">Suttur Mahavidhyapeeta</a>
+                </div>
+              </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Education</a>
+              <div class="dropdown-content">
+                <a href="educationsuttur.html">Suttur Education</a>
+                <a href="generaledu.html">General Education</a>
+                <a href="medicaledu.html">Medical Institutes</a>
+                <a href="technicaledu.html">Technical Institutes</a>
+                <a href="supportive.html">Supportive Institutes</a>
+              </div>
+            </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Services</a>
+              <div class="dropdown-content">
+                <a href="social.html">Social Services</a>
+                <a href="health.html">Healthcare</a>
+              </div>
+            </li>
+            <li><a href="events.html">Events</a></li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Visit Suttur</a>
+              <div class="dropdown-content">
+                <a href="reach.html">Reach</a>
+                <a href="stay.html">Stay</a>
+                <a href="culinary.html">Suttur Culinary Heritage</a>
+                <a href="places-in-suttur.html">Explore in Suttur</a>
+                <a href="places-around-suttur.html">Explore around Suttur</a>
+              </div>
+            </li>
+            <li><a href="contacts.html">Contact</a></li>
+            <li><a href="game.html">Game</a></li>
+          </ul>
+        </nav>
+      </header>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Technical Institutes</h1>
+        </div>
+    </div>
+    
+    <div>
+        <!-- Institution Cards -->
+
+        <h1 class="subhead">Engineering</h1>
+
+        <div class="other-institutions">
+            <div class="institution-card">
+            <img src="images/eng1.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>SJCE (Sri Jayachamarajendra Engineering College), Mysuru</h3>
+                <p>Sri Jayachamarajendra College of Engineering (SJCE) is a prestigious engineering institution located in Mysuru, India. Established in 1963, it has grown into one of the leading technical institutes in the country.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>The college was founded under the vision of Jagadguru Dr. Sri Shivarathri Rajendra Mahaswamigalavaru, the 23rd pontiff of Sri Suttur Mutt. Spread across 117 acres, SJCE serves as a major educational landmark in western Mysuru. With its modern infrastructure, highly skilled faculty, and strong academic programs, the institution has earned recognition under the Technical Education Quality Improvement Programme (TEQIP) with funding support of Rs. 20 crore in Phase I and Rs. 12.5 crore in Phase II.
+
+                        Since 2007-08, SJCE has held "Autonomous Status" granted by Visvesvaraya Technological University. This distinction reflects the institution's commitment to excellence in education, research, and innovation, solidifying its reputation as one of the foremost engineering colleges in India.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+            </div>
+
+            <div class="institution-card">
+            <img src="images/eng2.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Academy of Technical Education(JSSATE),Bengaluru</h3>
+                <p>JSS Academy of Technical Education (JSSATE), Bengaluru, is a premier institute for technical education in the region.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>Established in 1997, JSSATE is located on a 21.17-acre campus in Bangalore and offers seven undergraduate and four postgraduate engineering programs, along with a Business Administration program. Affiliated to Visvesvaraya Technological University (VTU), the college is home to over 2,850 students and has been recognized for its research centers across all departments.
+
+                        The campus features modern infrastructure, including well-equipped laboratories, spacious classrooms, and a comprehensive library. JSSATE has also launched the pioneering 'Advanced Jewellery Design Technology Centre', in collaboration with the Karnataka Government, Dassault Systems, and the Jewellery Manufacturers’ Association, offering cutting-edge training in jewelry design and manufacturing.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+            </div>
+
+            <div class="institution-card">
+            <img src="images/eng3.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Academy of Technical Education (JSSATE), NOIDA</h3>
+                <p>JSS Academy of Technical Education (JSSATE), Noida, is a leading technical institution in Uttar Pradesh, known for its advanced infrastructure and academic excellence.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>Established in 1998, JSSATE offers seven undergraduate courses, along with postgraduate programs in Computer Applications and Business Administration. The institution also provides BCA and BBA courses in collaboration with Guru Gobind Singh Indraprastha University and offers Doctoral Programs in various engineering and science disciplines.
+
+                        The campus spans 9 acres and features state-of-the-art laboratories, an IT Incubator Centre, and a Science & Technology Entrepreneurs Park (STEP). JSSATE is recognized for its excellent placement opportunities, with over 80 companies recruiting annually. The academy also promotes global exposure through internships and interdisciplinary projects, supported by international collaborations, including a Product Life Cycle Management Competency Centre (PLMCC) with Dassault Systems and the Government of France</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+            </div>
+
+            <div class="institution-card">
+            <img src="images/eng4.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSSATE (JSS Academy of Technical Education), Mauritius</h3>
+                <p>JSS Academy of Technical Education (JSSATE), Mauritius, is a premier institution dedicated to providing high-quality technical education.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p> Established in 2006, it aims to meet the growing demand for skilled professionals in various industries.Spread across eight acres with state-of-the-art infrastructure, JSSATE offers a range of engineering programs, focusing on practical training and industry exposure. The institution is approved by the Government of Mauritius, registered by the Tertiary Education Commission (TEC), and affiliated to Visvesvaraya Technological University (VTU), India.
+
+                        The college boasts excellent facilities, including modern classrooms, well-equipped laboratories, hostels, and a comprehensive library. Students also benefit from exchange programs with JSS institutions in India and merit-based scholarships. The placement cell has strong industry connections, ensuring numerous job opportunities for students by the end of their studies.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <h1 class="subhead">polytechnics</h1>
+        <div class="other-institutions">
+        <div class="institution-card">
+            <img src="images/poly1.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Women’s Polytechnic, Mysore</h3>
+                <p>JSS Women’s Polytechnic, Mysuru, established in 1980, empowers women through professional education with eight diploma courses and a postgraduate diploma in Computer Applications. Supported by state-of-the-art infrastructure, it also offers non-formal training and has an extension center in Bengaluru for Interior Design.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>Jagadguru Dr Sri Shivarathri Rajendra Mahaswamiji held the belief that a strong nation could be built if women were given professional education. JSS Women’s Polytechnic in Mysuru was established in 1980. The Polytechnic is governed by the Grant-In-Aid rules of Government of Karnataka and is under the purview of Directorate of Technical Education, Government of Karnataka. The Polytechnic is on the premises of the JSS Technical Institutions Campus and has a commendable infrastructure supported with full-fledged staff, state-of-the-art laboratory and library. At present, it offers eight professional courses under the revised system. The college also offers a postgraduate diploma in Computer Applications. The institution has been getting grant in aid from the government since 1983. In addition to imparting diploma education, non-formal training programs are being organized, which are sponsored by Government of India/ World Bank/ State Government/ Community Development Through Polytechnic Schemes. The polytechnic also has an extension centre in Bengaluru which runs diploma classes in Interior Design. A good number of outgoing students are well placed in different Central and State Government Departments, MultiNational Companies, Public-Private Sector Industries, etc., and many are pursuing higher education in reputed colleges.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/poly2.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Polytechnic, Mysore</h3>
+                <p>JSS Polytechnic, Mysuru, established in 1986, offers AICTE-approved diploma courses in diverse fields like Computer Science, Mechanical, and Mechatronics. Located on a 15-acre SJCE campus, it provides modern workshops and job-oriented training.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>JSS Polytechnic, Mysore was set up in 1986 to provide technical education and expertise for those who want to set up their own business. The institute is established in a 15-acre area on the SJCE campus and is well-equipped with modern workshops and best-in-class facilities. The Polytechnic offers Diploma courses in Computer Science, Electronics and Communications, Mechanical Engineering, Commercial Practice, Information Science and Engineering, Mechatronics and Electrical Engineering. The Karnataka government and the AICTE, New Delhi, have approved these courses. Besides, job-oriented courses are also taught here.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/poly3.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Polytechnic, Nanjangud</h3>
+                <p>JSS Polytechnic, Nanjangud, established in 1983-84, offers three-year diploma courses in diverse engineering fields, including Electronics, Mechanical, and Civil. It has been under Grant-in-Aid since 2001-02.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>JSS Polytechnic, Nanjangud was established in the academic year 1983-84. It offers three year diploma courses in Electronics & Communication Engineering, Mechanical Engineering, Civil Engineering, Mechatronics Engineering, Computer Science & Engineering, Water Technology & Health Sciences and Electrical & Electronics Engineering. It was admitted to Grant-in-Aid in 2001-02.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/poly4.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Polytechnic for the Differently Abled, Mysuru</h3>
+                <p>JSS Polytechnic for the Differently Abled, Mysuru, was established in 1991 to promote equality and accessibility, supporting differently-abled individuals with technical education under the World Bank Assistance Scheme.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>The Differently Abled persons need equality, opportunity and accessibility in all respects to prove their abilities. Beleiving in this philosophy and to fulfill one of the major objectives of the National Policy on Education, the J S S Mahavidyapeetha, Mysuru, established
+                        JSS Polytechnic for the Differently Abled, Mysuru in 1991 with the active support of the Department of Technical Education and Government of Karnataka under the World Bank Assistance Scheme.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+        <h1 class="subhead">JSS Industrial Training Centres</h1>
+        <div class="other-institutions">
+        <div class="institution-card">
+            <img src="images/train1.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Industrial Training Centre, Chamarajanagar</h3>
+                <p>JSS Industrial Training Center, Chamarajanagar, established in 1981, offers quality education and skill development opportunities to the rural population, equipping students for industry and self-employment through diverse technical courses and short-term programs.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>Located on a 5.23-acre campus in Mariyala, the institute offers courses like Electrician, Electronic Mechanic, Fitter, and an accredited Computer Operator and Programming Assistant trade. With excellent infrastructure, skilled staff, well-equipped labs, and a library of over 2300 books, JSS ITI has trained over 1850 candidates, awarding them National Trade Certificates. Additionally, it collaborates with agencies like NABARD and Women Development Corporation to train rural unemployed youth in areas like Electricals, Electronics, Welding, and Garment Making. Its garment production center employs 100 rural women, catering to uniform demands for JSS Schools and the market. Cultural and NSS activities, a dedicated school bus, and a 50–75% annual pass rate reflect its commitment to holistic development. By fostering entrepreneurship and providing job-oriented training, the institute remains a beacon for the agrarian community of Chamarajanagar.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/train2.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Industrial Training Centre, Talavadi (Tamilnadu)</h3>
+                <p>JSS Industrial Training Center, Chamarajanagar, established in 1981, offers quality education and skill development opportunities to the rural population, equipping students for industry and self-employment through diverse technical courses and short-term programs.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>Located on a 5.23-acre campus in Mariyala, the institute offers courses like Electrician, Electronic Mechanic, Fitter, and an accredited Computer Operator and Programming Assistant trade. With excellent infrastructure, skilled staff, well-equipped labs, and a library of over 2300 books, JSS ITI has trained over 1850 candidates, awarding them National Trade Certificates. Additionally, it collaborates with agencies like NABARD and Women Development Corporation to train rural unemployed youth in areas like Electricals, Electronics, Welding, and Garment Making. Its garment production center employs 100 rural women, catering to uniform demands for JSS Schools and the market. Cultural and NSS activities, a dedicated school bus, and a 50–75% annual pass rate reflect its commitment to holistic development. By fostering entrepreneurship and providing job-oriented training, the institute remains a beacon for the agrarian community of Chamarajanagar.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/train3.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Industrial Training Institute Thandya, Nanjangud</h3>
+                <p>JSS Industrial Training Institute, Nanjangud, established in 1981, provides technical education and skill development for rural communities.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>JSS Industrial Training Institute, Nanjangud, was established in 1981 to cater to the needs of rural people, in the field of technical education. In the begining, the institute offered courses in Electrician and Fitter Trades. Electronic Mechanic and Technician in Water Technology & Health Sciences (TWT & HS) Trades were introduced in the year 1997 and 2003 respectively. Also, several short-term skill development courses are offered for the unemployed youth under SKKY(DIC), MES, NIMSE, SGSY, RGCY, etc., The institute also offers skill development training programmes for newly recruited employees of different industries.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <h1 class="subhead">Other organizations</h1>
+        <div class="other-institutions">
+            <div class="institution-card">
+            <img src="images/other1.png" alt="Institution 1" >
+            <div class="institution-details">
+                <h3>JSS Centre for Management Studies, Mysuru
+                </h3>
+                <p>JSS Centre for Management Studies, Mysuru was established in the SJCE Campus in 1998. The centre offers a Two Year Full Time Autonomous MBA programme approved by AICTE and is affiliated to JSS Science and Technology University, Mysuru, Karnataka.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>The two years full time autonomous MBA programme is governed by the regulations approved by the Governing Council and Academic councils. The Board of Studies and Board of Examinations comprising of experts from academia, industry and practicing professionals play pivotal role in prescribing the curriculum and in matters of assessment, evaluation and examination. JSSCMS has a rich faculty strength equipped with contemporary pedagogical skills, a vast professional work experience in industry, academia and research.
+
+                        JSSCMS has made a name both nationally and globally. In the 15th year going and climbing to the top it has  more than 800 students who have received their MBA degrees so far from JSSCMS and pursuing their career with well known companies in respectable position.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/other2.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Academy, Dubai</h3>
+                <p>JSS International School, Dubai, is a premier institution following the ICSE curriculum, offering state-of-the-art facilities across its sprawling 23,338.74 square meters campus. The school focuses on holistic education, integrating cultural values with modern technology.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>The school features well-equipped Science and Computer Labs, libraries, a purpose-built auditorium, a sports complex, counseling center, music rooms, and an A.V. room, ensuring comprehensive development for students. Emphasizing experiential and collaborative learning, the institution incorporates workshops, role-plays, and project work while encouraging excellence in sports and cultural activities. Educational trips, excursions, and technology-based teaching from Class I foster exploration and growth. Guided by values like discovery, freedom, and responsibility, JSS International School prepares students as global citizens with a strong sense of commitment and social awareness</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- More institution cards can be added similarly -->
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 SutturSamskruthi. All rights reserved.</p>
+            <p>Follow us: <a href="#">Instagram</a> | <a href="#">Twitter</a> | <a href="#">LinkedIn</a></p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDetails(button) {
+            const card = button.closest('.institution-card');
+            const hiddenInfo = card.querySelector('.hidden-info');
+            const seeMore = card.querySelector('.see-more');
+            
+            if (hiddenInfo.style.display === 'block') {
+                hiddenInfo.style.display = 'none';
+                seeMore.style.display = 'block';
+            } else {
+                hiddenInfo.style.display = 'block';
+                seeMore.style.display = 'none';
+            }
+        }
+
+        
+        const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+navToggle.addEventListener('click', () => {
+  navToggle.classList.toggle('active');
+  navLinks.classList.toggle('active');
+});
+ 
+    </script>
+</body>
+</html>

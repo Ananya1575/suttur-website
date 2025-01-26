@@ -3,415 +3,399 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suttur</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Merienda:wght@400;700&display=swap" rel="stylesheet">
+    <title>Cultural Display Event</title>
     <style>
-        :root {
-            --primary-color: rgba(244, 116, 52, 0.9);
-            --secondary-color: #f6a049;
-            --accent-color: #ffcc55;
-            --background-color: #ffffff;
-            --text-dark: #2d3436;
-            --text-light: #ffffff;
-            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-      
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(45deg, var(--background-color), #fff);
-            color: var(--text-dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
+        :root {
+            --primary-color: #f4743e;
+            --secondary-color: #f6a049;
+            --accent-color: #ffcc55;
+            --text-dark: #2d3436;
+            --background-light: #f9f5f0;
+            --white:white;
         }
-/* Base navbar styles */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 200px;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.0);
-    backdrop-filter: blur(10px);
-    color: var(--text-dark);
-    padding-top: 40px;
-    z-index: 1000;
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-    /* Remove the initial transform to show navbar by default */
-    transform: translateX(0);
-}
 
-/* Modified to hide navbar when closed */
-.navbar.closed {
-    transform: translateX(-100%);
-}
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+        }
 
-/* Rest of the navbar styles remain the same */
-.logo {
-    text-align: center;
-    margin-bottom: 40px;
+
+        .navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(240, 102, 11, 0.897);
+  color: var(--white);
+  padding: 1rem 2rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: fixed;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid var(--glass-border);
 }
 
 .logo img {
-    width: 70px;
-    height: 70px;
-    border-radius: 40%;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin-right: -20px;
+  margin-top: -3px;
+  margin-bottom: -5px;
+}
+   
+
+.nav-toggle {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
 }
 
-.logo img:hover {
-    transform: scale(1.05);
+.nav-toggle .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--background-color);
 }
 
-/* Navigation list styles */
-.navbar ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
+.navbar .nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .nav-links li {
+  position: relative;
+  margin-right: 2rem;
+}
+
+.navbar .nav-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+}
+
+.navbar .nav-links a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.navbar .nav-links li:hover > .dropdown-content {
+  display: block;
+}
+
+  
+  .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color:var(--secondary-color);
+      min-width: 260px;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .dropdown-content a {
+      color: var(--text-dark);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #333;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 3rem;
+  }
+
+
+    .navbar-container {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        padding: 2rem;
+    }
+
+    .logo {
+        position: absolute;
+        top: 1.5rem;
+        left: 2rem;
+        z-index: 1001;
+    }
+
+    .nav-toggle {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        z-index: 1002;
+    }
+
+    .navbar .nav-links {
+        display: none;
+        width: 100%;
+        margin-top: 4rem; /* Adjust to prevent overlap with logo */
+    }
+
+    .navbar .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar .nav-links li {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .nav-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .navbar .nav-links {
+    display: none;
     flex-direction: column;
-    gap: 15px;
+    width: 100%;
+    margin-top: 3rem;
+  }
+
+  .navbar .nav-links.active {
+    display: flex;
+  }
+
+  .navbar .nav-links li {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .dropdown-content {
+    position: static;
+    box-shadow: none;
+  }
 }
 
-.navbar ul li {
-    position: relative;
-    text-align: center;
-    height: 40px;
-}
 
-/* Navigation item styles remain the same */
-.navbar ul li a {
-    display: block;
-    width: 75px;
-    height: 3px;
-    border-radius: 30%;
-    background-color: var(--text-dark);
-    margin: 0 auto;
-    position: relative;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: right;
-}
 
-.navbar ul li a::before {
-    content: attr(data-text);
-    position: absolute;
-    left: 120%;
-    top: -10px;
-    color: var(--text-dark);
-    font-size: 16px;
-    opacity: 0;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    white-space: nowrap;
-    transform: translateX(20px);
-}
+        .hero {
+            position: relative;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content:flex-start;
+            /* background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); */
+            color: var(--text-dark);
+            overflow: hidden;
+        }
 
-.navbar ul li:hover a {
-    width: 50px;
-    transform: translateX(-50px);
-    background-color: var(--primary-color);
-}
+        .hero-content {
+            text-align: left;
+            z-index: 2;
+            position: relative;
+            padding: 0 2rem;
+        }
 
-.navbar ul li:hover a::before {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* Hamburger menu styles remain the same */
-.navbar-toggle {
-    display: block;
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1001;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    border: none;
-    cursor: pointer;
-    padding: 15px;
-    border-radius: 50%;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
-
-.navbar-toggle:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.navbar-toggle span {
-    display: block;
-    width: 24px;
-    height: 2px;
-    background-color: var(--text-dark);
-    margin: 5px 0;
-    transition: all 0.3s ease;
-}
-
-/* Hamburger animation when active */
-.navbar-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-
-.navbar-toggle.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.navbar-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
-}
-
-/*         
-        .navbar {
-            position: fixed;
+        .hero::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
-            width: 200px;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.0);
-            backdrop-filter: blur(10px);
-            color: var(--text-dark);
-            padding-top: 40px;
-            z-index: 1000;
-            border-right: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease;
+            right: 0;
+            bottom: 0;
+            background: url('eventimages/image_6.jpg');
+            background-size:cover;
+            background-position: center;
+            opacity: 1;
         }
 
-        .logo {
+        .main-title {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            opacity: 0.9;
+            
+        }
+
+        .info-section {
+            background-color: white;
+            padding: 4rem 2rem;
+            
+        }
+
+        .info-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
             text-align: center;
-            margin-bottom: 40px;
+            
         }
 
-        .logo img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        .info-text {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        .carousel-section {
+            /* background-color: var(--background-light); */
+            padding: 4rem 2rem;
+        }
+
+        .carousel-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 4rem;
+            overflow: hidden;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-item {
+            flex: 0 0 calc(33.333% - 20px);
+            margin: 0 10px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
+            height: 400px;
         }
 
-        .logo img:hover {
+        .carousel-item:hover {
             transform: scale(1.05);
         }
 
-        .navbar ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
+        .carousel-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .carousel-controls {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
         }
 
-        .navbar ul li {
-            position: relative;
-            text-align: center;
-            height: 40px;
-        }
-
-        
-        .navbar ul li a {
-            display: block;
-            width: 75px; 
-            height: 3px; 
-            border-radius: 30%;
-            background-color: var(--text-dark);
-            margin: 0 auto;
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-origin: right;
-        }
-
-        .navbar ul li a::before {
-            content: attr(data-text);
-            position: absolute;
-            left: 120%;
-            top: -10px;
-            color: var(--text-dark);
-            font-size: 16px;
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap;
-            transform: translateX(20px);
-        }
-
-        .navbar ul li:hover a {
-            width: 50px; 
-            transform: translateX(-50px);
-            background-color: var(--primary-color);
-        }
-
-        .navbar ul li:hover a::before {
-            opacity: 1;
-            transform: translateX(0);
-        } */
-
-        .events {
-    padding: 5rem 2rem;
-}
-
-.section-title {
-    text-align: center;
-    font-size: 4.5rem;
-    margin-bottom: 3rem;
-    color: var(--text-dark);
-}
-
-.events-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Card Hover Effects */
-.card-hover {
-    position: relative;
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-    transition: var(--transition-smooth);
-    height: 400px;
-}
-
-.card-hover:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
-
-.card-hover__content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.9),
-        rgba(0, 0, 0, 0.7),
-        transparent
-    );
-    padding: 2rem;
-    color: var(--text-light);
-    transform: translateY(100%);
-    transition: var(--transition-smooth);
-}
-
-.card-hover:hover .card-hover__content {
-    transform: translateY(0);
-}
-
-.card-hover__title {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    font-weight: 600;
-}
-
-.card-hover__text {
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
-    opacity: 0.9;
-}
-
-.card-hover__link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background-color: var(--primary-color);
-    color: var(--text-light);
-    padding: 0.75rem 1.5rem;
-    border-radius: 2rem;
-    text-decoration: none;
-    font-weight: 500;
-    transition: var(--transition-smooth);
-}
-
-.card-hover__link:hover {
-    background-color: var(--accent-color);
-    transform: translateX(5px);
-}
-
-.card-hover__link svg {
-    width: 20px;
-    height: 20px;
-}
-
-.card-hover img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition-smooth);
-}
-
-.card-hover:hover img {
-    transform: scale(1.1);
-}
-
-
-        .footer {
-            background-color: rgba(45, 52, 54, 0.95);
-            color: var(--text-light);
-            padding: 3rem 2rem;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            width:100vw;
-        }
-
-        .footer-content {
-            max-width: 100vw;
-            margin: 0 auto;
-        }
-
-        .footer-logo {
-            font-family: 'Merienda', cursive;
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-    
-        /* .navbar-toggle {
-            display: none;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1001;
-            background: transparent;
+        .carousel-btn {
+            background: var(--primary-color);
+            color: white;
             border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
             cursor: pointer;
-            padding: 10px;
+            transition: background 0.3s ease;
         }
 
-        .navbar-toggle span {
-            display: block;
-            width: 30px;
-            height: 3px;
-            background-color: var(--text-dark);
-            margin: 6px 0;
-            transition: all 0.3s ease;
-        } */
+        .carousel-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        @media (max-width: 1200px) {
+            .carousel-item {
+                flex: 0 0 calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 50vh;
+            }
+
+            .main-title {
+                font-size: 2.5rem;
+            }
+
+            .carousel-item {
+                flex: 0 0 100%;
+            }
+        }
+        footer {
+            width: 100%;
+            flex-shrink: 0; /* Prevents footer from shrinking */
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            margin-top: auto; /* Pushes footer to bottom */
+        }
 
         .footer-content {
-        text-align: center;
-        padding: 3rem ;
-        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-        color: var(--white);
-        font-size: 1.1rem;
-        position: relative;
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--white);
+            font-size: 1.1rem;
         }
 
         .footer-content a {
-            color: var(--accent-color);
+            color: var(--text-light);
             text-decoration: none;
             transition: all 0.3s ease;
             font-weight: 600;
@@ -421,223 +405,201 @@
 
         .footer-content a:hover {
             background: rgba(255, 255, 255, 0.1);
-            color: var(--white);
         }
 
-        @media (max-width: 1024px) {
-            .events-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding-left: 0;
-            }
-
-            
-            .events-grid {
-                grid-template-columns: 1fr;
-                padding: 0 10px;
-            }
-
-            .card-hover {
-                height: 400px;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .card-hover {
-                height: 350px;
-            }
-
-            .card-hover__title {
-                font-size: 1.5rem;
-            }
-
-            .card-hover__text {
-                font-size: 0.9rem;
-            }
-
-            .footer-logo {
-                font-size: 2rem;
-            }
-        }
     </style>
 </head>
 <body>
-  
     <header>
-        <button class="navbar-toggle active" onclick="toggleNav()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
         <nav class="navbar">
-          <div class="logo">
-            <img src="images/logo.png" alt="Suttur Logo">
+            <div class="logo">
+                <img src="images/logonav.png" alt="">
+              </div>
+          <div class="nav-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
           </div>
-          <ul>
-            <li><a href="index.html" class="nav-item" data-text="Home"></a></li>
-            <li><a href="game.html" class="nav-item" data-text="Game"></a></li>
-            <li><a href="reach.html" class="nav-item" data-text="How to Reach"></a></li>
-            <li><a href="culinary.html" class="nav-item" data-text="Culinary Journey"></a></li>
-            <li><a href="events.html" class="nav-item" data-text="Events"></a></li>
-            <li><a href="stay.html" class="nav-item" data-text="Staying in Comfort"></a></li>
-            <li><a href="explore.html" class="nav-item" data-text="Exploring Nearby"></a></li>
-            <li><a href="education.html" class="nav-item" data-text="Education"></a></li>
-            <li><a href="difference.html" class="nav-item" data-text="Making a Difference"></a></li>
-            <li><a href="whysuttur.html" class="nav-item" data-text="Why Suttur"></a></li>
-            <li><a href="contacts.html" class="nav-item" data-text="Contact"></a></li>
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">About</a>
+                <div class="dropdown-content">
+                  <a href="about1.html">About Suttur Mutt</a>
+                  <a href="about2.html">Suttur Mahavidhyapeeta</a>
+                </div>
+              </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Education</a>
+              <div class="dropdown-content">
+                <a href="educationsuttur.html">Suttur Education</a>
+                <a href="generaledu.html">General Education</a>
+                <a href="medicaledu.html">Medical Institutes</a>
+                <a href="technicaledu.html">Technical Institutes</a>
+                <a href="supportive.html">Supportive Institutes</a>
+              </div>
+            </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Services</a>
+              <div class="dropdown-content">
+                <a href="social.html">Social Services</a>
+                <a href="health.html">Healthcare</a>
+              </div>
+            </li>
+            <li><a href="events.html">Events</a></li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Visit Suttur</a>
+              <div class="dropdown-content">
+                <a href="reach.html">Reach</a>
+                <a href="stay.html">Stay</a>
+                <a href="culinary.html">Suttur Culinary Heritage</a>
+                <a href="places-in-suttur.html">Explore in Suttur</a>
+                <a href="places-around-suttur.html">Explore around Suttur</a>
+              </div>
+            </li>
+            <li><a href="contacts.html">Contact</a></li>
+            <li><a href="game.html">Game</a></li>
           </ul>
         </nav>
       </header>
-  
-    <main>
-        <section class="events" id="events">
-            <h2 class="section-title">Events</h2>
-            <div class="events-grid">
-                <div class="card-hover">
-                    <img src="eventimages/image_4.jpg" alt="Sutturu Jatre Festival">
-                    <div class="card-hover__content">
-                        <h3 class="card-hover__title">Sutturu Jatre</h3>
-                        <p class="card-hover__text">Experience the vibrant cultural festival that brings together tradition, art, and community celebration in a spectacular display of heritage.</p>
-                        <a href="event1.html" class="card-hover__link">
-                            <span>Explore Event</span>
-                            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="main-title">Suttur Jatre</h1>
+            <div class="subtitle">27th - 31st Jan 2024</div>
+        </div>
+    </section>
 
-                <div class="card-hover">
-                    <img src="eventimages/image_176.jpg" alt="Cultural Display">
-                    <div class="card-hover__content">
-                        <h3 class="card-hover__title">Cultural Display</h3>
-                        <p class="card-hover__text">Experience the vibrant cultural festival that brings together tradition, art, and community celebration in a spectacular display of heritage.</p>
-                        <a href="event2.html" class="card-hover__link">
-                            <span>Explore Event</span>
-                            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                            </svg>
-                        </a>
+    <section class="info-section">
+        <h2 class="info-title">Information</h2>
+        <p class="info-text">
+          The Suttur Jatre, also known as the Suttur Jatra Mahotsav, is one of the grandest annual festivals celebrated in Karnataka. Held in the serene village of Suttur in the Nanjangud Taluk of Mysuru district, this event showcases the rich cultural, spiritual, and communal heritage of the region. Spanning several days, the festival draws thousands of devotees, tourists, and cultural enthusiasts from across the country. Dedicated to Lord Shiva and commemorating the spiritual contributions of Adijagadguru Sri Shivarathreeshwara Shivayogi Mahaswamiji, the founder of the Sri Suttur Math, the Jatre is a blend of devotion, art, and community engagement.<br>
+
+          Historical Significance
+          The origins of the Suttur Jatre date back to over a millennium. The festival is deeply rooted in the history of the Sri Suttur Math, which was established around the 11th century by Sri Shivarathreeshwara Shivayogi Mahaswamiji, a revered saint and social reformer. The Math has been a center of spiritual learning, cultural preservation, and social service for generations. The Jatre not only commemorates the legacy of the founder but also serves as a medium to propagate his teachings of universal love, harmony, and service to humanity.<br>
+          
+          The Sri Suttur Math has played a significant role in shaping the cultural and social fabric of the region, making the Suttur Jatre a celebration of both tradition and modernity.<br>
+          
+          Festival Highlights
+          The Suttur Jatre is a multi-faceted event that appeals to people of all ages and interests. The festival is a vibrant amalgamation of religious rituals, cultural extravaganzas, and community-oriented activities.<br>
+          
+          Religious Ceremonies
+          The festival begins with a series of elaborate poojas, abhishekas, and homas performed at the temples of the Math, including the shrines of Sri Mahadeshwara and Sri Veerabhadreshwara. Devotees participate in prayers, chanting of hymns, and spiritual discourses that create a divine atmosphere.<br>
+          
+          One of the highlights is the Rudrabhisheka, an elaborate offering to Lord Shiva, performed with great devotion. Spiritual leaders and scholars often deliver discourses on the teachings of the Shaiva tradition during the festival.<br>
+          
+          Cultural Programs
+          The evenings of the Jatre are lit up with mesmerizing folk music, dance performances, and theatrical enactments. These include Yakshagana, Janapada songs, and Bharatanatyam, which reflect the rich cultural diversity of Karnataka. Special troupes are invited to stage mythological plays and stories of saints, which resonate deeply with the audience.<br>
+          
+          Cultural competitions, including art and music contests, are organized for children and youth, making the festival an inclusive celebration.
+          
+          Exhibitions and Stalls
+          The festival also features a large exhibition ground, showcasing a wide range of items from traditional handicrafts to modern goods. Stalls selling local delicacies, traditional sweets, and handcrafted artifacts are a major attraction.<br>
+          
+          A Krishi Mela (Agricultural Fair) is organized to educate farmers about the latest innovations in agriculture, machinery, and sustainable practices.
+          
+          Community Services
+          True to the principles of the Sri Suttur Math, the Jatre emphasizes service to humanity. Free medical camps, eye-checkup camps, and blood donation drives are set up during the festival. The Math also distributes food to all visitors, symbolizing the value of Anna Dana (donation of food) as a sacred act.<br>
+          
+          A unique aspect of the Jatre is the inclusive participation of people from all castes, religions, and economic backgrounds, reinforcing the ideals of equality and brotherhood.<br>
+          
+          Cattle Fair and Wrestling Matches
+          A special attraction of the Suttur Jatre is the cattle fair, where farmers from across the region bring their livestock for trade. This traditional fair is accompanied by wrestling matches, a popular sport in rural Karnataka, adding to the excitement of the event.<br>
+          
+          Preparations and Festivities
+          The preparations for the Suttur Jatre begin months in advance, with the local community and Math authorities working tirelessly to ensure its success. The entire village of Suttur transforms into a hub of activity, with vibrant decorations, lights, and banners welcoming visitors.<br>
+          
+          Visitor Experience
+          For visitors, the Suttur Jatre is an unforgettable experience. The blend of spirituality, culture, and community spirit leaves a lasting impression. Families often plan their visit to coincide with the Jatre, ensuring they can partake in the festivities, seek blessings, and enjoy the cultural offerings.<br>
+          
+          Accommodation is arranged by the Math and local organizers, with free lodging provided to pilgrims. The serene surroundings of Suttur, located on the banks of the Kabini River, add to the overall charm of the festival.<br>
+          The Suttur Jatre is not just a festival; it is a living tradition that brings people together in the spirit of devotion, learning, and celebration. It continues to be a shining example of Karnataka's rich heritage and the enduring values of its people.<br>
+        </p>
+    </section>
+
+    <section class="carousel-section">
+        <div class="carousel-container">
+            <h2 class="gallery-title">Gallery</h2>
+            <div class="carousel-wrapper">
+                <div class="carousel" id="imageCarousel">
+                    <div class="carousel-item">
+                        <img src="eventimages/image_5.jpg" alt="Cultural Event">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="eventimages/image_30.jpg" alt="Traditional Performance">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="eventimages/image_16.jpg" alt="Crowd Gathering">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="eventimages/image_12.jpg" alt="Festival Scene">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="eventimages/image_6.jpg" alt="Dance Performance">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="eventimages/image_17.jpg" alt="Festival Scene">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="eventimages/image_2.jpg" alt="Music Performance">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="eventimages/image_15.jpg" alt="Dance Performance">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="eventimages/image_8.jpg" alt="Music Performance">
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
-
+            <div class="carousel-controls">
+                <button class="carousel-btn" id="prevBtn">Previous</button>
+                <button class="carousel-btn" id="nextBtn">Next</button>
+            </div>
+        </div>
+    </section>
     <footer>
         <div class="footer-content">
-            <p>&copy; 2025 TechNova. All rights reserved.</p>
+            <p>&copy; 2025 SutturSamskruthi. All rights reserved.</p>
             <p>Follow us: <a href="#">Instagram</a> | <a href="#">Twitter</a> | <a href="#">LinkedIn</a></p>
         </div>
     </footer>
 
     <script>
-      
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.hotel-section');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate');
-                    }
-                });
-            }, { threshold: 0.1 });
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.getElementById('imageCarousel');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const items = carousel.querySelectorAll('.carousel-item');
+            let currentIndex = 0;
 
-            elements.forEach(element => {
-                observer.observe(element);
-            });
-        }
-
-        // Call the function when the page loads
-        window.addEventListener('load', animateOnScroll);
-
-
-
-
-function toggleNav() {
-    const navbar = document.querySelector('.navbar');
-    const toggle = document.querySelector('.navbar-toggle');
-    
-    navbar.classList.toggle('closed');
-    toggle.classList.toggle('active');
-}
-
-
-
- // Handle navigation items animation
- const navItems = document.querySelectorAll('.nav-item');
-        navItems.forEach((item, index) => {
-            item.style.animationDelay = `${index * 0.1}s`;
-        });
-
-        // Scroll behavior
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            const hero = document.querySelector('.hero');
-            const navbarToggle = document.querySelector('.navbar-toggle');
-
-            if (window.pageYOffset > hero.offsetHeight) {
-                navbar.classList.add('closed');
-                navbarToggle.classList.remove('active');
+            function updateCarousel() {
+                const offset = -currentIndex * (items[0].offsetWidth + 20);
+                carousel.style.transform = `translateX(${offset}px)`;
             }
-        });
 
-        // Add smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    // Close mobile navbar after clicking a link
-                    if (window.innerWidth <= 768) {
-                        toggleNav();
-                    }
+            nextBtn.addEventListener('click', () => {
+                if (currentIndex < items.length - 3) {
+                    currentIndex++;
+                    updateCarousel();
                 }
             });
-        });
 
-        // Add contact cards animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    // Remove observer after animation
-                    observer.unobserve(entry.target);
+            prevBtn.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateCarousel();
                 }
             });
-        }, observerOptions);
 
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                document.querySelector('.navbar').classList.remove('closed');
-                document.querySelector('.navbar-toggle').classList.remove('active');
-            }
+            // Responsive adjustment
+            window.addEventListener('resize', updateCarousel);
         });
+        const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
 
-        // Add loading animation
-        document.addEventListener('DOMContentLoaded', () => {
-            document.body.style.opacity = '1';
-        });
- 
+navToggle.addEventListener('click', () => {
+  navToggle.classList.toggle('active');
+  navLinks.classList.toggle('active');
+});
     </script>
 </body>
 </html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Institutes</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: white;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        :root {
+            --primary-color: rgba(244, 116, 52, 0.9);
+            --secondary-color: #f6a049;
+            --accent-color: #ffcc55;
+            --background-color: #ffffff;
+            --text-dark: #2d3436;
+            --text-light: #ffffff;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+
+
+
+
+        .navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(240, 102, 11, 0.897);
+  color: var(--white);
+  padding: 1rem 2rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: fixed;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid var(--glass-border);
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin-right: -20px;
+  margin-top: -3px;
+  margin-bottom: -5px;
+}
+   
+
+.nav-toggle {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.nav-toggle .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--background-color);
+}
+
+.navbar .nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .nav-links li {
+  position: relative;
+  margin-right: 2rem;
+}
+
+.navbar .nav-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+}
+
+.navbar .nav-links a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.navbar .nav-links li:hover > .dropdown-content {
+  display: block;
+}
+
+  
+  .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color:var(--secondary-color);
+      min-width: 260px;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .dropdown-content a {
+      color: var(--text-dark);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #333;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 3rem;
+  }
+
+
+    .navbar-container {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        padding: 2rem;
+    }
+
+    .logo {
+        position: absolute;
+        top: 1.5rem;
+        left: 2rem;
+        z-index: 1001;
+    }
+
+    .nav-toggle {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        z-index: 1002;
+    }
+
+    .navbar .nav-links {
+        display: none;
+        width: 100%;
+        margin-top: 4rem; /* Adjust to prevent overlap with logo */
+    }
+
+    .navbar .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar .nav-links li {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .nav-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .navbar .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 3rem;
+  }
+
+  .navbar .nav-links.active {
+    display: flex;
+  }
+
+  .navbar .nav-links li {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .dropdown-content {
+    position: static;
+    box-shadow: none;
+  }
+}
+
+
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            background-image: url("images/orange.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color:black;
+        }
+
+        .more-info-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .other-institutions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            padding: 2rem;
+        }
+        .institution-card {
+            width: calc(33.333% - 1rem);
+            min-width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .institution-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .institution-details {
+            padding: 1rem;
+        }
+        .see-more, .see-less {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .see-more:hover, .see-less:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .hidden-info {
+            display: none;
+            padding: 1rem;
+            background-color: #f8f9fa;
+        }
+
+        footer {
+            width: 100%;
+            flex-shrink: 0; /* Prevents footer from shrinking */
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            margin-top: auto; /* Pushes footer to bottom */
+        }
+
+        .footer-content {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .footer-content a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+        }
+
+        .footer-content a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .institution-card {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="images/logonav.png" alt="">
+              </div>
+          <div class="nav-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">About</a>
+                <div class="dropdown-content">
+                  <a href="about1.html">About Suttur Mutt</a>
+                  <a href="about2.html">Suttur Mahavidhyapeeta</a>
+                </div>
+              </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Education</a>
+              <div class="dropdown-content">
+                <a href="educationsuttur.html">Suttur Education</a>
+                <a href="generaledu.html">General Education</a>
+                <a href="medicaledu.html">Medical Institutes</a>
+                <a href="technicaledu.html">Technical Institutes</a>
+                <a href="supportive.html">Supportive Institutes</a>
+              </div>
+            </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Services</a>
+              <div class="dropdown-content">
+                <a href="social.html">Social Services</a>
+                <a href="health.html">Healthcare</a>
+              </div>
+            </li>
+            <li><a href="events.html">Events</a></li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Visit Suttur</a>
+              <div class="dropdown-content">
+                <a href="reach.html">Reach</a>
+                <a href="stay.html">Stay</a>
+                <a href="culinary.html">Suttur Culinary Heritage</a>
+                <a href="places-in-suttur.html">Explore in Suttur</a>
+                <a href="places-around-suttur.html">Explore around Suttur</a>
+              </div>
+            </li>
+            <li><a href="contacts.html">Contact</a></li>
+            <li><a href="game.html">Game</a></li>
+          </ul>
+        </nav>
+      </header>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Supportive Institutes</h1>
+        </div>
+    </div>
+    
+    <div class="other-institutions">
+        <!-- Institution Cards -->
+        <div class="institution-card">
+            <img src="images/sup1.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Krishi Vignana Kendra (Agricultural Sciences Centre), Suttur</h3>
+                <p>JSS Krishi Vignana Kendra, established in 1994 at Suttur, focuses on empowering farmers by transferring modern agricultural knowledge and practices. Supported by ICAR and utilizing 52 acres of land, the center provides hands-on demonstrations and training.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>The center engages in cultivating crops like paddy, sugarcane, and mulberry using the latest farming techniques. Expert guidance is provided to trained farmers through field visits, ensuring effective implementation of modern agricultural methods for increased crop output. Training programs are conducted periodically for farmers, women, and youth, equipping them with skills to improve their farming practices. In a year, approximately 2,229 farmers are trained through various initiatives.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/sup2.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Hiriyara Mane (JSS Senior Citizens’ Homes)</h3>
+                <p>JSS Hiriyara Mane, established in 2000 with the blessings of Jagadguru Sri Shivaratri Deshikendra Mahaswamiji, offers a safe and peaceful haven for elderly citizens in Mysuru and Suttur. The homes provide free lodging, boarding, and medical care, helping senior citizens live a dignified and anxiety-free life.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>In Mysuru, two free units offer care to elderly residents, with activities like the manufacturing of chalk pieces and silk cocoon garlands to keep them engaged. Inmates also enjoy mass prayers, library facilities, and organized games and feasts on national and religious festivals. The home is managed by a team of staff, including a manager. The Suttur facility features one free home accommodating fifty people and another paid home for ten residents, both equipped with modern amenities and maintained by a dedicated team.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/sup3.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Senior Citizens Home, Bengaluru</h3>
+                <p>JSSMVP has established a senior citizens' home at Kethohalli, near the Big Banyan Tree in Bangalore, offering a peaceful environment for elderly residents. The paid facility provides excellent amenities tailored to the unique needs and care requirements of senior citizens.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>JSSMVP has started an old age home for the senior citizens at Kethohalli in Thavarekere Hobli, Bangalore South Taluk. The home is located on a beautiful farm near the famous Big Banyan Tree (Dodda Alada Mara) on the premises of the Math’s Kethohalli branch. It is a paid home and offers excellent facilities for senior citizens to enjoy a comfortable stay. The centre fulfils the unique needs and special care required by the senior citizens.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/sup4.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Rural Development & Self Employment Training Institute</h3>
+                <p>Established in 2001-02 by JSSMVP, RUDSETI in Chamarajanagar focuses on transforming unemployed youth into self-reliant entrepreneurs. The center provides training, production, and residential facilities to help rural youth become productive and independent.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>RUDSETI, with its 9.5-acre campus, offers a unique approach to addressing unemployment among rural youth in Chamarajanagar, Karnataka. With four production cum training centers and residential accommodations for 80-100 people, the center provides a comprehensive platform for skill development. In collaboration with the State Bank of Mysore and the Department of Industries and Commerce, Government of Karnataka, RUDSETI aims to empower youth with the knowledge and resources necessary to start their own businesses.
+
+                        What sets RUDSETI apart is its post-training support, which helps candidates navigate the challenges of self-employment. By offering consistent motivation and guidance, RUDSETI ensures that the youth remain on track to become successful entrepreneurs and contribute to the local economy.
+                    </p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/sup5.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>Engineering Division</h3>
+                <p>The JSS Mahavidyapeetha has established dedicated divisions for Engineering and Electrical works to support and maintain its educational and social sector initiatives. These divisions oversee the construction, maintenance, and management of civil and electrical infrastructure across the organization.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>The JSS Mahavidyapeeta has its own Engineering Division to construct and maintain buildings, internal roads and other civil works, to support and develop the various educational and social sector programmes. A separate director heads the Engineering Division. Based on the volume of various civil works, eight divisions are operating. Every division has a residential engineer, 48 technical staff and 13 supporting staff.
+
+                        To manage the power supply and supervise the erection and maintenance of electrical works, a separate Electrical Division has been established. During the year on report, including the ongoing projects, a total number of 24 projects were under execution at a total investment of Rs. 10,220.00 lac.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/sup6.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>JSS Advanced Jewellery Design Technology Centre</h3>
+                <p>The JSS Advanced Jewellery Design Technology Centre, established in 2004 at JSS ATE Campus, Bengaluru, was set up by JSSMVP in collaboration with the Government of Karnataka under the ASIDE Scheme. It is the first institute of its kind in southern India, offering specialized training in jewellery designing and manufacturing to goldsmiths, artisans, and the gems and jewellery trading community.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>JSS Advanced Jewellery Design Technology Centre situated at JSS ATE Campus, Bengaluru was setup by JSSMVP in the year 2004 jointly with the Government of Karnataka under the Central Govt’s ASIDE Scheme. The institute is first of its kind in the entire southern India imparting training in Jewellery Designing and Manufacturing to the Goldsmiths, Artisans and trading community in gems and jewellery sector.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="institution-card">
+            <img src="images/sup7.png" alt="Institution 1">
+            <div class="institution-details">
+                <h3>Literature & Cultural Centres</h3>
+                <p>The JSS Auditorium, located in the JSS Educational Institutions Campus at Jayanagar, Bengaluru, is a prestigious cultural venue known for its modern facilities and artistic design. Surrounded by silver oak trees, it serves as a hub for cultural events, offering a platform for youth to showcase their talents throughout the year.</p>
+                <button class="see-more" onclick="toggleDetails(this)">See More</button>
+                <div class="hidden-info">
+                    <p>An auditorium with most modern facilities has been constructed in the JSS Educational Institutions Campus at Jayanagar, Bengaluru. This is one of the prestigious cultural centers in the capital city. This auditorium has been built most artistically and ornamentally. The tall silver oak trees in front of the building present a magnificent and greenery look. The interiors of the projection room, portico, green-room and the exterior design show that every minute details have been considered. Ideally located, it is easily accessible from all parts of the city. It was built with an objective to provide opportunities to the youth to exhibit their talents. Many cultural programmes are held at the centre through out the  year.</p>
+                    <button class="see-less" onclick="toggleDetails(this)">See Less</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 SutturSamskruthi. All rights reserved.</p>
+            <p>Follow us: <a href="#">Instagram</a> | <a href="#">Twitter</a> | <a href="#">LinkedIn</a></p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDetails(button) {
+            const card = button.closest('.institution-card');
+            const hiddenInfo = card.querySelector('.hidden-info');
+            const seeMore = card.querySelector('.see-more');
+            
+            if (hiddenInfo.style.display === 'block') {
+                hiddenInfo.style.display = 'none';
+                seeMore.style.display = 'block';
+            } else {
+                hiddenInfo.style.display = 'block';
+                seeMore.style.display = 'none';
+            }
+        }
+
+        
+        const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+navToggle.addEventListener('click', () => {
+  navToggle.classList.toggle('active');
+  navLinks.classList.toggle('active');
+});
+ 
+    </script>
+</body>
+</html>

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSS Healthcare Services</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: rgba(240, 244, 248, 0.8);
+            line-height: 1.6;
+            overflow-x: hidden;
+            margin-bottom: 70px;
+
+        }
+        :root {
+            --primary-color: rgba(244, 116, 52, 0.9);
+            --secondary-color: #f6a049;
+            --accent-color: #ffcc55;
+            --background-color: #ffffff;
+            --text-dark: #2d3436;
+            --text-light: #ffffff;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+
+
+        .navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(240, 102, 11, 0.897);
+  color: var(--white);
+  padding: 1rem 2rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: fixed;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid var(--glass-border);
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin-right: -20px;
+  margin-top: -3px;
+  margin-bottom: -5px;
+}
+   
+
+.nav-toggle {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.nav-toggle .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--background-color);
+}
+
+.navbar .nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .nav-links li {
+  position: relative;
+  margin-right: 2rem;
+}
+
+.navbar .nav-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+}
+
+.navbar .nav-links a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.navbar .nav-links li:hover > .dropdown-content {
+  display: block;
+}
+
+  
+  .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color:var(--secondary-color);
+      min-width: 260px;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .dropdown-content a {
+      color: var(--text-dark);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #333;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 3rem;
+  }
+
+
+    .navbar-container {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        padding: 2rem;
+    }
+
+    .logo {
+        position: absolute;
+        top: 1.5rem;
+        left: 2rem;
+        z-index: 1001;
+    }
+
+    .nav-toggle {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        z-index: 1002;
+    }
+
+    .navbar .nav-links {
+        display: none;
+        width: 100%;
+        margin-top: 4rem; /* Adjust to prevent overlap with logo */
+    }
+
+    .navbar .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar .nav-links li {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .nav-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .navbar .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 3rem;
+  }
+
+  .navbar .nav-links.active {
+    display: flex;
+  }
+
+  .navbar .nav-links li {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .dropdown-content {
+    position: static;
+    box-shadow: none;
+  }
+}
+
+
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            background-image: url("images/medicali.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: black;
+        }
+
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: url('/images/background\ image-health.jpg') no-repeat center center/cover;
+            opacity: 0.2;
+            /* Adjust transparency */
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        footer {
+            width: 100%;
+            flex-shrink: 0; /* Prevents footer from shrinking */
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            margin-top: auto; /* Pushes footer to bottom */
+        }
+
+        .footer-content {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .footer-content a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+        }
+
+        .footer-content a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .page-header {
+            margin-top: 100px;
+            text-align: center;
+            color: rgb(54, 53, 53);
+            margin-bottom: 70px;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        @media (max-width: 1024px) {
+            .services {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .service-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 2;
+        }
+
+        .service-description-container {
+            flex-grow: 1;
+            max-height: 100px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .service-description-container.expanded {
+            max-height: 500px;
+        }
+
+        .service-description {
+            color: #34495e;
+        }
+
+        .see-more {
+            
+            display: inline-block;
+            padding: 1rem 1rem;
+            width: 7rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 01rem;
+        }
+
+        .see-more:hover, .see-less:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="images/logonav.png" alt="logo">
+              </div>
+          <div class="nav-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">About</a>
+                <div class="dropdown-content">
+                  <a href="about1.html">About Suttur Mutt</a>
+                  <a href="about2.html">Suttur Mahavidhyapeeta</a>
+                </div>
+              </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Education</a>
+              <div class="dropdown-content">
+                <a href="educationsuttur.html">Suttur Education</a>
+                <a href="generaledu.html">General Education</a>
+                <a href="medicaledu.html">Medical Institutes</a>
+                <a href="technicaledu.html">Technical Institutes</a>
+                <a href="supportive.html">Supportive Institutes</a>
+              </div>
+            </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Services</a>
+              <div class="dropdown-content">
+                <a href="social.html">Social Services</a>
+                <a href="health.html">Healthcare</a>
+              </div>
+            </li>
+            <li><a href="events.html">Events</a></li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Visit Suttur</a>
+              <div class="dropdown-content">
+                <a href="reach.html">Reach</a>
+                <a href="stay.html">Stay</a>
+                <a href="culinary.html">Suttur Culinary Heritage</a>
+                <a href="places-in-suttur.html">Explore in Suttur</a>
+                <a href="places-around-suttur.html">Explore around Suttur</a>
+              </div>
+            </li>
+            <li><a href="contacts.html">Contact</a></li>
+            <li><a href="game.html">Game</a></li>
+          </ul>
+        </nav>
+      </header>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Medical Institutes</h1>
+        </div>
+    </div>
+    <div class="background-animation"></div>
+    <div class="container">
+        <div class="services" id="servicesContainer">
+            <div class="service-card">
+                <img src="images/JSS-Hospita-Mysuru.jpg" alt="JSS Hospital Mysore" class="service-image">
+                <div class="service-content">
+                    <h2 class="service-title">JSS Hospital Mysore</h2>
+                    <div class="service-description-container">
+                        <p class="service-description">JSS Hospital on MG Road, Mysuru, has a rich history dating back
+                            to 1963 when His Holiness Dr. Sri Shivarathri Rajendra Mahaswamiji established the JSS
+                            Health Centre under the JSS Medical Service Trust to provide affordable healthcare to the
+                            poor. Over time, it has grown into an 1800-bed teaching hospital with 35 specialties and
+                            super specialties, serving JSS Medical College.
+
+                            A pioneer in comprehensive healthcare, JSS Hospital caters to patients from rural areas
+                            across Mysuru, Chamarajanagar, Mandya, Coorg, Hassan in Karnataka, and the Nilgiris in Tamil
+                            Nadu. It serves 800–1000 outpatients daily and organizes rural health awareness programs.
+                        </p>
+                    </div>
+                    <button class="see-more">See More</button>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="images/JSS-Ayurveda-Hospital.jpg" alt="JSS Ayurveda hospital" class="service-image">
+                <div class="service-content">
+                    <h2 class="service-title">JSS Ayurveda Hospital</h2>
+                    <div class="service-description-container">
+                        <p class="service-description">The JSS Ayurveda Hospital began operations on MG Road, Mysuru, in
+                            August 1992, offering treatments across all Ayurvedic specialties with a focus on providing
+                            quality care to the public, particularly the rural poor. Over the past 18 years, the
+                            hospital, in association with the JSS Ayurveda Medical College, has benefited over 6 lakh
+                            patients from Mysuru, Chamarajanagar, Coorg, and Mandya.
+
+                            As a teaching hospital, it combines academic rigor with patient care, drawing its medical
+                            staff primarily from the prestigious JSS Ayurveda Medical College. This academic foundation
+                            ensures continuous upgrading of treatments and services. To address the rising demand for
+                            Ayurvedic healthcare, JSS Mahavidyapeetha expanded the facility, creating a 1,10,000 sq. ft.
+                            state-of-the-art hospital at Lalithadripura, Mysuru</p>
+                    </div>
+                    <button class="see-more">See More</button>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="images/JSS_Chamrajnagar_Hospital.jpg" alt="JJSS Hospital, Chamarajanagar"
+                    class="service-image">
+                <div class="service-content">
+                    <h2 class="service-title">JSS Hospital, Chamarajanagar</h2>
+                    <div class="service-description-container">
+                        <p class="service-description">JSS Hospital, Chamarajanagar, is a notable addition to the
+                            extensive healthcare services offered under the patronage of Sri Suttur Math. This 100-bed
+                            facility is dedicated to providing advanced and personalized medical care to the residents
+                            of Chamarajanagar and nearby regions. Equipped with modern infrastructure, the hospital
+                            caters to a variety of healthcare needs while maintaining a focus on accessibility and
+                            affordability for the community.
+
+                            In addition to its core services, the hospital reflects the broader vision of JSS
+                            Mahavidyapeetha (JSSMVP), which integrates healthcare and education. Institutions under
+                            JSSMVP, such as SJCE, JSS International Schools in Ooty and Dubai, and JSS Academy of
+                            Technical Education in Noida, also include healthcare facilities that benefit students,
+                            staff, and local communities. JSS Hospital, Chamarajanagar, embodies this commitment to
+                            improving lives through compassionate care and progressive services</p>
+                    </div>
+                    <button class="see-more">See More</button>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="images/JSS_Nature_Cure_Hospital_-Coimbatore-.jpg"
+                    alt="JSS Yoga and Nature Cure Hospital, Coimbatore" class="service-image">
+                <div class="service-content">
+                    <h2 class="service-title">JSS Yoga and Nature Cure Hospital</h2>
+                    <div class="service-description-container">
+                        <p class="service-description">Located in Pichanur on the Palakkad Highway in Coimbatore, this
+                            150-bed hospital is dedicated to providing care through a drugless system of medicine.
+                            Spanning a vast 55-acre expanse of lush green surroundings, the hospital offers a serene and
+                            therapeutic environment, ideal for holistic healing and recovery. It is well-equipped with
+                            modern facilities and employs a comprehensive approach to treating a variety of ailments,
+                            emphasizing natural and non-invasive methods.
+
+                            The hospital is staffed by a team of highly experienced and qualified naturopaths, along
+                            with skilled and trained therapists, who specialize in managing chronic illnesses,
+                            allergies, and complex medical conditions. These professionals are committed to patient care
+                            and are available around the clock to ensure continuous and effective treatment. By
+                            combining expertise with a holistic philosophy, the hospital provides a unique and natural
+                            pathway to health and wellness for patients.</p>
+                    </div>
+                    <button class="see-more">See More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+          <p>&copy; 2025 SutturSamskruthi. All rights reserved.</p>
+          <p>Follow us: <a href="#">Instagram</a> | <a href="#">Twitter</a> | <a href="#">LinkedIn</a></p>
+      </div>
+    </footer>
+
+
+    <script>
+        document.querySelectorAll('.service-card').forEach(card => {
+            const seeMoreButton = card.querySelector('.see-more');
+            const descriptionContainer = card.querySelector('.service-description-container');
+
+            seeMoreButton.addEventListener('click', () => {
+                descriptionContainer.classList.toggle('expanded');
+                seeMoreButton.textContent = descriptionContainer.classList.contains('expanded')
+                    ? 'See Less'
+                    : 'See More';
+            });
+        });
+
+
+
+        
+        const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+navToggle.addEventListener('click', () => {
+  navToggle.classList.toggle('active');
+  navLinks.classList.toggle('active');
+});
+ 
+    </script>
+</body>
+
+</html>

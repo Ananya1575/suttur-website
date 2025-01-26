@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education in suttur</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: white;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        :root {
+            --primary-color: rgba(244, 116, 52, 0.9);
+            --secondary-color: #f6a049;
+            --accent-color: #ffcc55;
+            --background-color: #ffffff;
+            --text-dark: #2d3436;
+            --text-light: #ffffff;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+
+
+
+
+
+        .navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(240, 102, 11, 0.897);
+  color: var(--white);
+  padding: 1rem 2rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: fixed;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid var(--glass-border);
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin-right: -20px;
+  margin-top: -3px;
+  margin-bottom: -5px;
+}
+   
+
+.nav-toggle {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.nav-toggle .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--background-color);
+}
+
+.navbar .nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .nav-links li {
+  position: relative;
+  margin-right: 2rem;
+}
+
+.navbar .nav-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+}
+
+.navbar .nav-links a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.navbar .nav-links li:hover > .dropdown-content {
+  display: block;
+}
+
+  
+  .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color:var(--secondary-color);
+      min-width: 260px;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .dropdown-content a {
+      color: var(--text-dark);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #333;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 3rem;
+  }
+
+
+    .navbar-container {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        padding: 2rem;
+    }
+
+    .logo {
+        position: absolute;
+        top: 1.5rem;
+        left: 2rem;
+        z-index: 1001;
+    }
+
+    .nav-toggle {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        z-index: 1002;
+    }
+
+    .navbar .nav-links {
+        display: none;
+        width: 100%;
+        margin-top: 4rem; /* Adjust to prevent overlap with logo */
+    }
+
+    .navbar .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar .nav-links li {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .nav-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .navbar .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 3rem;
+  }
+
+  .navbar .nav-links.active {
+    display: flex;
+  }
+
+  .navbar .nav-links li {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .dropdown-content {
+    position: static;
+    box-shadow: none;
+  }
+}
+
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            background-image: url("images/orange.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color:black;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            flex: 1 0 auto; /* This ensures the container takes up available space */
+        }
+
+        .college-section {
+            margin-bottom: 4rem;
+        }
+
+        .college-title {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 2rem;
+            padding-left: 1rem;
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .college-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .college-gallery {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+            height: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: opacity 0.3s;
+            object-position: top;
+        }
+
+        .college-info {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .college-info p {
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .hidden-content {
+            display: none;
+            padding: 1rem;
+            background: #f8f9fa;
+            margin-top: 1rem;
+            border-radius: 8px;
+        }
+
+        .see-more-btn, .see-less-btn {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+           
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .see-more-btn:hover, .see-less-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .website-btn {
+            padding: 0.8rem 1.8rem;
+            background: var(--accent-color);
+            color: white;
+            width: 10rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .website-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .head3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+            margin-left: 1rem;
+        }
+
+        /* Updated footer styles */
+        footer {
+            width: 100%;
+            flex-shrink: 0; /* Prevents footer from shrinking */
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            margin-top: auto; /* Pushes footer to bottom */
+        }
+
+        .footer-content {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .footer-content a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+        }
+
+        .footer-content a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .college-content {
+                flex-direction: column;
+            }
+
+            .college-gallery {
+                height: 300px;
+            }
+
+            .college-title {
+                font-size: 2rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+            
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .hero-content h1 {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .college-section {
+            animation: slideInLeft 0.5s ease-out;
+        }
+
+        .college-gallery {
+            animation: slideInRight 1s ease-out;
+        }
+
+        .institutions li {
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="images/logonav.png" alt="">
+              </div>
+          <div class="nav-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">About</a>
+                <div class="dropdown-content">
+                  <a href="about1.html">About Suttur Mutt</a>
+                  <a href="about2.html">Suttur Mahavidhyapeeta</a>
+                </div>
+              </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Education</a>
+              <div class="dropdown-content">
+                <a href="educationsuttur.html">Suttur Education</a>
+                <a href="generaledu.html">General Education</a>
+                <a href="medicaledu.html">Medical Institutes</a>
+                <a href="technicaledu.html">Technical Institutes</a>
+                <a href="supportive.html">Supportive Institutes</a>
+              </div>
+            </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Services</a>
+              <div class="dropdown-content">
+                <a href="social.html">Social Services</a>
+                <a href="health.html">Healthcare</a>
+              </div>
+            </li>
+            <li><a href="events.html">Events</a></li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Visit Suttur</a>
+              <div class="dropdown-content">
+                <a href="reach.html">Reach</a>
+                <a href="stay.html">Stay</a>
+                <a href="culinary.html">Suttur Culinary Heritage</a>
+                <a href="places-in-suttur.html">Explore in Suttur</a>
+                <a href="places-around-suttur.html">Explore around Suttur</a>
+              </div>
+            </li>
+            <li><a href="contacts.html">Contact</a></li>
+            <li><a href="game.html">Game</a></li>
+          </ul>
+        </nav>
+      </header>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Education in Suttur</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="featured-colleges">
+            <div class="college-section">
+                <h2 class="college-title">JSS School, Suttur</h2>
+                <div class="college-content">
+                    <div class="college-gallery">
+                        <img src="images/image.png" alt="JSS Science and Technology University" class="gallery-img">
+                    </div>
+                    <div class="college-info">
+                        <p>JSS School, Suttur, a unique project of the Sri Math, was established in 1962-63 with the objective of providing free education to children from rural families and thereby empowering the underprivileged. In the year 2001-02, a residential school was started to help the children from economically backward classes.</p>
+                        <button class="see-more-btn" onclick="toggleContent(this)">See More</button>
+                        <div class="hidden-content">
+                            <p>The students studying at this school hail from different parts of the country. Students from poverty-stricken parts of Karnataka, Manipur, Meghalaya, Jharkhand, and Tripura come to study here. The school provides the facilities like food, accommodation, textbooks, uniform, and medical care to these children at no cost. It has a separate hostel for girls and boys. The school is spread over a picturesque campus with a conducive atmosphere for learning. It comprises excellent facilities that nurture the inborn potential of every child. This initiative of Sri Suttur Math is applauded by various personalities from different walks of life.<br> At present, the school imparts education in Kannada and English medium and currently has more than 4,000 children of which 2500 are residents (boarders), and the rest are day scholars. Presently, education is provided from Nursery to 10th Standard following the State syllabus. The school has a competent and dedicated team of faculty members.</p>
+                            <button class="see-less-btn" onclick="toggleContent(this)">See Less</button>
+                        </div>
+                        <div class="button-group">
+                            <a href="https://sutturmath.org/jss-school-suttur/" class="website-btn" target="_blank">Visit Website</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="college-section">
+                <h2 class="college-title">JSS D.Ed. College, Suttur</h2>
+                <div class="college-content">
+                    <div class="college-gallery">
+                        <img src="images/image1.png" alt="JSS Science and Technology University" class="gallery-img">
+                    </div>
+                    <div class="college-info">
+                        <p>JSS Teachers' Training Institute, is one of the pioneering institutions of JSS Mahavidyapeetha. The institution was started in the year 1959 in Mysuru. It was shifted to Suttur in 2001 to cater to the needs of rural aspirants. Presently, the College is functioning from the second floor of the spacious JSSMVP school building in Suttur.<br>The JSSMVP school building in Suttur stands on the banks of the River Kapila. Surrounded by a picturesque environment, the college is completely free from pollution. It is located at 25 km from Mysuru city and 15km from Nanjangud.</p>
+                        <button class="see-more-btn" onclick="toggleContent(this)">See More</button>
+                        <div class="hidden-content">
+                            <p>The College has excellent infrastructure with well-equipped laboratories, including a computer lab, psychology lab, ET lab and general science lab. There is also a well-stocked library. The building has all the necessary basic amenities such as drinking water, etc. The college has experienced faculty, conforming to the norms stipulated by NCTE.<br>The College provides good facilities and ample opportunities for co-curricular activities. Workshops, TLM, retreat programmes and seminars are regularly conducted. Important events are zestfully celebrated. In all, the college provides a great forum for the all-round development of the trainees.<br>What is unique about the institution is its focus on kindling an interest in social service among the trainees. The institution has been consistently achieving good academic results with several distinctions. Most of the trainees who graduated from this college have secured jobs in the private and government sector.<br>The Alumni Association acts as a bridge between old and incumbent trainees of the college.</p>
+                            <button class="see-less-btn" onclick="toggleContent(this)">See Less</button>
+                        </div>
+                        <div class="button-group">
+                            <a href="https://jssonline.org/our-institutions/general-education/jss-teacher-training-institutes/jss-d-ed-college-suttur/" class="website-btn" target="_blank">Visit Website</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="college-section">
+                <h2 class="college-title">JSS B.Ed.College, Suttur</h2>
+                <div class="college-content">
+                    <div class="college-gallery">
+                        <img src="images/image2.png" alt="JSS Science and Technology University" class="gallery-img">
+                    </div>
+                    <div class="college-info">
+                        <p>JSS Institute of Education, B.Ed College, Suttur, Nanjangud, was established in the year 2004-05. The campus spreads across a sprawling 60 acres of land and is equipped with the best infrastructure. The location is in a serene atmosphere entirely free from pollution on the banks of River Kapila. Suttur is at a distance of 28 km from Mysuru, 15 Km from Nanjangud and 15 T.Narasipur.</p>
+                        <button class="see-more-btn" onclick="toggleContent(this)">See More</button>
+                        <div class="hidden-content">
+                            <p>The college has well-furnished, spacious and equipped with technology classrooms.<br>The College has Educational Technology Lab, Language Lab, Science Lab, Educational Psychology Lab, Curriculum Lab, etc. The College has ICT Resource Centre with 75 computers and has access to the Internet. The management maintains a Museum and a Science Park in the vicinity of the College.<br>The College has a spacious library and reading room with a massive collection of over 30,000 books catering to the needs of education, perspectives, pedagogy, school textbooks, fiction, etc. Besides, various educational journals, magazines and newspapers are also subscribed.<br>The College has a multi-purpose hall (Allamaprabhu Auditorium) for seminars, conferences, workshops, etc., The hall has a seating capacity of 350 students with Air conditioning and a Digital Sound System.<br>The College has purified drinking water facilities, Washrooms and Rest Rooms for gents and ladies, Canteen Facility etc.The College has separate hostel facilities for both boys and girls with Solar Water, Medical and Security Facilities. Special attention to Music, Drama and Sports activities for Hostel Students.<br>Staff quarters are provided for the employees of the institution and is at a walkable distance from the College.The College has a well-equipped hospital (with both Allopathy and Ayurveda treatments) that works 24×7 in its campus.</p>
+                            <button class="see-less-btn" onclick="toggleContent(this)">See Less</button>
+                        </div>
+                        <div class="button-group">
+                            <a href="https://jssonline.org/our-institutions/general-education/jss-teacher-training-institutes/jss-institute-of-education-suttur/" class="website-btn" target="_blank">Visit Website</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 SutturSamskruthi. All rights reserved.</p>
+            <p>Follow us: <a href="#">Instagram</a> | <a href="#">Twitter</a> | <a href="#">LinkedIn</a></p>
+        </div>
+    </footer>
+
+    <script>
+
+        function toggleContent(button) {
+        const content = button.closest('.college-info, .card-content').querySelector('.hidden-content');
+        const seeMoreBtn = button.closest('.college-info, .card-content').querySelector('.see-more-btn');
+        
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+                seeMoreBtn.style.display = 'inline-block';
+            } else {
+                content.style.display = 'block';
+                seeMoreBtn.style.display = 'none';
+            }
+        }
+            // Add animation to elements as they come into view
+            function animateOnScroll() {
+                const elements = document.querySelectorAll('.college-section, .card');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.animation = 'fadeInUp 1s ease-out';
+                        }
+                    });
+                }, { threshold: 0.1 });
+    
+                elements.forEach(element => {
+                    observer.observe(element);
+                });
+            }
+    
+            // Call the function when the page loads
+            window.addEventListener('load', animateOnScroll);
+    
+    
+            // Add contact cards animation on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+    
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        // Remove observer after animation
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+    
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    document.querySelector('.navbar').classList.remove('closed');
+                    document.querySelector('.navbar-toggle').classList.remove('active');
+                }
+            });
+    
+            // Add loading animation
+            document.addEventListener('DOMContentLoaded', () => {
+                document.body.style.opacity = '1';
+            });
+     
+            const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+navToggle.addEventListener('click', () => {
+  navToggle.classList.toggle('active');
+  navLinks.classList.toggle('active');
+});
+        </script>
+</body>
+</html>

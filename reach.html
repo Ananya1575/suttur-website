@@ -32,148 +32,211 @@
             --text-light: #ffffff;
             --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-/* Base navbar styles */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 200px;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.0);
-    backdrop-filter: blur(10px);
-    color: var(--text-dark);
-    padding-top: 40px;
-    z-index: 1000;
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-    /* Remove the initial transform to show navbar by default */
-    transform: translateX(0);
-}
 
-/* Modified to hide navbar when closed */
-.navbar.closed {
-    transform: translateX(-100%);
-}
 
-/* Rest of the navbar styles remain the same */
-.logo {
-    text-align: center;
-    margin-bottom: 40px;
+
+
+        .navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(240, 102, 11, 0.897);
+  color: var(--white);
+  padding: 1rem 2rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: fixed;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid var(--glass-border);
 }
 
 .logo img {
-    width: 70px;
-    height: 70px;
-    border-radius: 40%;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin-right: -20px;
+  margin-top: -3px;
+  margin-bottom: -5px;
+}
+   
+
+.nav-toggle {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
 }
 
-.logo img:hover {
-    transform: scale(1.05);
+.nav-toggle .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--background-color);
 }
 
-/* Navigation list styles */
-.navbar ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
+.navbar .nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .nav-links li {
+  position: relative;
+  margin-right: 2rem;
+}
+
+.navbar .nav-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+}
+
+.navbar .nav-links a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.navbar .nav-links li:hover > .dropdown-content {
+  display: block;
+}
+
+  
+  .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color:var(--secondary-color);
+      min-width: 260px;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .dropdown-content a {
+      color: var(--text-dark);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #333;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 3rem;
+  }
+
+
+    .navbar-container {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        padding: 2rem;
+    }
+
+    .logo {
+        position: absolute;
+        top: 1.5rem;
+        left: 2rem;
+        z-index: 1001;
+    }
+
+    .nav-toggle {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        z-index: 1002;
+    }
+
+    .navbar .nav-links {
+        display: none;
+        width: 100%;
+        margin-top: 4rem; /* Adjust to prevent overlap with logo */
+    }
+
+    .navbar .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar .nav-links li {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .nav-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .navbar .nav-links {
+    display: none;
     flex-direction: column;
-    gap: 15px;
-}
+    width: 100%;
+    margin-top: 3rem;
+  }
 
-.navbar ul li {
-    position: relative;
-    text-align: center;
-    height: 40px;
-}
+  .navbar .nav-links.active {
+    display: flex;
+  }
 
-/* Navigation item styles remain the same */
-.navbar ul li a {
-    display: block;
-    width: 75px;
-    height: 3px;
-    border-radius: 30%;
-    background-color: var(--text-dark);
-    margin: 0 auto;
-    position: relative;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: right;
-}
+  .navbar .nav-links li {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
 
-.navbar ul li a::before {
-    content: attr(data-text);
-    position: absolute;
-    left: 120%;
-    top: -10px;
-    color: var(--text-dark);
-    font-size: 16px;
-    opacity: 0;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    white-space: nowrap;
-    transform: translateX(20px);
-}
-
-.navbar ul li:hover a {
-    width: 50px;
-    transform: translateX(-50px);
-    background-color: var(--primary-color);
-}
-
-.navbar ul li:hover a::before {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* Hamburger menu styles remain the same */
-.navbar-toggle {
-    display: block;
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1001;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    border: none;
-    cursor: pointer;
-    padding: 15px;
-    border-radius: 50%;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
-
-.navbar-toggle:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.navbar-toggle span {
-    display: block;
-    width: 24px;
-    height: 2px;
-    background-color: var(--text-dark);
-    margin: 5px 0;
-    transition: all 0.3s ease;
-}
-
-/* Hamburger animation when active */
-.navbar-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-
-.navbar-toggle.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.navbar-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
+  .dropdown-content {
+    position: static;
+    box-shadow: none;
+  }
 }
 
         .hero {
             position: relative;
             width: 100%;
-            height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://source.unsplash.com/1600x900/?india,travel');
+            height: 70vh;
+            background:url('images/orange.png');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -184,7 +247,7 @@
 
         .hero-content {
             text-align: center;
-            color: white;
+            color:var(--text-dark);
         }
 
         .hero h1 {
@@ -367,7 +430,7 @@
         }
 
         .footer-content a {
-            color: var(--accent-color);
+            color: var(--white);
             text-decoration: none;
             transition: all 0.3s ease;
             font-weight: 600;
@@ -428,35 +491,64 @@
 </head>
 
 <body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="images/logonav.png" alt="">
+              </div>
+          <div class="nav-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">About</a>
+                <div class="dropdown-content">
+                  <a href="about1.html">About Suttur Mutt</a>
+                  <a href="about2.html">Suttur Mahavidhyapeeta</a>
+                </div>
+              </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Education</a>
+              <div class="dropdown-content">
+                <a href="educationsuttur.html">Suttur Education</a>
+                <a href="generaledu.html">General Education</a>
+                <a href="medicaledu.html">Medical Institutes</a>
+                <a href="technicaledu.html">Technical Institutes</a>
+                <a href="supportive.html">Supportive Institutes</a>
+              </div>
+            </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Services</a>
+              <div class="dropdown-content">
+                <a href="social.html">Social Services</a>
+                <a href="health.html">Healthcare</a>
+              </div>
+            </li>
+            <li><a href="events.html">Events</a></li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Visit Suttur</a>
+              <div class="dropdown-content">
+                <a href="reach.html">Reach</a>
+                <a href="stay.html">Stay</a>
+                <a href="culinary.html">Suttur Culinary Heritage</a>
+                <a href="places-in-suttur.html">Explore in Suttur</a>
+                <a href="places-around-suttur.html">Explore around Suttur</a>
+              </div>
+            </li>
+            <li><a href="contacts.html">Contact</a></li>
+            <li><a href="game.html">Game</a></li>
+          </ul>
+        </nav>
+      </header>
     <div class="hero">
         <div class="hero-content">
             <h1>Journey Guide to Suttur</h1>
         </div>
     </div>
-    <header>
-        <button class="navbar-toggle active" onclick="toggleNav()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <nav class="navbar">
-          <div class="logo">
-            <img src="images/logo.png" alt="Suttur Logo">
-          </div>
-          <ul>
-            <li><a href="index.html" class="nav-item" data-text="Home"></a></li>
-            <li><a href="game.html" class="nav-item" data-text="Game"></a></li>
-            <li><a href="culinary.html" class="nav-item" data-text="Culinary Journey"></a></li>
-            <li><a href="events.html" class="nav-item" data-text="Events"></a></li>
-            <li><a href="stay.html" class="nav-item" data-text="Staying in Comfort"></a></li>
-            <li><a href="explore.html" class="nav-item" data-text="Exploring Nearby"></a></li>
-            <li><a href="education.html" class="nav-item" data-text="Education"></a></li>
-            <li><a href="difference.html" class="nav-item" data-text="Making a Difference"></a></li>
-            <li><a href="whysuttur.html" class="nav-item" data-text="Why Suttur"></a></li>
-            <li><a href="contacts.html" class="nav-item" data-text="Contact"></a></li>
-          </ul>
-        </nav>
-      </header>
+   
 
     <div class="container">
         <div class="journey-timeline">
@@ -648,7 +740,7 @@
 
     <footer>
         <div class="footer-content">
-            <p>&copy; 2025 TechNova. All rights reserved.</p>
+            <p>&copy; 2025 SutturSamskruthi. All rights reserved.</p>
             <p>Follow us: <a href="#">Instagram</a> | <a href="#">Twitter</a> | <a href="#">LinkedIn</a></p>
         </div>
     </footer>
@@ -741,6 +833,14 @@
         document.addEventListener('DOMContentLoaded', () => {
             document.body.style.opacity = '1';
         });
+        
+        const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+navToggle.addEventListener('click', () => {
+  navToggle.classList.toggle('active');
+  navLinks.classList.toggle('active');
+});
  
 
     </script>

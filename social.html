@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Services</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+        :root {
+            --primary-color: rgba(244, 116, 52, 0.9);
+            --secondary-color: #f6a049;
+            --accent-color: #ffcc55;
+            --background-color: #ffffff;
+            --text-dark: #2d3436;
+            --text-light: #ffffff;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+
+
+        .navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(240, 102, 11, 0.897);
+  color: var(--white);
+  padding: 1rem 2rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: fixed;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid var(--glass-border);
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin-right: -20px;
+  margin-top: -3px;
+  margin-bottom: -5px;
+}
+   
+
+.nav-toggle {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.nav-toggle .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--background-color);
+}
+
+.navbar .nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .nav-links li {
+  position: relative;
+  margin-right: 2rem;
+}
+
+.navbar .nav-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+}
+
+.navbar .nav-links a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.navbar .nav-links li:hover > .dropdown-content {
+  display: block;
+}
+
+  
+  .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color:var(--secondary-color);
+      min-width: 260px;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .dropdown-content a {
+      color: var(--text-dark);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #333;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 3rem;
+  }
+
+
+    .navbar-container {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        padding: 2rem;
+    }
+
+    .logo {
+        position: absolute;
+        top: 1.5rem;
+        left: 2rem;
+        z-index: 1001;
+    }
+
+    .nav-toggle {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        z-index: 1002;
+    }
+
+    .navbar .nav-links {
+        display: none;
+        width: 100%;
+        margin-top: 4rem; /* Adjust to prevent overlap with logo */
+    }
+
+    .navbar .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar .nav-links li {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .nav-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .navbar .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 3rem;
+  }
+
+  .navbar .nav-links.active {
+    display: flex;
+  }
+
+  .navbar .nav-links li {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .dropdown-content {
+    position: static;
+    box-shadow: none;
+  }
+}
+
+
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            background-image: url("images/medicali.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: black;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+
+        .services {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .service-content-wrapper {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        footer {
+            width: 100%;
+            flex-shrink: 0; /* Prevents footer from shrinking */
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            margin-top: auto; /* Pushes footer to bottom */
+        }
+
+        .footer-content {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .footer-content a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+        }
+
+        .footer-content a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .service-content-wrapper {
+                flex-direction: column;
+            }
+        }
+
+        .service-images {
+            display: flex;
+            gap: 10px;
+            width: 40%;
+        }
+
+        @media (max-width: 768px) {
+            .service-images {
+                width: 100%;
+                flex-direction: column;
+            }
+        }
+
+        .service-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .service-text {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (max-width: 768px) {
+            .service-text {
+                width: 100%;
+            }
+        }
+
+        .service-description-container {
+            max-height: 100px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .service-description-container.expanded {
+            max-height: 500px;
+        }
+
+        .see-more, .see-less {
+            display: inline-block;
+            padding: 1rem 1rem;
+            width: 7rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 01rem;
+        }
+
+        .see-more:hover, .see-less:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="images/logonav.png" alt="">
+              </div>
+          <div class="nav-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">About</a>
+                <div class="dropdown-content">
+                  <a href="about1.html">About Suttur Mutt</a>
+                  <a href="about2.html">Suttur Mahavidhyapeeta</a>
+                </div>
+              </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Education</a>
+              <div class="dropdown-content">
+                <a href="educationsuttur.html">Suttur Education</a>
+                <a href="generaledu.html">General Education</a>
+                <a href="medicaledu.html">Medical Institutes</a>
+                <a href="technicaledu.html">Technical Institutes</a>
+                <a href="supportive.html">Supportive Institutes</a>
+              </div>
+            </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Services</a>
+              <div class="dropdown-content">
+                <a href="social.html">Social Services</a>
+                <a href="health.html">Healthcare</a>
+              </div>
+            </li>
+            <li><a href="events.html">Events</a></li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Visit Suttur</a>
+              <div class="dropdown-content">
+                <a href="reach.html">Reach</a>
+                <a href="stay.html">Stay</a>
+                <a href="culinary.html">Suttur Culinary Heritage</a>
+                <a href="places-in-suttur.html">Explore in Suttur</a>
+                <a href="places-around-suttur.html">Explore around Suttur</a>
+              </div>
+            </li>
+            <li><a href="contacts.html">Contact</a></li>
+            <li><a href="game.html">Game</a></li>
+          </ul>
+        </nav>
+      </header>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Social Services</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="services" id="servicesContainer">
+            <div class="service-card">
+                <div class="service-content-wrapper">
+                    <div class="service-images">
+                        <img src="images/Mysore-citizen-forum.jpg" alt="Mysore Citizens’ Forum (MCF) "
+                            class="service-image">
+                    </div>
+                    <div class="service-text">
+                        <h2>Mysore Citizens’ Forum (MCF)</h2>
+                        <div class="service-description-container">
+                            <p>The citizens of Mysore have consistently extended support to victims of natural
+                                calamities, leading to the formation of the Mysore Citizens Forum (MCF) in 2004 to
+                                assist Tsunami victims. MCF operates as an informal agency comprising prominent
+                                citizens, philanthropists, donors, and voluntary organizations under the leadership of
+                                His Holiness Jagadguru Sri Shivarathri Deshikendra Mahaswamiji, Pontiff of Suttur Math
+                                and President of JSS Mahavidyapeetha. Its mission is to pool resources into a
+                                consolidated Mysore Fund for effective rehabilitation and disaster management.
+
+                                Following the 2004 tsunami, MCF provided immediate aid to the affected Modaliyarkuppam
+                                village in Tamil Nadu by distributing food, clothing, and essentials. They also gifted
+                                30 boats to fishermen, repaired a school, and constructed 92 houses, later adding 160
+                                more with government assistance. MCF has also extended help during earthquakes in Latur
+                                and Bhuj. Notably, all relief funds were entirely used for rehabilitation, with no
+                                deductions for personal expenses of the volunteers. MCF's initiatives reflect Mysore's
+                                collective commitment to humanitarian efforts.</p>
+                        </div>
+                        <button class="see-more">See More</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-content-wrapper">
+                    <div class="service-images">
+                        <img src="images/Mysore-citizen-forum-1.jpg" alt="MCF helps flood hit North Karnataka"
+                            class="service-image">
+                    </div>
+                    <div class="service-text">
+                        <h2>MCF helps flood hit North Karnataka</h2>
+                        <div class="service-description-container">
+                            <p>The Mysore Citizens Forum (MCF) swiftly responded to the North Karnataka floods, sending
+                                500 quintals of rice, medicines, clothes, and utensils worth ₹10 lakh under the
+                                leadership of former MLA M.K. Somashekar. Unused funds of ₹22 lakh from the 2004 tsunami
+                                relief were also utilized.
+
+                                Led by Sri Shivarathri Deshikendra Swamiji, MCF built 1,200 houses across five villages
+                                in Bijapur, Bagalkot, and Gadag districts. The Math also offered free education,
+                                boarding, and healthcare for affected children.
+
+                                A Padayatra led by Swamiji raised over ₹5.5 crore, with contributions from MUDA, Mysore
+                                City Corporation, and other donors, ensuring sustained support for flood victims.</p>
+                        </div>
+                        <button class="see-more">See More</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-content-wrapper">
+                    <div class="service-images">
+                        <img src="images/rehabitation.jpg" alt="Disaster Relief Through Unity" class="service-image">
+                    </div>
+                    <div class="service-text">
+                        <h2>Disaster Relief Through Unity</h2>
+                        <div class="service-description-container">
+                            <p>The Mysore Citizens Forum (MCF), with contributions from JSS MVP, Suttur Math, and
+                                Mysoreans, donated Rs. 10 lakh to flood victims in North Karnataka. Essential relief
+                                materials like food grains, medicines, and clothes were sent as immediate aid.
+
+                                Through a padayatra led by Sri Shivarathri Deshikendra Mahaswamiji, Rs. 1.40 crore was
+                                raised for flood relief. Additionally, MCF constructed 1,250 houses across five
+                                flood-affected villages in Bijapur, Bagalkot, and Gadag districts.</p>
+                        </div>
+                        <button class="see-more">See More</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-content-wrapper">
+                    <div class="service-images">
+                        <img src="images/JSS-Hostel.jpg" alt="Hostels and Orphanages" class="service-image">
+                    </div>
+                    <div class="service-text">
+                        <h2>JHostels and Orphanages</h2>
+                        <div class="service-description-container">
+                            <p>In 1930, H.H. Jagadguru Dr. Sri Shivarathri Rajendra Mahaswamiji began providing
+                                accommodation and food to poor students at his rented residence, aiming to prevent them
+                                from discontinuing their education. This initiative led to the establishment of KSS
+                                Hostel, later expanded with a building donated by Sahukar Siddalingaiah. With blessings
+                                from His Holiness Jagadguru Manthra Maharshi Sri Shivarathreeshwara Mahaswamiji, a free
+                                hostel was started on Vanivilasa Road. Over time, the hostels grew, offering education
+                                support and lodging to thousands of students, including future leaders, ministers, and
+                                officers.</p>
+                        </div>
+                        <button class="see-more">See More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+          <p>&copy; 2025 SutturSamskruthi. All rights reserved.</p>
+          <p>Follow us: <a href="#">Instagram</a> | <a href="#">Twitter</a> | <a href="#">LinkedIn</a></p>
+      </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.service-card').forEach(card => {
+            const seeMoreButton = card.querySelector('.see-more');
+            const descriptionContainer = card.querySelector('.service-description-container');
+
+            seeMoreButton.addEventListener('click', () => {
+                descriptionContainer.classList.toggle('expanded');
+                seeMoreButton.textContent = descriptionContainer.classList.contains('expanded')
+                    ? 'See Less'
+                    : 'See More';
+            });
+        });
+
+        
+        const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+navToggle.addEventListener('click', () => {
+  navToggle.classList.toggle('active');
+  navLinks.classList.toggle('active');
+});
+ 
+    </script>
+</body>
+
+</html>
