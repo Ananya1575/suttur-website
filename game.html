@@ -32,6 +32,203 @@
         }
 
         .navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(240, 102, 11, 0.897);
+  color: var(--white);
+  padding: 1rem 2rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: fixed;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid var(--glass-border);
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  margin-right: -20px;
+  margin-top: -3px;
+  margin-bottom: -5px;
+}
+   
+
+.nav-toggle {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.nav-toggle .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--background-color);
+}
+
+.navbar .nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .nav-links li {
+  position: relative;
+  margin-right: 2rem;
+}
+
+.navbar .nav-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+}
+
+.navbar .nav-links a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.navbar .nav-links li:hover > .dropdown-content {
+  display: block;
+}
+
+  
+  .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color:var(--secondary-color);
+      min-width: 260px;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .dropdown-content a {
+      color: var(--text-dark);
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #333;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 3rem;
+  }
+
+
+    .navbar-container {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        padding: 2rem;
+    }
+
+    .logo {
+        position: absolute;
+        top: 1.5rem;
+        left: 2rem;
+        z-index: 1001;
+    }
+
+    .nav-toggle {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        z-index: 1002;
+    }
+
+    .navbar .nav-links {
+        display: none;
+        width: 100%;
+        margin-top: 4rem; /* Adjust to prevent overlap with logo */
+    }
+
+    .navbar .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar .nav-links li {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .nav-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .navbar .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 3rem;
+  }
+
+  .navbar .nav-links.active {
+    display: flex;
+  }
+
+  .navbar .nav-links li {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .dropdown-content {
+    position: static;
+    box-shadow: none;
+  }
+}
+
+/* 
+        .navbar {
             display: flex;
             justify-content: space-around;
             align-items: center;
@@ -215,7 +412,7 @@
             .dropdown.active .dropdown-content {
                 display: block;
             }
-        }
+        } */
 
         .hero {
             position: relative;
@@ -504,6 +701,58 @@
         <nav class="navbar">
             <div class="logo">
                 <img src="images/logonav.png" alt="">
+              </div>
+          <div class="nav-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">About</a>
+                <div class="dropdown-content">
+                  <a href="about1.html">About Suttur Mutt</a>
+                  <a href="about2.html">Suttur Mahavidhyapeeta</a>
+                </div>
+              </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Education</a>
+              <div class="dropdown-content">
+                <a href="educationsuttur.html">Suttur Education</a>
+                <a href="generaledu.html">General Education</a>
+                <a href="medicaledu.html">Medical Institutes</a>
+                <a href="technicaledu.html">Technical Institutes</a>
+                <a href="supportive.html">Supportive Institutes</a>
+              </div>
+            </li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Services</a>
+              <div class="dropdown-content">
+                <a href="social.html">Social Services</a>
+                <a href="health.html">Healthcare</a>
+              </div>
+            </li>
+            <li><a href="events.html">Events</a></li>
+            <li class="dropdown">
+              <a href="javascript:void(0)" class="dropbtn">Visit Suttur</a>
+              <div class="dropdown-content">
+                <a href="reach.html">Reach</a>
+                <a href="stay.html">Stay</a>
+                <a href="culinary.html">Suttur Culinary Heritage</a>
+                <a href="places-in-suttur.html">Explore in Suttur</a>
+                <a href="places-around-suttur.html">Explore around Suttur</a>
+              </div>
+            </li>
+            <li><a href="contacts.html">Contact</a></li>
+            <li><a href="game.html">Game</a></li>
+          </ul>
+        </nav>
+      </header>
+    <!-- <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="images/logonav.png" alt="">
             </div>
             <div class="nav-toggle">
                 <span class="bar"></span>
@@ -551,7 +800,7 @@
                 <li><a href="game.html">Game</a></li>
             </ul>
         </nav>
-    </header>
+    </header> -->
 
     <section class="hero">
         <div class="hero-content">
@@ -786,12 +1035,12 @@
         createClues();
                 
         const navToggle = document.querySelector('.nav-toggle');
-        const navLinks = document.querySelector('.nav-links');
+const navLinks = document.querySelector('.nav-links');
 
-        navToggle.addEventListener('click', () => {
-            navToggle.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
+navToggle.addEventListener('click', () => {
+  navToggle.classList.toggle('active');
+  navLinks.classList.toggle('active');
+});
     </script>
 </body>
 </html>
