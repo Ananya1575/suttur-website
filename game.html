@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suttur Crossword Game - JSS Foundation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --primary-color: rgba(244, 116, 52, 0.9);
@@ -32,202 +35,203 @@
         }
 
         .navbar {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: rgba(240, 102, 11, 0.897);
-  color: var(--white);
-  padding: 1rem 2rem;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  position: fixed;
-  width: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  border: 1px solid var(--glass-border);
-}
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: rgba(240, 102, 11, 0.897);
+            color: var(--white);
+            padding: 1rem 2rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid var(--glass-border);
+        }
 
-.logo img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  margin-right: -20px;
-  margin-top: -3px;
-  margin-bottom: -5px;
-}
-   
-
-.nav-toggle {
-  display: none;
-  cursor: pointer;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-}
-
-.nav-toggle .bar {
-  display: block;
-  width: 25px;
-  height: 3px;
-  margin: 5px auto;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-  background-color: var(--background-color);
-}
-
-.navbar .nav-links {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.navbar .nav-links li {
-  position: relative;
-  margin-right: 2rem;
-}
-
-.navbar .nav-links a {
-  color: var(--text-light);
-  text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  position: relative;
-  padding: 0.5rem 1rem;
-  border-radius: 15px;
-}
-
-.navbar .nav-links a:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
-}
-
-.navbar .nav-links li:hover > .dropdown-content {
-  display: block;
-}
-
-  
-  .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color:var(--secondary-color);
-      min-width: 260px;
-      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-      z-index: 1;
-      border-radius: 8px;
-      padding: 10px;
-    }
-
-    .dropdown-content a {
-      color: var(--text-dark);
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-    }
-
-    .dropdown-content a:hover {
-      background-color: #333;
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-@media (max-width: 768px) {
-  .navbar {
-    padding: 3rem;
-  }
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin-right: -20px;
+            margin-top: -3px;
+            margin-bottom: -5px;
+        }
 
 
-    .navbar-container {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: flex-start;
-        padding: 2rem;
-    }
+        .nav-toggle {
+            display: none;
+            cursor: pointer;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
 
-    .logo {
-        position: absolute;
-        top: 1.5rem;
-        left: 2rem;
-        z-index: 1001;
-    }
+        .nav-toggle .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+            background-color: var(--background-color);
+        }
 
-    .nav-toggle {
-        position: absolute;
-        top: 2rem;
-        right: 2rem;
-        z-index: 1002;
-    }
+        .navbar .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
 
-    .navbar .nav-links {
-        display: none;
-        width: 100%;
-        margin-top: 4rem; /* Adjust to prevent overlap with logo */
-    }
+        .navbar .nav-links li {
+            position: relative;
+            margin-right: 2rem;
+        }
 
-    .navbar .nav-links.active {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-    }
+        .navbar .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+        }
 
-    .navbar .nav-links li {
-        width: 100%;
-        margin-bottom: 0.5rem;
-    }
+        .navbar .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .navbar .nav-links li:hover>.dropdown-content {
+            display: block;
+        }
 
 
-  .nav-toggle {
-    display: block;
-  }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
 
-  .nav-toggle.active .bar:nth-child(2) {
-    opacity: 0;
-  }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--secondary-color);
+            min-width: 260px;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 8px;
+            padding: 10px;
+        }
 
-  .nav-toggle.active .bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-  }
+        .dropdown-content a {
+            color: var(--text-dark);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
 
-  .nav-toggle.active .bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-  }
+        .dropdown-content a:hover {
+            background-color: #333;
+        }
 
-  .navbar .nav-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 3rem;
-  }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
 
-  .navbar .nav-links.active {
-    display: flex;
-  }
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 3rem;
+            }
 
-  .navbar .nav-links li {
-    margin-right: 0;
-    margin-bottom: 0.5rem;
-  }
 
-  .dropdown-content {
-    position: static;
-    box-shadow: none;
-  }
-}
+            .navbar-container {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: flex-start;
+                padding: 2rem;
+            }
 
-/* 
+            .logo {
+                position: absolute;
+                top: 1.5rem;
+                left: 2rem;
+                z-index: 1001;
+            }
+
+            .nav-toggle {
+                position: absolute;
+                top: 2rem;
+                right: 2rem;
+                z-index: 1002;
+            }
+
+            .navbar .nav-links {
+                display: none;
+                width: 100%;
+                margin-top: 4rem;
+                /* Adjust to prevent overlap with logo */
+            }
+
+            .navbar .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar .nav-links li {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-toggle.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .nav-toggle.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .navbar .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                margin-top: 3rem;
+            }
+
+            .navbar .nav-links.active {
+                display: flex;
+            }
+
+            .navbar .nav-links li {
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+            }
+
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+            }
+        }
+
+        /* 
         .navbar {
             display: flex;
             justify-content: space-around;
@@ -438,7 +442,7 @@
         .hero h1 {
             font-size: clamp(2rem, 5vw, 5rem);
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .main-content {
@@ -554,7 +558,7 @@
             font-size: clamp(1.1rem, 1.5vw, 1.25rem);
         }
 
-        .crossword-clues > div {
+        .crossword-clues>div {
             flex: 1;
             min-width: 0;
         }
@@ -595,7 +599,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.4);
+            background-color: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(4px);
         }
 
@@ -681,6 +685,7 @@
                 font-size: 0.875rem;
             }
         }
+
         @media (hover: none) {
             .navbar .nav-links a:hover {
                 transform: none;
@@ -696,59 +701,60 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <nav class="navbar">
             <div class="logo">
                 <img src="images/logonav.png" alt="">
-              </div>
-          <div class="nav-toggle">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-          </div>
-          <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">About</a>
-                <div class="dropdown-content">
-                  <a href="about1.html">About Suttur Mutt</a>
-                  <a href="about2.html">Suttur Mahavidhyapeeta</a>
-                </div>
-              </li>
-            <li class="dropdown">
-              <a href="javascript:void(0)" class="dropbtn">Education</a>
-              <div class="dropdown-content">
-                <a href="educationsuttur.html">Suttur Education</a>
-                <a href="generaledu.html">General Education</a>
-                <a href="medicaledu.html">Medical Institutes</a>
-                <a href="technicaledu.html">Technical Institutes</a>
-                <a href="supportive.html">Supportive Institutes</a>
-              </div>
-            </li>
-            <li class="dropdown">
-              <a href="javascript:void(0)" class="dropbtn">Services</a>
-              <div class="dropdown-content">
-                <a href="social.html">Social Services</a>
-                <a href="health.html">Healthcare</a>
-              </div>
-            </li>
-            <li><a href="events.html">Events</a></li>
-            <li class="dropdown">
-              <a href="javascript:void(0)" class="dropbtn">Visit Suttur</a>
-              <div class="dropdown-content">
-                <a href="reach.html">Reach</a>
-                <a href="stay.html">Stay</a>
-                <a href="culinary.html">Suttur Culinary Heritage</a>
-                <a href="places-in-suttur.html">Explore in Suttur</a>
-                <a href="places-around-suttur.html">Explore around Suttur</a>
-              </div>
-            </li>
-            <li><a href="contacts.html">Contact</a></li>
-            <li><a href="game.html">Game</a></li>
-          </ul>
+            </div>
+            <div class="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">About</a>
+                    <div class="dropdown-content">
+                        <a href="about1.html">About Suttur Mutt</a>
+                        <a href="about2.html">Suttur Mahavidhyapeeta</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Education</a>
+                    <div class="dropdown-content">
+                        <a href="educationsuttur.html">Suttur Education</a>
+                        <a href="generaledu.html">General Education</a>
+                        <a href="medicaledu.html">Medical Institutes</a>
+                        <a href="technicaledu.html">Technical Institutes</a>
+                        <a href="supportive.html">Supportive Institutes</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Services</a>
+                    <div class="dropdown-content">
+                        <a href="social.html">Social Services</a>
+                        <a href="health.html">Healthcare</a>
+                    </div>
+                </li>
+                <li><a href="events.html">Events</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Visit Suttur</a>
+                    <div class="dropdown-content">
+                        <a href="reach.html">Reach</a>
+                        <a href="stay.html">Stay</a>
+                        <a href="culinary.html">Suttur Culinary Heritage</a>
+                        <a href="places-in-suttur.html">Explore in Suttur</a>
+                        <a href="places-around-suttur.html">Explore around Suttur</a>
+                    </div>
+                </li>
+                <li><a href="contacts.html">Contact</a></li>
+                <li><a href="game.html">Game</a></li>
+            </ul>
         </nav>
-      </header>
+    </header>
     <!-- <header>
         <nav class="navbar">
             <div class="logo">
@@ -843,7 +849,7 @@
         function toggleNav() {
             const navbar = document.querySelector('.navbar');
             const toggle = document.querySelector('.navbar-toggle');
-            
+
             navbar.classList.toggle('closed');
             toggle.classList.toggle('active');
         }
@@ -851,43 +857,72 @@
         // Crossword puzzle data
         const crosswordData = {
             grid: [
-                ['S', 'U', 'T', 'T', 'U', 'R', '#', 'J', '#', 'M', '#', '#', '#', '#', '#'],
-                ['#', '#', '#', '#', 'N', '#', '#', 'A', '#', 'Y', '#', '#', '#', '#', '#'],
-                ['#', '#', '#', '#', 'I', '#', '#', 'T', '#', 'S', '#', '#', '#', '#', '#'],
-                ['#', '#', '#', '#', 'V', '#', '#', 'H', '#', 'O', '#', '#', '#', '#', '#'],
-                ['#', '#', '#', '#', 'E', '#', '#', 'R', '#', 'R', '#', '#', '#', '#', '#'],
-                ['#', '#', '#', '#', 'R', '#', '#', 'E', '#', 'E', '#', '#', '#', '#', '#'],
-                ['#', '#', '#', '#', 'S', 'K', 'I', 'L', 'L', '#', '#', '#', '#', '#', '#'],
-                ['#', '#', '#', '#', 'I', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
-                ['#', '#', '#', '#', 'T', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
-                ['#', '#', '#', '#', 'Y', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
-                ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
-                ['H', 'O', 'S', 'P', 'I', 'T', 'A', 'L', '#', 'S', 'W', 'A', 'M', 'I', '#'],
-                ['#', '#', '#', '#', '#', '#', '#', '#', '#', 'H', '#', '#', '#', '#', '#'],
-                ['#', '#', '#', '#', '#', '#', '#', '#', '#', 'R', 'I', 'V', 'E', 'R', '#'],
-                ['#', '#', '#', '#', '#', '#', '#', '#', '#', 'I', '#', '#', '#', '#', '#']
+                ['S', 'U', 'T', 'T', 'U', 'R', '#', 'J', 'S', 'S', '#', 'M', '#', '#', '#'],
+                ['#', '#', '#', '#', '#', '#', '#', 'A', '#', '#', '#', 'Y', '#', '#', '#'],
+                ['#', '#', '#', '#', '#', '#', '#', 'T', '#', '#', '#', 'S', '#', '#', 'D'],
+                ['#', '#', '#', '#', '#', '#', '#', 'H', '#', '#', '#', 'O', '#', '#', 'O'],
+                ['#', '#', '#', 'D', '#', '#', '#', 'R', '#', '#', '#', 'R', '#', '#', 'L'],
+                ['#', '#', '#', 'U', '#', '#', '#', 'E', '#', '#', '#', 'E', '#', '#', 'L'],
+                ['#', '#', '#', 'B', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'U'],
+                ['#', '#', '#', 'A', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'K'],
+                ['#', '#', 'S', 'I', 'X', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'U'],
+                ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'N'],
+                ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'I'],
+                ['K', 'A', 'N', 'N', 'A', 'D', 'A', '#', '#', '#', '#', '#', '#', '#', 'T'],
+                ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', 'H'],
+                ['#', '#', '#', '#', '#', '#', '#', '#', '#', 'K', 'A', 'P', 'I', 'L', 'A'],
+                ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#']
             ],
             across: [
                 { number: 1, clue: "Home of JSS Math", answer: "SUTTUR" },
-                { number: 5, clue: "JSS Development Centre enhances this", answer: "SKILL" },
-                { number: 6, clue: "JSS medical facility in Mysuru", answer: "HOSPITAL" },
-                { number: 7, clue: "Spiritual leader's title", answer: "SWAMI" },
-                { number: 8, clue: "Kaveri flows as this", answer: "RIVER" }
+                { number: 2, clue: "The educational trust ran by Suttur Mutt", answer: "JSS" },
+                { number: 6, clue: "How long does the suttur jaatre typically last", answer: "SIX" },
+                { number: 7, clue: "Major language spoken in Suttur", answer: "KANNADA" },
+                { number: 8, clue: "River which flows near Suttur", answer: "KAPILA" }
             ],
             down: [
-                { number: 2, clue: "JSS has a global academic presence", answer: "UNIVERSITY" },
-                { number: 3, clue: "Annual cultural festival at Suttur", answer: "JATHRE" },
-                { number: 4, clue: "City where JSS is headquartered", answer: "MYSORE" },
-                { number: 7, clue: "Sacred place of worship", answer: "SHRI" }
+                { number: 2, clue: "Annual cultural festival at Suttur", answer: "JATHRE" },
+                { number: 3, clue: "City where JSS is headquartered", answer: "MYSORE" },
+                { number: 5, clue: "The foreign country where the JSS school is present", answer: "DUBAI" },
+                { number: 4, clue: "Traditional folk dance performed at Suttur Jathre", answer: "DOLLUKUNITHA" }
             ]
         };
 
+        // Function to create the crossword grid with correct cell numbering
         function createCrosswordGrid() {
             const grid = document.getElementById('crosswordGrid');
+            grid.innerHTML = ''; // Clear existing grid
+
+            // First pass: identify cells that need numbers
+            const numberedCells = new Map();
+            let currentNumber = 1;
+
+            for (let i = 0; i < crosswordData.grid.length; i++) {
+                for (let j = 0; j < crosswordData.grid[i].length; j++) {
+                    if (crosswordData.grid[i][j] !== '#') {
+                        // Check if it's the start of an across word
+                        if ((j === 0 || crosswordData.grid[i][j - 1] === '#') &&
+                            (j < crosswordData.grid[i].length - 1 && crosswordData.grid[i][j + 1] !== '#')) {
+                            numberedCells.set(`${i},${j}`, currentNumber++);
+                            continue;
+                        }
+                        // Check if it's the start of a down word
+                        if ((i === 0 || crosswordData.grid[i - 1][j] === '#') &&
+                            (i < crosswordData.grid.length - 1 && crosswordData.grid[i + 1][j] !== '#')) {
+                            if (!numberedCells.has(`${i},${j}`)) {
+                                numberedCells.set(`${i},${j}`, currentNumber++);
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Second pass: create the grid with numbered cells
             for (let i = 0; i < crosswordData.grid.length; i++) {
                 for (let j = 0; j < crosswordData.grid[i].length; j++) {
                     const cell = document.createElement('div');
                     cell.className = 'crossword-cell';
+
                     if (crosswordData.grid[i][j] === '#') {
                         cell.classList.add('filled');
                     } else {
@@ -898,37 +933,22 @@
                         input.dataset.col = j;
                         input.addEventListener('input', checkAnswer);
                         cell.appendChild(input);
+
+                        // Add cell number if needed
+                        const cellNumber = numberedCells.get(`${i},${j}`);
+                        if (cellNumber !== undefined) {
+                            const numberSpan = document.createElement('span');
+                            numberSpan.className = 'crossword-cell-number';
+                            numberSpan.textContent = cellNumber;
+                            cell.appendChild(numberSpan);
+                        }
                     }
                     grid.appendChild(cell);
                 }
             }
-            addCellNumbers();
         }
 
-        function addCellNumbers() {
-            const cells = document.querySelectorAll('.crossword-cell:not(.filled)');
-            let currentNumber = 1;
-            cells.forEach(cell => {
-                const row = parseInt(cell.querySelector('input').dataset.row);
-                const col = parseInt(cell.querySelector('input').dataset.col);
-                if (isStartOfWord(row, col)) {
-                    const numberSpan = document.createElement('span');
-                    numberSpan.className = 'crossword-cell-number';
-                    numberSpan.textContent = currentNumber++;
-                    cell.appendChild(numberSpan);
-                }
-            });
-        }
-
-        function isStartOfWord(row, col) {
-            return (
-                (col === 0 || crosswordData.grid[row][col - 1] === '#') &&
-                crosswordData.grid[row][col + 1] !== '#' ||
-                (row === 0 || crosswordData.grid[row - 1][col] === '#') &&
-                crosswordData.grid[row + 1][col] !== '#'
-            );
-        }
-
+        // Rest of your existing JavaScript functions
         function createClues() {
             const acrossClues = document.getElementById('acrossClues');
             const downClues = document.getElementById('downClues');
@@ -938,7 +958,7 @@
                 li.className = 'clue-item';
                 li.innerHTML = `
                     <span class="clue-text">${clue.number}. ${clue.clue}</span>
-                    <span class="hint-icon" onclick="showHint('${clue.answer}')">👁️</span>
+                    <span class="hint-icon" onclick="showHint('${clue.answer}')"></span>
                 `;
                 acrossClues.appendChild(li);
             });
@@ -948,26 +968,19 @@
                 li.className = 'clue-item';
                 li.innerHTML = `
                     <span class="clue-text">${clue.number}. ${clue.clue}</span>
-                    <span class="hint-icon" onclick="showHint('${clue.answer}')">👁️</span>
+                    <span class="hint-icon" onclick="showHint('${clue.answer}')"></span>
                 `;
                 downClues.appendChild(li);
             });
         }
 
-        function showHint(answer) {
-            const hintModal = document.getElementById('hintModal');
-            const hintText = document.getElementById('hintText');
-            const hint = `The answer starts with "${answer[0]}" and ends with "${answer[answer.length - 1]}".`;
-            hintText.textContent = hint;
-            hintModal.style.display = 'block';
-        }
-
+        // Keep all your existing functions for checking answers, showing hints, etc.
         function checkAnswer(event) {
             const input = event.target;
             const row = parseInt(input.dataset.row);
             const col = parseInt(input.dataset.col);
             const correctLetter = crosswordData.grid[row][col];
-            
+
             if (input.value.toUpperCase() === correctLetter) {
                 input.parentElement.classList.add('correct');
             } else {
@@ -980,7 +993,7 @@
         function toggleAnswers() {
             const inputs = document.querySelectorAll('.crossword-cell input');
             const button = document.querySelector('.show-answers-button');
-            
+
             if (!answersShown) {
                 inputs.forEach(input => {
                     const row = parseInt(input.dataset.row);
@@ -1000,47 +1013,38 @@
             }
         }
 
-        // Close the hint modal
-        document.querySelector('.close-hint').onclick = function() {
+        function showHint(answer) {
+            const hintModal = document.getElementById('hintModal');
+            const hintText = document.getElementById('hintText');
+            const hint = `The answer starts with "${answer[0]}" and ends with "${answer[answer.length - 1]}".`;
+            hintText.textContent = hint;
+            hintModal.style.display = 'block';
+        }
+
+        // Event listeners
+        document.querySelector('.close-hint').onclick = function () {
             document.getElementById('hintModal').style.display = 'none';
         }
 
-        // Close the hint modal if clicked outside
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             const hintModal = document.getElementById('hintModal');
             if (event.target == hintModal) {
                 hintModal.style.display = 'none';
             }
         }
 
-        // Handle navigation items animation
-        const navItems = document.querySelectorAll('.nav-item');
-        navItems.forEach((item, index) => {
-            item.style.animationDelay = `${index * 0.1}s`;
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
         });
 
-        // Scroll behavior
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            const hero = document.querySelector('.hero');
-            const navbarToggle = document.querySelector('.navbar-toggle');
-
-            if (window.pageYOffset > hero.offsetHeight) {
-                navbar.classList.add('closed');
-                navbarToggle.classList.remove('active');
-            }
-        });
-
+        // Initialize the crossword
         createCrosswordGrid();
         createClues();
-                
-        const navToggle = document.querySelector('.nav-toggle');
-const navLinks = document.querySelector('.nav-links');
-
-navToggle.addEventListener('click', () => {
-  navToggle.classList.toggle('active');
-  navLinks.classList.toggle('active');
-});
     </script>
 </body>
+
 </html>
